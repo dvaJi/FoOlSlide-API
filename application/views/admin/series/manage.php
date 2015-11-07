@@ -3,25 +3,26 @@ $CI =& get_instance();
 $CI->buttoner = array(
 	array(
 		'href' => site_url('/admin/series/add_new/'),
-		'text' => _('Add Series')
+		'text' => _('Add Series'),
+        'class' => "btn-success"
 	)
 );
 ?>
 
 <div class="table" style="padding-bottom: 15px">
-	<h3 style="float: left"><?php echo _('Series Information'); ?></h3>
-	<span style="float: right; padding: 5px">
-		<div class="smartsearch">
-		<?php
-		echo form_open(site_url('/admin/series/manage/'));
-		echo form_input(array('name'=>'search', 'placeholder' => _('To search, write and hit enter')));
-		echo form_close();
-		?>
-		</div>
-	</span>
-	<hr class="clear"/>
-	<?php echo buttoner(); ?>
-
+    <div class="cont">
+        <h3 style="float: left;"><?php echo _('Series Information'); ?> <?php echo buttoner(); ?>
+        </h3>
+        <span style="float: right;">
+            <div class="smartsearch">
+            <?php
+            echo form_open(site_url('/admin/series/manage/'));
+            echo form_input(array('name'=>'search', 'placeholder' => _('To search, write and hit enter'), 'class' => 'form-control'));
+            echo form_close();
+            ?>
+            </div>
+        </span>
+    </div>
 	<div class="list comics">
 		<?php
 		foreach ($comics as $comic)

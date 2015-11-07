@@ -5,18 +5,21 @@
 		'id' => 'old_password',
 		'value' => set_value('old_password'),
 		'size' => 30,
+        'class' => 'form-control'
 	);
 	$new_password = array(
 		'name' => 'new_password',
 		'id' => 'new_password',
 		'maxlength' => $this->config->item('password_max_length', 'tank_auth'),
 		'size' => 30,
+        'class' => 'form-control'
 	);
 	$confirm_new_password = array(
 		'name' => 'confirm_new_password',
 		'id' => 'confirm_new_password',
 		'maxlength' => $this->config->item('password_max_length', 'tank_auth'),
 		'size' => 30,
+        'class' => 'form-control'
 	);
 	?>
 	<?php echo form_open(); ?>
@@ -37,10 +40,10 @@
 	</div>
 	<div class="formgroup">
 		<div>
-			<?php echo form_submit('change', 'Change Password'); ?>
+			<?php echo form_submit(array('name' => 'change', 'class' => 'form-control btn btn-primary'), 'Change Password'); ?>
 		</div>
 	</div>
 	<?php echo form_close(); ?>
-	<a href="<?php echo site_url('/account/profile/') ?>" class="button yellow"><?php echo _("Back to profile") ?></a>
+	<a href="<?php echo site_url('/account/profile/') ?>" class="btn btn-warning"><?php echo _("Back to profile") ?></a>
 
 </div>

@@ -5,6 +5,7 @@ $email = array(
 	'value' => set_value('email'),
 	'maxlength' => 80,
 	'size' => 30,
+    'class' => 'form-control'
 );
 ?>
 	<?php echo form_open($this->uri->uri_string()); ?>
@@ -15,7 +16,7 @@ $email = array(
 	</div>
 	<div class="formgroup">
 		<div>
-			<?php echo form_submit('send', 'Send'); ?>
+			<?php echo form_submit(array('name' => 'send', 'class' => 'form-control btn btn-primary'), 'Send'); ?>
 		</div>
 	</div>
 	<?php echo form_close(); ?>

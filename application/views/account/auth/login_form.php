@@ -1,14 +1,6 @@
 <div class="incontent login">
 	<?php
-	$login = array(
-		'name' => 'login',
-		'id' => 'login',
-		'value' => set_value('login'),
-		'maxlength' => 80,
-		'size' => 30,
-		'placeholder' => _('required')
-	);
-	if ($login_by_username AND $login_by_email)
+    if ($login_by_username AND $login_by_email)
 	{
 		$login_label = _('Email or username');
 	}
@@ -20,11 +12,23 @@
 	{
 		$login_label = _('Email');
 	}
+	$login = array(
+		'name' => 'login',
+		'id' => 'login',
+		'value' => set_value('login'),
+		'maxlength' => 80,
+		'size' => 30,
+		'placeholder' => $login_label,
+        'class' => 'form-control',
+        'aria-describedby' => 'uadd'
+	);
 	$password = array(
 		'name' => 'password',
 		'id' => 'password',
 		'size' => 30,
-		'placeholder' => _('required')
+		'placeholder' => 'Password',
+        'class' => 'form-control',
+        'aria-describedby' => 'padd'
 	);
 	$remember = array(
 		'name' => 'remember',
@@ -40,15 +44,15 @@
 	?>
 	<?php echo form_open($this->uri->uri_string()); ?>
 
-	<div class="formgroup">
-		<div><?php echo form_label($login_label, $login['id']); ?></div>
-		<div><?php echo form_input($login); ?></div>
+	<div class="input-group">
+    <span class="input-group-addon" id="uadd"><i class="fa fa-user"></i></span>
+		<?php echo form_input($login); ?>
 		<div style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? $errors[$login['name']] : ''; ?></div>
 	</div>
 
-	<div class="formgroup">
-		<div><?php echo form_label('Password', $password['id']); ?></div>
-		<div><?php echo form_password($password); ?></div>
+	<div class="input-group">
+        <span class="input-group-addon" id="padd" style="max-width: 36px;"><i class="fa fa-key"></i></span>
+		<?php echo form_password($password); ?>
 		<div style="color: red;"><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']]) ? $errors[$password['name']] : ''; ?></div>
 	</div>
 
@@ -101,7 +105,7 @@
 		</div>
 	</div>
 	<div class="formgroup">
-		<div><?php echo form_submit('submit', _('Login')); ?></div>
+		<div><?php echo form_submit(array('name' => 'submit', 'class' => 'form-control btn btn-success'), _('Login')); ?></div>
 	</div>
 </table>
 <?php echo form_close(); ?>
@@ -109,12 +113,12 @@
 <table>
 	<tr>
 		<td>
-			<a href="<?php echo site_url('/account/auth/forgot_password/') ?>" class="button yellow"><?php echo _("Forgot password") ?></a>
+			<a href="<?php echo site_url('/account/auth/forgot_password/') ?>" class="btn btn-warning form-control"><?php echo _("Forgot password") ?></a>
 		</td>
 		<?php
 		if ($this->config->item('allow_registration', 'tank_auth'))
 		{
-			echo '<td><a href="' . site_url('/account/auth/register/') . '" class="button">' . _("Register") . '</a></td>';
+			echo '<td><a href="' . site_url('/account/auth/register/') . '" class="btn btn-primary form-control">' . _("Register") . '</a></td>';
 		}
 		?>
 	</tr>

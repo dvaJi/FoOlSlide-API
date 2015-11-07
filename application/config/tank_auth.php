@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 */
 $config['website_name'] = 'FoOlSlide';
-$config['webmaster_email'] = 'webmaster@your-site.com';
+$config['webmaster_email'] = 'chocolatkey@gmail.com';
 
 /*
 |--------------------------------------------------------------------------
@@ -111,7 +111,7 @@ $config['forgot_password_expire'] = 60*15;
 */
 $config['captcha_path'] = 'content/captcha/';
 $config['captcha_fonts_path'] = 'content/captcha/fonts/3.ttf';
-$config['captcha_width'] = 400;
+$config['captcha_width'] = 350;
 $config['captcha_height'] = 50;
 $config['captcha_font_size'] = 16;
 $config['captcha_grid'] = FALSE;

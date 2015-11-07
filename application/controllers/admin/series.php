@@ -258,7 +258,8 @@ class Series extends Admin_Controller
 					'name' => 'licensed',
 					'type' => 'nation',
 					'value' => array(),
-					'help' => _('Insert the nations where the series is licensed in order to limit the availability.')
+					'help' => _('Insert the nations where the series is licensed in order to limit the availability.'),
+                    'class' => 'form-control'
 				)
 			);
 

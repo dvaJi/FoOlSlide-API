@@ -71,7 +71,7 @@ class Reader extends Public_Controller
 	}
 
 
-	function feeds($format = NULL)
+	function feeds($format = NULL, $unlimited = FALSE)
 	{
 		//if (is_null($format))
 		//	redirect('feeds/rss');
@@ -82,7 +82,11 @@ class Reader extends Public_Controller
 		$chapters->order_by('created', 'DESC');
 
 		// get the generic chapters and the comic coming with them
-		$chapters->limit(25)->get();
+        if($unlimited == TRUE) {
+            $chapters->limit(99999999)->get();
+        } else{
+            $chapters->limit(25)->get();
+        }
 		$chapters->get_comic();
 
 		if ($chapters->result_count() > 0)

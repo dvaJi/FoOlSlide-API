@@ -68,7 +68,7 @@ if(!function_exists('get_twitter_widget'))
 	function get_twitter_widget($team = NULL)
 	{
 		$twitter = get_setting_twitter($team);
-		$echo = sprintf(_('%sFollow us%s on Twitter'),'<a href="http://twitter.com/intent/user?screen_name='.urlencode($twitter).'">', '<img src="'.site_url().'assets/images/bird_16_blue.png" /></a>' );
+		$echo = sprintf(_('%sFollow us%s on Twitter'),'<a href="https://twitter.com/intent/user?screen_name='.urlencode($twitter).'">', '<img src="'.site_url().'assets/images/bird_16_blue.png" /></a>' );
 		return '<div class="text">'.$echo.'</div>';
 	}
 }
@@ -142,7 +142,7 @@ if(!function_exists('get_facebook_widget'))
 	{
 		$facebook = get_setting_facebook($team);
 
-		$echo = "<iframe src='http://www.facebook.com/plugins/likebox.php?href=".urlencode($facebook)."&amp;width=290&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:290px; height:63px; background:rgba(255,255,255,.5)' allowTransparency='true'></iframe>";
+		$echo = "<iframe src='https://www.facebook.com/plugins/likebox.php?href=".urlencode($facebook)."&amp;width=290&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:290px; height:63px; background:rgba(255,255,255,.5)' allowTransparency='true'></iframe>";
 		return $echo;
 	}
 }

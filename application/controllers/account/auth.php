@@ -137,7 +137,7 @@ class Auth extends Account_Controller
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
 			}
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
 
 			$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
@@ -160,7 +160,7 @@ class Auth extends Account_Controller
 						$this->form_validation->set_value('password'),
 						$email_activation))) {									// success
 
-					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
+					$data['site_name'] = get_setting('fs_gen_site_title');;
 
 					if ($email_activation) {									// send "activate" email
 						$data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
@@ -221,7 +221,7 @@ class Auth extends Account_Controller
 				if (!is_null($data = $this->tank_auth->change_email(
 						$this->form_validation->set_value('email')))) {			// success
 
-					$data['site_name']	= $this->config->item('website_name', 'tank_auth');
+					$data['site_name']	= get_setting('fs_gen_site_title');
 					$data['activation_period'] = $this->config->item('email_activation_expire', 'tank_auth') / 3600;
 
 					$this->_send_email('activate', $data['email'], $data);
@@ -284,7 +284,7 @@ class Auth extends Account_Controller
 				if (!is_null($data = $this->tank_auth->forgot_password(
 						$this->form_validation->set_value('login')))) {
 
-					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
+					$data['site_name'] = get_setting('fs_gen_site_title');
 
 					// Send email with password activation link
 					$this->_send_email('forgot_password', $data['email'], $data);
@@ -314,7 +314,7 @@ class Auth extends Account_Controller
 		$user_id		= $this->uri->segment(4);
 		$new_pass_key	= $this->uri->segment(5);
 
-		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+		$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']');
 		$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
 
 		$data['errors'] = array();
@@ -324,7 +324,7 @@ class Auth extends Account_Controller
 					$user_id, $new_pass_key,
 					$this->form_validation->set_value('new_password')))) {	// success
 
-				$data['site_name'] = $this->config->item('website_name', 'tank_auth');
+				$data['site_name'] = get_setting('fs_gen_site_title');
 
 				// Send email with new password
 				$this->_send_email('reset_password', $data['email'], $data);
@@ -361,7 +361,7 @@ class Auth extends Account_Controller
 
 		} else {
 			$this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+			$this->form_validation->set_rules('new_password', 'New Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']');
 			$this->form_validation->set_rules('confirm_new_password', 'Confirm new Password', 'trim|required|xss_clean|matches[new_password]');
 
 			$data['errors'] = array();
@@ -404,7 +404,7 @@ class Auth extends Account_Controller
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password')))) {			// success
 
-					$data['site_name'] = $this->config->item('website_name', 'tank_auth');
+					$data['site_name'] = get_setting('fs_gen_site_title');
 
 					// Send email with new email address and its activation link
 					$this->_send_email('change_email', $data['new_email'], $data);
@@ -499,10 +499,10 @@ class Auth extends Account_Controller
 	function _send_email($type, $email, &$data)
 	{
 		$this->load->library('email');
-		$this->email->from($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
-		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
+		$this->email->from($this->config->item('webmaster_email', 'tank_auth'), get_setting('fs_gen_site_title'));
+		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), get_setting('fs_gen_site_title'));
 		$this->email->to($email);
-		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
+		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), get_setting('fs_gen_site_title')));
 		$this->email->message($this->load->view('account/email/'.$type.'-html', $data, TRUE));
 		$this->email->set_alt_message($this->load->view('account/email/'.$type.'-txt', $data, TRUE));
 		$this->email->send();

@@ -51,7 +51,7 @@ if (!defined('BASEPATH'))
 					for ($i = (($val = $current_page + 2) >= count($pages)) ? (count($pages)) : $val; $i > 0 && $i > $current_page - 3; $i--)
 					{
 						$current = ((count($pages) / 100 > 1 && $i / 100 < 1) ? '0' : '') . ((count($pages) / 10 > 1 && $i / 10 < 1) ? '0' : '') . $i;
-						echo '<div class="number number_' . $i . ' ' . (($i == $current_page) ? 'current_page' : '') . '"><a href="' . $chapter->href . 'page/' . $i . '">' . $current . '</a></div>';
+						echo '<div class="number number_' . $i . ' ' . (($i == $current_page) ? 'current_page' : '') . '"><a href="' . $chapter->href . '' . $i . '">' . $current . '</a></div>';
 					}
 					?>
 				</span>
@@ -61,6 +61,13 @@ if (!defined('BASEPATH'))
 	</div>
 </div>
 
+<?php
+if (get_setting('fs_ads_top_banner') && get_setting('fs_ads_top_banner_active') && !get_setting('fs_ads_top_banner_reload'))
+					echo '<div class="ads banner" id="ads_top_banner">' . get_setting('fs_ads_top_banner') . '</div>';
+
+if (get_setting('fs_ads_top_banner') && get_setting('fs_ads_top_banner_active') && get_setting('fs_ads_top_banner_reload'))
+    echo '<div class="ads iframe banner" id="ads_top_banner"><iframe marginheight="0" marginwidth="0" frameborder="0" src="' . site_url() . 'content/ads/ads_top.html' . '"></iframe></div>';
+?>
 
 <div id="page">
 
@@ -73,22 +80,57 @@ if (!defined('BASEPATH'))
 
 <div class="clearer"></div>
 
+<?php
+if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_active') && !get_setting('fs_ads_bottom_banner_reload'))
+					echo '<div class="ads banner" id="ads_bottom_banner">' . get_setting('fs_ads_bottom_banner') . '</div>';
+
+if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_active') && get_setting('fs_ads_bottom_banner_reload'))
+    echo '<div class="ads iframe banner" id="ads_bottom_banner"><iframe marginheight="0" marginwidth="0" frameborder="0" src="' . site_url() . 'content/ads/ads_bottom.html' . '"></iframe></div>';
+?>
+
 <div id="bottombar">
     <div class="pagenumber">
 		<?php echo _('Page') . ' ' . $current_page ?>
     </div>
     <div class="socialbuttons">
         <div class="tweet">
-            <a href="http://twitter.com/share" class="twitter-share-button" data-url="<?php echo $chapter->href() ?>" data-count="horizontal" data-via="<?php echo get_setting_twitter(); ?>" data-related="<?php echo get_setting_twitter(); ?>">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $chapter->href() ?>" data-count="horizontal" data-via="<?php echo get_setting_twitter(); ?>" data-related="<?php echo get_setting_twitter(); ?>">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
         </div>
 		<div class="facebook">
-			<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode($chapter->href()) ?>&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:95px; height:21px;" allowTransparency="true"></iframe>
+			<iframe src="https://www.facebook.com/plugins/like.php?href=<?php echo urlencode($chapter->href()) ?>&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:95px; height:21px;" allowTransparency="true"></iframe>
 		</div>
 		<div class="googleplus">
 			<g:plusone size="medium" href="<?php echo $chapter->href() ?>"></g:plusone>
 		</div>
     </div>
+	
+	<div id="disqus_thread" style="background-color: transparent;"></div>
+	<script type="text/javascript">
+    /*var disqus_shortname = 'INSERT DISQUS NAME HERE AND UNCOMMENT. TODO: MAKE AVAILABLE IN OPTIONS';
+    var disqus_title = '<?php echo $comic->title() ?> - <?php echo $chapter->title() ?> - Page <?php echo $current_page; ?>';
+    var disqus_identifier = '<?php echo $comic->title() ?> :: <?php echo $chapter->title() ?> :: <?php echo $current_page; ?>';
+    
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();*/
+    
+    /* * * Disqus Reset Function * * */
+    function dreset(newUrl, pageNum) {
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                this.page.identifier = '<?php echo $comic->title() ?> :: <?php echo $chapter->title() ?> :: ' + pageNum;
+                this.page.url = newUrl;
+                this.page.title = '<?php echo $comic->title() ?> - <?php echo $chapter->title() ?> - Page ' + pageNum;
+            }
+        });
+    };
+	</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 </div>
+
+
 
 <script type="text/javascript">
 	var title = document.title;
@@ -111,14 +153,13 @@ if (!defined('BASEPATH'))
 	function changePage(id, noscroll, nohash)
 	{
 		id = parseInt(id);
-		if (initialized && id == current_page)
+        
+		if (initialized && id == current_page){
 			return false;
-
-		if(!initialized) {
-			create_message('key_suggestion', 4000, gt_key_suggestion);
-		}
+        }
 
 		initialized = true;
+        
 		if(id > pages.length-1)
 		{
 			location.href = next_chapter;
@@ -128,12 +169,20 @@ if (!defined('BASEPATH'))
 			current_page = 0;
 			id = 0;
 		}
-
+        
 		preload(id);
+        
+        /*Disqus*/
+        //alert(base_url+'page/' + (id + 1));
+        dreset(base_url+'page/' + (id + 1), (id + 1));
+        
 		current_page = id;
+        
 		next = parseInt(id+1);
+        
 		jQuery("html, body").stop(true,true);
-		if(!noscroll) jQuery.scrollTo('.panel', 430, {'offset':{'top':-6}});
+        
+		if(!noscroll) jQuery.scrollTo('.panel', 0, {'offset':{'top':-6}});
 
 		if(pages[id].loaded !== true) {
 			jQuery('#page .inner img.open').css({'opacity':'0'});
@@ -145,14 +194,17 @@ if (!defined('BASEPATH'))
 		}
 
 		resizePage(id);
-
+        
 		if(!nohash) History.pushState(null, null, base_url+'page/' + (current_page + 1));
-		document.title = gt_page+' ' + (current_page+1) + ' :: ' + title;
+		document.title = gt_page + ' ' + (current_page+1) + ' :: ' + title;
+        
 		update_numberPanel();
 		jQuery('#pagelist .current').removeClass('current');
 
 		jQuery("#ads_top_banner.iframe iframe").attr("src", site_url + "content/ads/ads_top.html");
 		jQuery("#ads_bottom_banner.iframe iframe").attr("src", site_url + "content/ads/ads_bottom.html");
+        
+        
 
 		return false;
 	}
@@ -284,7 +336,6 @@ if (!defined('BASEPATH'))
 		for (i = ((val = current_page - 1) <= 0)?(1):val; i <= pages.length && i < current_page + 4; i++) {
 			jQuery('.number_'+i).removeClass('dnone');
 		}
-
 		jQuery('.pagenumber').html(gt_page + ' ' + (current_page+1));
 	}
 
@@ -305,6 +356,8 @@ if (!defined('BASEPATH'))
 	var button_down_code;
 
 	jQuery(document).ready(function() {
+                
+        document.title = gt_page+' ' + (current_page+1) + ' :: ' + title;
 		jQuery(document).keydown(function(e){
 
 			if(!button_down && !jQuery("input").is(":focus"))
@@ -327,7 +380,7 @@ if (!defined('BASEPATH'))
 					}, 20);
 				}
 				if(e.keyCode==39 || e.keyCode==68)
-				{
+				{ 
 					if(!isSpread) nextPage();
 					else if(e.timeStamp - timeStamp39 < 400 && e.timeStamp - timeStamp39 > 150) nextPage();
 					timeStamp39 = e.timeStamp;

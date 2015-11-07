@@ -4,6 +4,7 @@
 		'name' => 'password',
 		'id' => 'password',
 		'size' => 30,
+        'class' => 'form-control'
 	);
 	?>
 	<?php echo form_open($this->uri->uri_string()); ?>
@@ -14,9 +15,9 @@
 	</div>
 	<div class="formgroup">
 		<div>
-			<?php echo form_submit('cancel', 'Delete account'); ?>
+			<?php echo form_submit(array('name' => 'cancel', 'class' => 'form-control btn btn-danger'), 'Delete account'); ?>
 		</div>
 	</div>
 	<?php echo form_close(); ?>
-	<a href="<?php echo site_url('/account/profile/') ?>" class="button yellow"><?php echo _("Back to profile") ?></a>
+	<a href="<?php echo site_url('/account/profile/') ?>" class="btn btn-warning"><?php echo _("Back to profile") ?></a>
 </div>

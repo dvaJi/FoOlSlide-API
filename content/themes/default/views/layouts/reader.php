@@ -13,15 +13,20 @@
 			echo link_tag('content/themes/' . $this->config->item('theme_extends') . '/style.css?v='.FOOLSLIDE_VERSION);
 		}
 		if (file_exists('content/themes/' . get_setting('fs_theme_dir') . '/style.css'))
-			echo link_tag('content/themes/' . get_setting('fs_theme_dir') . '/style.css?v='.FOOLSLIDE_VERSION);
-		?>
+			echo link_tag('content/themes/' . get_setting('fs_theme_dir') . '/style.css?v='.FOOLSLIDE_VERSION);?>
+		
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="<?php echo site_url() ?>sitemap.xml" />
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo site_url() ?>rss.xml" />
 		<link rel="alternate" type="application/atom+xml" title="Atom" href="<?php echo site_url() ?>atom.xml" />
 		<link rel='index' title='<?php echo get_setting('fs_gen_site_title') ?>' href='<?php echo site_url() ?>' />
 		<meta name="generator" content="FoOlSlide <?php echo FOOLSLIDE_VERSION ?>" />
-		<script src="<?php echo site_url() . 'assets/js/jquery.js?v='.FOOLSLIDE_VERSION ?>"></script>
-		<script src="<?php echo site_url() . 'assets/js/jquery.plugins.js?v='.FOOLSLIDE_VERSION ?>"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script src="<?php echo site_url() . 'js/vendor/jquery.js?v='.FOOLSLIDE_VERSION ?>"></script>
+		<script src="<?php echo site_url() . 'js/jquery.plugins.js?v='.FOOLSLIDE_VERSION ?>"></script>
+
 		<?php if ($this->agent->is_browser('MSIE')) : ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
@@ -52,18 +57,23 @@
 		<?php echo get_setting('fs_theme_header_code'); ?>
 	</head>
 	<body class="<?php if (isset($_COOKIE["night_mode"]) && $_COOKIE["night_mode"] == 1)
-			echo 'night '; ?>">
+			echo 'night '; ?>" style="background: url('.../images/bgb.jpg') no-repeat center center fixed;">
 		<div id="wrapper">
 			<?php echo get_setting('fs_theme_preheader_text'); ?>
 			<div id="header">
 				<?php echo get_setting('fs_theme_header_text'); ?>
+				<a href="<?php echo get_setting('fs_gen_back_url') //site_url('')?>"><img id="title" src="<?php echo site_url() ?>images/logo.png" alt="<?php echo get_setting('fs_gen_site_title') ?>"></img></a>
+				<?php if (get_setting('fs_gen_back_url'))
+					echo'<!--<div class="home_url"><a href="' . get_setting('fs_gen_back_url') . '">' . _("Go back to site") . ' &crarr;</a></div>-->'; ?>
+				
+				<!--<a href="/forum" style="display: inline-block; padding: 10px;"><div id="title">Forums</div><sup style="color: #FFCC00;">New!</sup></a>-->
 				<div role="navigation" id="navig">
 					<ul>
 						<li>
-							<a href="<?php echo site_url('') ?>"><?php echo _('Latest releases'); ?></a>
+							<a href="<?php echo site_url('') ?>"><i class="fa fa-clock-o"></i><span class="mh"> <?php echo _('Latest releases'); ?></span></a>
 						</li>
 						<li>
-							<a href="<?php echo site_url('directory') ?>"><?php echo _('Series list'); ?></a>
+							<a href="<?php echo site_url('directory') ?>"><i class="fa fa-list"></i><span class="mh"> <?php echo _('Series list'); ?></span></a>
 						</li>
 						<li style="">
 							<?php
@@ -73,16 +83,14 @@
 							?>
 						</li>
 						<li>
-							<a style="padding:0;" href="<?php echo site_url('feeds/rss') ?>"><img height="28" width="28" style="position:relative; top:1px;" src="<?php echo site_url() . 'content/themes/default/images/feed-icon-28x28.png' ?>" /></a>
+							<!--<a style="padding:0;" href="<?php echo site_url('feeds/rss') ?>"><img height="28" width="28" style="position:relative; top:1px;" src="<?php echo site_url() . 'content/themes/default/images/feed-icon-28x28.png' ?>" /></a>-->
 						</li>
 
 						<div class="clearer"></div>
 					</ul>
 				</div>
 
-				<a href="<?php echo site_url('') ?>"><div id="title"><?php echo get_setting('fs_gen_site_title') ?></div></a>
-				<?php if (get_setting('fs_gen_back_url'))
-					echo'<div class="home_url"><a href="' . get_setting('fs_gen_back_url') . '">' . _("Go back to site") . ' &crarr;</a></div>'; ?>
+				
 				<div class="clearer"></div>
 			</div>
 
@@ -92,14 +100,14 @@
 				if (!isset($is_reader) || !$is_reader)
 					echo '<div class="panel">';
 
-				if (get_setting('fs_ads_top_banner') && get_setting('fs_ads_top_banner_active') && !get_setting('fs_ads_top_banner_reload'))
+				if (get_setting('fs_ads_top_banner') && get_setting('fs_ads_top_banner_active') && !get_setting('fs_ads_top_banner_reload') && (!isset($is_reader) || !$is_reader))
 					echo '<div class="ads banner" id="ads_top_banner">' . get_setting('fs_ads_top_banner') . '</div>';
 
-				if (get_setting('fs_ads_top_banner') && get_setting('fs_ads_top_banner_active') && get_setting('fs_ads_top_banner_reload'))
+				if (get_setting('fs_ads_top_banner') && get_setting('fs_ads_top_banner_active') && get_setting('fs_ads_top_banner_reload') && (!isset($is_reader) || !$is_reader))
 					echo '<div class="ads iframe banner" id="ads_top_banner"><iframe marginheight="0" marginwidth="0" frameborder="0" src="' . site_url() . 'content/ads/ads_top.html' . '"></iframe></div>';
 
-				if (isset($show_sidebar))
-					echo get_sidebar();
+				//if (isset($show_sidebar))
+				//	echo get_sidebar();
 
 				if (isset($is_latest) && $is_latest)
 				{
@@ -112,9 +120,9 @@
 							if (!$loaded_slideshow)
 							{
 								?>
-								<link rel="stylesheet" href="<?php echo site_url() ?>assets/js/nivo-slider.css" type="text/css" media="screen" />
-								<link rel="stylesheet" href="<?php echo site_url() ?>assets/js/nivoThemes/default/default.css" type="text/css" media="screen" />
-								<script src="<?php echo site_url() ?>assets/js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+								<link rel="stylesheet" href="<?php echo site_url() ?>js/nivo-slider.css" type="text/css" media="screen" />
+								<link rel="stylesheet" href="<?php echo site_url() ?>js/nivoThemes/default/default.css" type="text/css" media="screen" />
+								<script src="<?php echo site_url() ?>js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 								<script type="text/javascript">
 									jQuery(window).load(function() {
 										jQuery('#slider').nivoSlider({
@@ -176,11 +184,14 @@
 
 				// here we output the body of the page
 				echo $template['body'];
+				
+				//if (isset($show_sidebar))
+				//	echo get_sidebar();
 
-				if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_active') && !get_setting('fs_ads_bottom_banner_reload'))
+				if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_active') && !get_setting('fs_ads_bottom_banner_reload') && (!isset($is_reader) || !$is_reader))
 					echo '<div class="ads banner" id="ads_bottom_banner">' . get_setting('fs_ads_bottom_banner') . '</div>';
 
-				if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_active') && get_setting('fs_ads_bottom_banner_reload'))
+				if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_active') && get_setting('fs_ads_bottom_banner_reload') && (!isset($is_reader) || !$is_reader))
 					echo '<div class="ads iframe banner" id="ads_bottom_banner"><iframe marginheight="0" marginwidth="0" frameborder="0" src="' . site_url() . 'content/ads/ads_bottom.html' . '"></iframe></div>';
 
 				if (!isset($is_reader) || !$is_reader)
@@ -195,9 +206,6 @@
 				<div>
 					<?php echo get_setting('fs_gen_footer_text'); ?>
 				</div>
-				<div class="cp_link">
-					<a href="http://www.foolz.us/info/foolslide/" target="_blank"><img src="<?php echo site_url() . 'content/themes/' . get_setting('fs_theme_dir') .'/images/logo_footer.png' ?>" /></a>
-				</div>
 			</div>
 		</div>
 
@@ -205,4 +213,16 @@
 		</div>
 	</body>
 	<?php echo get_setting('fs_theme_footer_code'); ?>
+    <!--<script>
+    TODO: Google Analytics in options
+    
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-INSERT HERE', 'auto');
+    ga('send', 'pageview');
+
+    </script>-->
 </html>

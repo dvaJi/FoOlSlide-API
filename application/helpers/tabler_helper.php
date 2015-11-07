@@ -16,8 +16,8 @@ if (!function_exists('tabler'))
 			array(
 				'type' => 'submit',
 				'name' => 'submit',
-				'class' => 'btn primary',
-				'id' => 'submit',
+				'class' => 'btn btn-success form-control',
+				'id' => 'submitn',
 				'value' => _('Save')
 			)
 		);
@@ -78,7 +78,7 @@ if (!function_exists('tabler'))
 			$CI->buttoner[] = array(
 				'text' => _('Edit'),
 				'href' => '',
-				'onclick' => "slideToggle('.plain'); slideToggle('.edit'); return false;"
+				'onclick' => "slideToggle('.plain'); slideToggle('.edit'); return false;",
 			);
 		}
 
@@ -101,7 +101,7 @@ if (!function_exists('tabler'))
 							if ($colk == 0)
 							{
 								$echo .= '<label for="' . $column['field'] . '">' . $column['table'] . '</label>';
-								$echo .= '<div class="input">';
+								$echo .= '<div class="input form-group">';
 							}
 							else
 							{
@@ -140,7 +140,7 @@ if (!function_exists('tabler'))
 		}
 		elseif ($list)
 		{
-			$echo .= '<div class="plain"><table class="zebra-striped" rules="rows">';
+			$echo .= '<div class="plain table-responsive"><table class="table table-striped" rules="rows">';
 			foreach ($result as $rowk => $row)
 			{
 				if (isset($row[1]['type']) && $row[1]['type'] == 'hidden')
@@ -192,7 +192,7 @@ if (!function_exists('tabler'))
 				}
 				else
 				{
-					$echo .= '<div class="clearfix">';
+					$echo .= '<div class="clearfix form-group">';
 					foreach ($row as $colk => $column)
 					{
 						if ($colk == 0)
@@ -242,8 +242,10 @@ if (!function_exists('formize'))
 					$column['checked'] = 'checked';
 				$column['value'] = 1;
 			}
-		}
-
+    } else if(!($column['type'] == 'submit')) {
+            $column['class'] = 'form-control';
+        }
+        
 		$formize = 'form_' . $column['type'];
 		if (!isset($column['type']))
 			$formize = "";
@@ -502,7 +504,7 @@ if (!function_exists('form_language'))
 		$lang = config_item('fs_languages');
 		if (!isset($column['value']) || $column['value'] == "")
 			$column['value'] = get_setting('fs_gen_default_lang');
-		return form_dropdown($column['name'], $lang, $column['value']);
+		return form_dropdown($column['name'], $lang, $column['value'], array('class' => 'form-control'));
 	}
 
 
@@ -524,7 +526,7 @@ if (!function_exists('form_themes'))
 				$set[$item] = $item;
 			}
 		}
-		return form_dropdown($column['name'], $set, $column['value']);
+		return form_dropdown($column['name'], $set, $column['value'], array('class' => 'form-control'));
 	}
 
 

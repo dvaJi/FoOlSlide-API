@@ -1,0 +1,158 @@
+/* Overwrite Twitter Bootstrap CSS */
+/* Input, Textarea, Select, Uneditable, Append */
+input,
+textarea,
+select,
+.uneditable-input {
+	margin: 0 2px 1px 0;
+	/*width: 500px;
+	max-width: 500px;*/
+}
+
+.uneditable-input { height: auto; }
+.input-append .add-on { margin-left: -3px; }
+
+/* Tables */
+table td { vertical-align: middle; }
+table th + th, table td + td {
+  border-left: 0px solid #ddd;
+}
+.fixed-table { table-layout: fixed; }
+
+/*Larger Navbar*/
+.navbar-fixed-top {
+    min-height: 50px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 50px;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav > li > a {
+    line-height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;}
+}
+
+/*Filechooser*/
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+input[readonly] {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+.form-stacked {
+  max-width: 600px;
+}
+
+/* End Twitter Bootstrap CSS Changes */
+
+
+
+/* Additional CSS */
+/* Search Bar */
+.smartsearch {
+    float: right;
+    border: 1px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+.smartsearch > form > input { width: 300px; }
+
+.cont {
+    overflow: hidden;
+}
+
+/* Div Tables */
+.table {
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+.table > hr.clear {
+  height: 0px;
+  border-color: rgba(0,0,0,0);
+}
+
+/* Div Lists */
+.list div { margin-right: 10px; }
+.list div + div { border-top: 1px solid #ddd; }
+.list .item div + div { border-top: 0px; }
+
+.list .item {
+  padding: 8px 8px 5px 8px;
+  margin-top: 5px;
+}
+.list .item .smalltext {
+  font-size: 10px;
+  margin-top: 2px;
+}
+.list .item .smalltext a {
+  color: #909090;
+  text-decoration: none;
+}
+.list .item .smalltext a:hover {
+  color: #0069d6;
+  text-decoration: none;
+}
+.list .chapters .item .info, .list .item .info {
+  float: right;
+}
+
+/* Change Log List */
+.changelog .item .title { font-weight: bold; }
+.changelog .item .description { padding-left: 5px; }
+
+/* Icons */
+.icon { vertical-align: middle; margin-right: 5px; }
+.icon-small { margin-bottom: 5px; }
+.sidebar { list-style: none; }
+
+/* Loader */
+.loading { display: none; width: 100%; text-align: center; margin: auto; }
+
+.vartext { padding: 5px; font-style: italic; font-size: 10px }
+
+.navbar {
+    border-radius: 0px;
+    background: #527885;
+    border: none;
+}
+
+.navbar-text, .navbar-brand {
+    color: #FFF !important;
+}
+
+.navbar-nav > li > a {
+    color: #FFF !important;
+}
+@media (max-width: 767px){
+    .navbar-nav .open .dropdown-menu > li > a {
+        color: #FFF !important;
+    }
+}

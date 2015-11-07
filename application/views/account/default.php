@@ -3,8 +3,14 @@
 	<head>
 		<title><?php echo get_setting('fs_gen_site_title'); ?> <?php echo _('Control panel') ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href="<?php echo base_url() ?>assets/admin/account.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="<?php echo base_url() ?>css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url() ?>css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url() ?>css/admin/account.css" rel="stylesheet" type="text/css" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
         <script type="text/javascript">
             function slideDown(item) { jQuery(item).slideDown(); }
             function slideUp(item) { jQuery(item).slideUp(); }
@@ -70,45 +76,59 @@ if ($CI->agent->is_browser('MSIE'))
 
 
 
-	<body>
+	<body style="background: url('<?php echo base_url() ?>images/admin_background.png') no-repeat center center fixed" class="noselect">
 
 		<div class="wrapper">
-
-			<div id="background">
-				<img src="<?php echo base_url() ?>assets/admin/images/admin_background.png" />
-			</div>
-
-
-
-			<div id="nav">
-				<div class="element">
-					<a href="<?php echo site_url(); ?>">
-						<img class="icon off" src="<?php echo glyphish(158) ?>" />
-						<img class="icon on" src="<?php echo glyphish(158, TRUE) ?>" />
-						<?php echo _("Reader") ?></a>
-				</div>
-				<?php if (isset($this->tank_auth) && $this->tank_auth->is_allowed())
-				{ ?><div class="element">
-						<a href="<?php echo site_url('admin'); ?>">
-							<img class="icon off" src="<?php echo glyphish(116) ?>" />
-							<img class="icon on" src="<?php echo glyphish(116, TRUE) ?>" />
-							<?php echo _("Admin panel") ?></a>
-					</div>
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nvb" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="<?php echo site_url('admin') ?>">
+                      <?php if (isset($this->tank_auth))
+					echo get_setting('fs_gen_site_title'); ?> - <?php
+                        if ($this->tank_auth->is_logged_in())
+                        {
+                            echo $this->tank_auth->get_username() . ': ';
+                        }
+                        echo $function_title
+                    ?></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="nvb">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="<?php echo site_url(); ?>">
+                                    <i class="fa fa-book"></i>
+                                    <?php echo _("Reader") ?></a>
+                            </li>
+                            <?php if (isset($this->tank_auth) && $this->tank_auth->is_allowed())
+                            { ?><li>
+                                    <a href="<?php echo site_url('admin'); ?>">
+                                        <i class="fa fa-cogs"></i>
+                                        <?php echo _("Admin panel") ?></a>
+                                </li>
+                            <?php } ?>
+                            <?php if (isset($this->tank_auth) && $this->tank_auth->is_logged_in())
+                            { ?><li>
+                                    <a href="<?php echo site_url('/account/auth/logout'); ?>">
+                                        <i class="fa fa-sign-out"></i>
+                                        <?php echo _("Logout") ?> <?php echo $this->tank_auth->get_username(); ?></a>
+                                </li>
 				<?php } ?>
-				<?php if (isset($this->tank_auth) && $this->tank_auth->is_logged_in())
-				{ ?><div class="element">
-						<a href="<?php echo site_url('/account/auth/logout'); ?>">
-							<img class="icon off" src="<?php echo glyphish(73) ?>" />
-							<img class="icon on" src="<?php echo glyphish(73, TRUE) ?>" />
-							<?php echo _("Logout") ?> <?php echo $this->tank_auth->get_username(); ?></a>
-					</div>
-				<?php } ?>
-			</div>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
-			<div id="header">
+			<!--<div id="header"> TODO: REMOVE
 
 				<div class="title"><?php if (isset($this->tank_auth))
-					echo get_setting('fs_gen_site_title'); ?> - <?php echo _('Account'); ?></div>
+					echo get_setting('fs_gen_site_title'); ?></div>
 
 				<div class="subtitle"><?php
 					if ($this->tank_auth->is_logged_in())
@@ -127,7 +147,7 @@ if ($CI->agent->is_browser('MSIE'))
 					echo '</div>';
 				}
 				?>
-			</div>
+			</div>-->
 
 			<div id="content_wrap">
 

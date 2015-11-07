@@ -5,13 +5,13 @@
 	<div style="margin:0 10px 15px 0;">
 		<h3><?php echo _('Sitemap for search engines') ?></h3>
 		<p><?php echo _('You can submit your sitemap to the search engines to index your FoOlSlide better and faster. We suggest adding this to your Google Webmaster Tools admin panel.') ?></p>
-		<p><code><?php echo site_url() ?>sitemap.xml</code></p>
+		<p><code  style="word-wrap: break-word;"><?php echo site_url() ?>sitemap.xml</code></p>
 	</div>
 
 	<?php if ($imagick_optimize): ?>
 		<div style="margin:0 10px 15px 0;">
 			<h3><?php echo _('Optimize Thumbnails') ?></h3>
-			<p><span class="label important"><?php echo _('Important') ?></span> <?php echo _('FoOlSlide has detected that your server is able to use a better compression algorithm for thumbnail generation. This optimization will create small thumbnails and reduce up to 10% bandwidth usage. However, regardless of this action, all thumbnails will be generated with this new algorithmn.') ?></p>
+			<p><span class="text-danger"><?php echo _('Important') ?></span> <?php echo _('FoOlSlide has detected that your server is able to use a better compression algorithm for thumbnail generation. This optimization will create small thumbnails and reduce up to 10% bandwidth usage. However, regardless of this action, all thumbnails will be generated with this new algorithmn.') ?></p>
 			<span><a href="#" class="btn" data-keyboard="true" data-backdrop="true" data-controls-modal="modal-for-thumbnail-optimization" onClick="return getThumbNumber();"><?php echo _('Optimize Thumbnails'); ?></a></span>
 
 			<div id="modal-for-thumbnail-optimization" class="modal hide fade" style="display: none">
@@ -30,8 +30,8 @@
 				</div>
 
 				<script type="text/javascript">
-																						
-																						
+
+                
 					var stop = false;
 																						
 					var stopOptimizeThumbnails = function() {
@@ -225,13 +225,13 @@
 
 	<div style="margin:0 10px 15px 0;">
 		<h3><?php echo _('Check and repair the library') ?></h3>
-		<p><span class="label important">Danger Zone™</span> <?php echo _('The repair function brutally edits your files and database. While it should be safe to use, you might lose data you actually want to save.') ?></p>
-		<p><span class="label success"><?php echo _('Suggestion') ?></span> <?php echo _('Have a backup of your database and of your FoOlSlide directory before proceeding. Perform a check before clicking on repair.') ?></p>
+		<p><span class="text-danger">Danger Zone™</span> <?php echo _('The repair function brutally edits your files and database. While it should be safe to use, you might lose data you actually want to save.') ?></p>
+		<p><span class="text-success"><?php echo _('Suggestion') ?></span> <?php echo _('Have a backup of your database and of your FoOlSlide directory before proceeding. Perform a check before clicking on repair.') ?></p>
 		<p><?php echo _('It can happen that you or some server error mess with the FoOlSlide library. This will allow you to find broken database entries and missing files. The repair function will rebuild the missing thumbnails, remove the database entries for missing files and remove the unidentified files.') ?></p>
-		<p><?php echo sprintf(_('You can also use this function via command line. Use the following line: %s'), '<br/><code>php ' . FCPATH . 'index.php admin system tools_check_comics</code>') ?></p>
+		<p><?php echo sprintf(_('You can also use this function via command line. Use the following line: %s'), '<br/><code style="word-wrap: break-word;">php ' . FCPATH . 'index.php admin system tools_check_comics</code>') ?></p>
 		<span>
-			<a href="#" class="btn success" data-keyboard="true" data-backdrop="true" data-controls-modal="modal-for-library-check" onClick="checkLibrary(true)"><?php echo _('Check library'); ?></a>
-			<a href="#" class="btn danger" rel="popover-right" data-original-title="Repair library" data-content="<?php echo htmlentities(_('This is actually a dangerous operation. Always perform a check and make sure you have a backup of your data.')) ?>" data-keyboard="true" data-backdrop="true" data-controls-modal="modal-for-library-check" onClick="checkLibrary(true, true)"><?php echo _('Repair library'); ?></a>
+			<a href="#" class="btn btn-success" data-keyboard="true" data-backdrop="true" data-controls-modal="modal-for-library-check" onClick="checkLibrary(true)"><?php echo _('Check library'); ?></a>
+			<a href="#" class="btn btn-danger" rel="popover-right" data-original-title="Repair library" data-content="<?php echo htmlentities(_('This is actually a dangerous operation. Always perform a check and make sure you have a backup of your data.')) ?>" data-keyboard="true" data-backdrop="true" data-controls-modal="modal-for-library-check" onClick="checkLibrary(true, true)"><?php echo _('Repair library'); ?></a>
 		</span>
 
 

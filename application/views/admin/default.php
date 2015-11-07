@@ -3,16 +3,20 @@
 	<head>
 		<title><?php echo get_setting('fs_gen_site_title'); ?> <?php echo _('Control Panel') ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/bootstrap/style.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/admin/style.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/font-awesome.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/admin/style.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
 		<style type="text/css">
 			body {
 				padding-top: 60px;
 			}
 		</style>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/bootstrap/bootstrap.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery-2.1.4.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
+        <script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
+        <script type="text/javascript" src="<?php echo site_url() ?>js/jquery-migrate-1.2.1.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
 		<script type="text/javascript">
 			function slideDown(item) { jQuery(item).slideDown(); }
 			function slideUp(item) { jQuery(item).slideUp(); }
@@ -96,9 +100,9 @@ if ($CI->agent->is_browser('MSIE'))
 <?php } ?>
 						// Auto-Focus on First Input
 						jQuery(":input:first").focus(); // Focus on first input generated
-				
+
 						// Bootstrap jQuery
-						jQuery("a[rel=twipsy]").twipsy({ live: true });
+						/*jQuery("a[rel=twipsy]").twipsy({ live: true });*/
 						jQuery("a[rel^='popover']").each(function() {
 							var direction = $(this).attr('rel').replace("popover-", "");
 							$(this).popover({ offset: 10, placement: direction, html: true });
@@ -109,40 +113,47 @@ if ($CI->agent->is_browser('MSIE'))
 	</head>
 
 	<body>
-		<div class="topbar" data-dropdown="dropdown">
-			<div class="topbar-inner">
-				<div class="container-fluid">
-					<a class="brand" href="<?php echo site_url('admin') ?>"><?php echo get_setting('fs_gen_site_title'); ?> - <?php echo _('Control Panel'); ?></a>
-					<ul class="nav secondary-nav">
-						<li><a href="<?php echo site_url(); ?>">
-								<?php echo _("Reader") ?></a></li>
-						<?php if ((isset($this->tank_auth) && $this->tank_auth->is_allowed()) || (isset($this->tank_auth) && $this->tank_auth->is_logged_in()))
-						{ ?>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle"><?php echo $this->tank_auth->get_username(); ?></a>
-								<ul class="dropdown-menu">
-									<?php if (isset($this->tank_auth) && $this->tank_auth->is_allowed())
-									{ ?><li><a href="<?php echo site_url('account'); ?>">
-												<?php echo _("Your Profile") ?></a></li>
-									<?php } ?>
-									<?php if (isset($this->tank_auth) && $this->tank_auth->is_logged_in())
-									{ ?><li><a href="<?php echo site_url('/account/auth/logout'); ?>">
-												<?php echo _("Logout") ?></a></li>
-									<?php } ?>
-								</ul>
-							</li>
-						<?php } ?>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nvb" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="<?php echo site_url('admin') ?>"><?php echo get_setting('fs_gen_site_title'); ?> - <?php echo _('Control Panel'); ?></a>
+                </div>
+                <div class="collapse navbar-collapse" id="nvb">
+                    <ul class="nav navbar-nav">
+                        <?php echo $sidebar ?>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="<?php echo site_url(); ?>">
+                                <i class="fa fa-book"></i> <?php echo _("Reader") ?></a></li>
+                        <?php if ((isset($this->tank_auth) && $this->tank_auth->is_allowed()) || (isset($this->tank_auth) && $this->tank_auth->is_logged_in()))
+                        { ?>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $this->tank_auth->get_username(); ?> <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <?php if (isset($this->tank_auth) && $this->tank_auth->is_allowed())
+                                    { ?><li><a href="<?php echo site_url('account'); ?>">
+                                                <?php echo _("Your Profile") ?></a></li>
+                                    <?php } ?>
+                                    <?php if (isset($this->tank_auth) && $this->tank_auth->is_logged_in())
+                                    { ?><li><a href="<?php echo site_url('/account/auth/logout'); ?>">
+                                                <?php echo _("Logout") ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                        <?php } ?>
+                        </ul>
+                </div>
+            </div>
+		</nav>
 
 		<div class="container-fluid">
-			<div class="sidebar">
-				<div class="well">
-					<?php echo $sidebar ?>
-				</div>
-			</div>
 
 			<div class="content">
 				<ul class="breadcrumb">

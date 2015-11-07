@@ -2,6 +2,8 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+
+$amount = isset($_GET['p']) ? TRUE : FALSE;//first item
 ?>
 <rss version="2.0"
 	 xmlns:dc="http://purl.org/dc/elements/1.1/"
