@@ -1,6 +1,7 @@
 FoOlSlide 2
 =========
 __WARNING! THIS IS UNOFFICIAL!__
+
 __Current working version: "Early Christmas"__
 
 FoOlSlide is a ridiculously elaborated comic reader meant for users to enjoy reading.
