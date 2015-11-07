@@ -18,3 +18,4 @@ New in version 2
 -  Backend recoded in Bootstrap 3 and mobile-optimized
 -  Frontend theme is mobile-optimized and jquery/javascript has been updated
 -  Disqus comment support (not finished)
+-  Using Font Awesome icons
