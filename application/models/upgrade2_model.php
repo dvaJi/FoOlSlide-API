@@ -99,9 +99,6 @@ class Upgrade2_model extends CI_Model {
 		rename('content/cache/upgrade/assets', 'assets');
 		delete_files('content/themes/default/', TRUE);
 		rename('content/cache/upgrade/content/themes/default', 'content/themes/default');
-		delete_files('content/themes/memochou/', TRUE);
-		rename('content/cache/upgrade/content/themes/memochou', 'content/themes/memochou');
-
 		return TRUE;
 	}
 
