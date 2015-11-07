@@ -15,4 +15,6 @@ Installation
 
 New in version 2
 ------------
-1.  Backend recoded in Bootstrap 3 and mobile-optimized
+-  Backend recoded in Bootstrap 3 and mobile-optimized
+-  Frontend theme is mobile-optimized and jquery/javascript has been updated
+-  Disqus comment support (not finished)
