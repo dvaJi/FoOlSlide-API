@@ -5,6 +5,8 @@ __Current working version: "Early Christmas"__
 FoOlSlide is a ridiculously elaborated comic reader meant for users to enjoy reading.
 Version 2 primarily focuses on bringing the design/libraries up to date and making FoOlSlide mobile-friendly. The backend theme has been updated to Bootstrap 3 (lots of code mods) as well as the frontend. Work on this project is not finished yet! Please report bugs and suggestions.
 
+__THIS IS UNOFFICIAL!__
+
 Installation
 ------------
 1.  Copy everything in the archive in a public server folder
