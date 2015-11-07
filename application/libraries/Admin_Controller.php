@@ -141,7 +141,7 @@ class Admin_Controller extends MY_Controller
 			"content" => array(
 				"http://archive.foolz.us/dev/" => array("level" => "member", "name" => _("Developer Community"), "icon" => "comments-o"),
 				"http://chocolatkey.com" => array("level" => "member", "name" => _("Developer Site"), "icon" => "building"),
-				"http://github.com/FoolCode/" => array("level" => "member", "name" => _("FoolCode GitHub"), "icon" => "github"),
+				"http://github.com/chocolatkey/" => array("level" => "member", "name" => _("Chocolatkey Github"), "icon" => "github"),
 			)
 		);
 
