@@ -7,14 +7,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/font-awesome.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/font-awesome.min.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/admin/style.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
 		<style type="text/css">
 			body {
 				padding-top: 60px;
 			}
 		</style>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery-2.1.4.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
         <script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
         <script type="text/javascript" src="<?php echo site_url() ?>js/jquery-migrate-1.2.1.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
 		<script type="text/javascript">

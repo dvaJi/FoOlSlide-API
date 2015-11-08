@@ -161,7 +161,7 @@ class Install extends Install_Controller
 			}
 
 			if (validation_errors())
-				set_notice('error', validation_errors());
+				set_notice('danger', validation_errors());
 		}
 
 		// make a form off the array
@@ -224,7 +224,7 @@ class Install extends Install_Controller
 		if ($this->db->conn_id == "")
 		{
 			// unable to connect
-			set_notice('error', _('Connection with database not enstabilished: check the database fields.'));
+			set_notice('danger', _('Connection with database was not established: check the database fields.'));
 			return false;
 		}
 
@@ -292,7 +292,7 @@ class Install extends Install_Controller
 		}
 
 		// a nice notice to tell that FoOlSlide install was a success
-		flash_notice('notice', _('FoOlSlide has installed successfully. Check the preferences and make sure you create a team for your own chapters.'));
+		flash_notice('notice', _('FoOlSlide 2 has been successfully installed. Check the preferences and make sure you create a team for your own chapters.'));
 		redirect('/admin/');
 	}
 
@@ -309,28 +309,28 @@ class Install extends Install_Controller
 
 		if (version_compare(phpversion(), '5.2.0') < 0)
 		{
-			set_notice('error', _('You need at least PHP version 5.2.0 to run FoOlSlide. This means you have a many years old version. It is suggested to upgrade to a more recent version of PHP to avoid security issues with your server in general.'));
+			set_notice('danger', _('You need at least PHP version 5.2.0 to run FoOlSlide. This means you have a many years old version. It is suggested to upgrade to a more recent version of PHP to avoid security issues with your server in general.'));
 			$prob = TRUE;
 			return FALSE;
 		}
 
 		if (!file_exists('assets/config.sample.php'))
 		{
-			set_notice('error', sprintf(_('The file %s was removed. The installation can\'t continue without that file. You can find it in the FoOlSlide download.'), FCPATH . 'config.sample.php'));
+			set_notice('danger', sprintf(_('The file %s was removed. The installation can\'t continue without that file. You can find it in the FoOlSlide download.'), FCPATH . 'config.sample.php'));
 			$prob = TRUE;
 			return FALSE;
 		}
 
 		if (!is_writable('content'))
 		{
-			set_notice('error', sprintf(_('The %s directory needs to be writable. Use this command in your shell if possible: %s or change its permissions recursively to 777 with your own FTP software. You won\'t be able to install or run FoOlSlide without this.'), FCPATH . 'content/', '<br/><b><code>chmod -R 777 ' . FCPATH . 'content/</code></b><br/>'));
+			set_notice('danger', sprintf(_('The %s directory needs to be writable. Use this command in your shell if possible: %s or change its permissions recursively to 777 with your own FTP software. You won\'t be able to install or run FoOlSlide without this.'), FCPATH . 'content/', '<br/><b><code>chmod -R 777 ' . FCPATH . 'content/</code></b><br/>'));
 			$prob = TRUE;
 			return FALSE;
 		}
 
 		if (!is_writable('content/themes'))
 		{
-			set_notice('error', sprintf(_('The %s directory needs to be writable as well. Use this command in your shell if possible: %s or change its permissions recursively to 777 with your own FTP software. You won\'t be able to install or run FoOlSlide without this.'), FCPATH . 'content/themes', '<br/><b><code>chmod -R 777 ' . FCPATH . 'content/</code></b><br/>'));
+			set_notice('danger', sprintf(_('The %s directory needs to be writable as well. Use this command in your shell if possible: %s or change its permissions recursively to 777 with your own FTP software. You won\'t be able to install or run FoOlSlide without this.'), FCPATH . 'content/themes', '<br/><b><code>chmod -R 777 ' . FCPATH . 'content/</code></b><br/>'));
 			$prob = TRUE;
 			return FALSE;
 		}
@@ -356,17 +356,17 @@ class Install extends Install_Controller
 			// if absolutely unable to tell who's the php user, just apologize
 			// else, give a precise command for shell to enter
 			if ($whoami != "")
-				set_notice('warn', sprintf(_('The %s directory would be better if writable, in order to deliver automatic updates. Use this command in your shell if possible: %s'), FCPATH, '<br/><b><code>chown -R ' . $whoami . ' ' . FCPATH . '</code></b>'));
+				set_notice('warning', sprintf(_('The %s directory would be better if writable, in order to deliver automatic updates. Use this command in your shell if possible: %s'), FCPATH, '<br/><b><code>chown -R ' . $whoami . ' ' . FCPATH . '</code></b>'));
 			else
-				set_notice('warn', sprintf(_('The %s directory would be better if writable, in order to deliver automatic updates.<br/>It was impossible to determine the user running PHP. Use this command in your shell if possible: %s where www-data is an example (usually it\'s www-data or Apache)'), FCPATH, '<br/><b><code>chown -R www-data ' . FCPATH . '</code></b><br/>'));
-			set_notice('warn', sprintf(_('If you can\'t do the above, after the installation you will be given a textfile to paste in config.php. More info after submitting.')));
+				set_notice('warning', sprintf(_('The %s directory would be better if writable, in order to deliver automatic updates.<br/>It was impossible to determine the user running PHP. Use this command in your shell if possible: %s where www-data is an example (usually it\'s www-data or Apache)'), FCPATH, '<br/><b><code>chown -R www-data ' . FCPATH . '</code></b><br/>'));
+			set_notice('warning', sprintf(_('If you can\'t do the above, after the installation you will be given a textfile to paste in config.php. More info after submitting.')));
 			$prob = TRUE;
 		}
 
 		// there was an issue? suggest to refresh the page to check again
 		if ($prob)
 		{
-			set_notice('notice', _('If you made any changes, just refresh this page to recheck the directory permissions.'));
+			set_notice('info', _('If you made any changes, just refresh this page to recheck the directory permissions.'));
 		}
 
 		// all good

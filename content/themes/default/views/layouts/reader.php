@@ -24,7 +24,7 @@
 		<meta name="generator" content="FoOlSlide <?php echo FOOLSLIDE_VERSION ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<script src="<?php echo site_url() . 'js/vendor/jquery.js?v='.FOOLSLIDE_VERSION ?>"></script>
+		<script src="<?php echo site_url() . 'js/vendor/jquery.min.js?v='.FOOLSLIDE_VERSION ?>"></script>
 		<script src="<?php echo site_url() . 'js/jquery.plugins.js?v='.FOOLSLIDE_VERSION ?>"></script>
 
 		<?php if ($this->agent->is_browser('MSIE')) : ?>

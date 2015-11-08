@@ -4,15 +4,15 @@
 		<title>Installing FoOlSlide</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/bootstrap/style.css" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/admin/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/admin/style.css" />
 		<style type="text/css">
 			body {
 				padding-top: 60px;
 			}
 		</style>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.js"></script>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/bootstrap/bootstrap.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>js/jquery.min.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			function slideDown(item) { jQuery(item).slideDown(); }
 			function slideUp(item) { jQuery(item).slideUp(); }
@@ -87,7 +87,6 @@
 				jQuery(":input:first").focus(); // Focus on first input generated
 				
 				// Bootstrap jQuery
-				jQuery("a[rel=twipsy]").twipsy({ live: true });
 				jQuery("a[rel^='popover']").each(function() {
 					var direction = $(this).attr('rel').replace("popover-", "");
 					$(this).popover({ offset: 10, placement: direction });
@@ -98,13 +97,14 @@
 	</head>
 	
 	<body>
-		<div class="topbar" data-dropdown="dropdown">
-			<div class="topbar-inner">
-				<div class="container-fluid">
-					<a class="brand" href="#">Installing FoOlSlide</a>
-				</div>
-			</div>
-		</div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <a class="navbar-brand" href="/">FoOlSlide 2</a>
+                </div>
+            </div>
+		</nav>
 		
 		<div class="container-fluid">
 			
@@ -133,7 +133,7 @@
 						if (isset($this->notices))
 							foreach ($this->notices as $key => $value)
 							{
-								echo '<div class="alert-message ' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
+								echo '<div class="alert alert-' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
 							}
 						if (isset($this->tank_auth))
 						{
@@ -141,7 +141,7 @@
 							if (!empty($flashdata))
 								foreach ($flashdata as $key => $value)
 								{
-									echo '<div class="alert-message ' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
+									echo '<div class="alert alert-' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
 								}
 						}
 					?>
@@ -151,10 +151,6 @@
 			</div>
 		</div>
 		
-		<footer style="position: relative; bottom: 0px; width: 100%">
-			<p style="padding-left: 20px;">FoOlSlide Install</p>
-		</footer>
-		
 		<!-- Modal Container for Admin Panel -->
 		<div id="modal-container" class="modal hide fade">
 			<div class="modal-header">
@@ -163,7 +159,7 @@
 			</div>
 			<div class="modal-body">
 				<p id="modal-text-desc"></p>
-				<div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>assets/js/images/loader-18.gif"/></div>
+				<div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>js/images/loader-18.gif"/></div>
 			</div>
 			<div class="modal-footer">
 				<a href="#" id="modal-btn-no" class="btn primary"><?php echo _('No'); ?></a>
