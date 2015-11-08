@@ -30,7 +30,7 @@ Some pics of FoOlslide 2
 ![Chapter Infomation (Mobile)](http://i.imgur.com/mVT47ed.png)
 ![Login](http://i.imgur.com/ycPlBEs.png)
 ![Latest Releases](http://i.imgur.com/FCpvUpR.png)
-![Latest Releases (Mobile)](http://i.imgur.com/zTsjnts.png)
+![Latest Releases (Mobile)](http://i.imgur.com/4Ud6rXU.png)
 
 
 To do:
