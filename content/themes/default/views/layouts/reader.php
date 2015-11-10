@@ -56,8 +56,7 @@
 		<?php endif; ?>
 		<?php echo get_setting('fs_theme_header_code'); ?>
 	</head>
-	<body class="<?php if (isset($_COOKIE["night_mode"]) && $_COOKIE["night_mode"] == 1)
-			echo 'night '; ?>" style="background: url('.../images/bgb.jpg') no-repeat center center fixed;">
+	<body class="<?php if (isset($_COOKIE["night_mode"]) && $_COOKIE["night_mode"] == 1) echo 'night '; ?>" style="background: url('<?php echo base_url() ?>/content/themes/default/images/bgb.jpg') no-repeat center center fixed;">
 		<div id="wrapper">
 			<?php echo get_setting('fs_theme_preheader_text'); ?>
 			<div id="header">

@@ -323,7 +323,7 @@ class Reader extends Public_Controller
 
 		if ($comice->result_count() == 0)
 		{
-			set_notice('warn', 'This comic does not exist.');
+			set_notice('warning', 'This comic does not exist.');
 		}
 
 		$archive = new Archive();

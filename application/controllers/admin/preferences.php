@@ -169,7 +169,7 @@ class Preferences extends Admin_Controller
 						'tr_TR.utf8' => 'Turkish'
 					),
 				'preferences' => 'fs_gen',
-				'help' => _('Changes the software language of FoOlSlide. Please contribute by translating this software on our <a href="https://www.transifex.net/projects/p/foolslide/resource/defaultpot/">Transifex project</a>.')
+				'help' => _('Changes the software language of FoOlSlide. Help with translation would me much appreciated.')
 			)
 		);
 
