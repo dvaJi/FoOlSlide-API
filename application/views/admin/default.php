@@ -6,17 +6,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/font-awesome.min.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/admin/style.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/font-awesome.min.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/admin/style.css?v=<?php echo FOOLSLIDE_VERSION ?>" />
 		<style type="text/css">
 			body {
 				padding-top: 60px;
 			}
 		</style>
 		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
-        <script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
-        <script type="text/javascript" src="<?php echo site_url() ?>js/jquery-migrate-1.2.1.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
+        <script type="text/javascript" src="<?php echo site_url() ?>assets/js/bootstrap.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
+        <script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery-migrate-1.2.1.min.js?v=<?php echo FOOLSLIDE_VERSION ?>"></script>
 		<script type="text/javascript">
 			function slideDown(item) { jQuery(item).slideDown(); }
 			function slideUp(item) { jQuery(item).slideUp(); }

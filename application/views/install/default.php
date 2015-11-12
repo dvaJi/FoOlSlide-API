@@ -4,15 +4,15 @@
 		<title>Installing FoOlSlide</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/admin/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/admin/style.css" />
 		<style type="text/css">
 			body {
 				padding-top: 60px;
 			}
 		</style>
-		<script type="text/javascript" src="<?php echo site_url() ?>js/jquery.min.js"></script>
-		<script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			function slideDown(item) { jQuery(item).slideDown(); }
 			function slideUp(item) { jQuery(item).slideUp(); }
@@ -159,7 +159,7 @@
 			</div>
 			<div class="modal-body">
 				<p id="modal-text-desc"></p>
-				<div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>js/images/loader-18.gif"/></div>
+				<div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>assets/js/images/loader-18.gif"/></div>
 			</div>
 			<div class="modal-footer">
 				<a href="#" id="modal-btn-no" class="btn primary"><?php echo _('No'); ?></a>

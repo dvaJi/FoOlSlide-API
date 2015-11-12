@@ -25,7 +25,7 @@ class Upgrade_model extends CI_Model {
 		else
 			$result = file_get_contents($this->pod . '/api/software/foolslide');
 		if (!$result) {
-			set_notice('error', _('FoOlPod server could not be contacted: impossible to check for new versions.'));
+			set_notice('error', _('GitHub could not be contacted: impossible to check for new versions.'));
 			return FALSE;
 		}
 		$data = json_decode($result);
@@ -103,7 +103,7 @@ class Upgrade_model extends CI_Model {
 		}
 		if (!$zip) {
 			log_message('error', 'upgrade_model get_file(): impossible to get the update from FoOlPod');
-			flash_notice('error', _('Can\'t get the update file from FoOlPod. It might be a momentary problem, or a problem with your server security configuration. Browse <a href="http://foolrulez.com/pod/human">http://foolrulez.com/pod/human</a> to check if it\'s a known issue.'));
+			flash_notice('error', _('Can\'t get the update file from FoOlPod. It might be a momentary problem, or a problem with your server security configuration.'));
 			return FALSE;
 		}
 

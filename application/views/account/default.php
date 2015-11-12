@@ -5,9 +5,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="<?php echo base_url() ?>css/bootstrap.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url() ?>css/font-awesome.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url() ?>css/admin/account.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url() ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url() ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url() ?>assets/css/admin/account.css" rel="stylesheet" type="text/css" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
@@ -76,7 +76,7 @@ if ($CI->agent->is_browser('MSIE'))
 
 
 
-	<body style="background: url('<?php echo base_url() ?>images/admin_background.png') no-repeat center center fixed" class="noselect">
+	<body style="background: url('<?php echo base_url() ?>assets/images/admin_background.png') no-repeat center center fixed" class="noselect">
 
 		<div class="wrapper">
             <nav class="navbar navbar-inverse">
