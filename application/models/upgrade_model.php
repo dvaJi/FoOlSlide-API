@@ -102,8 +102,8 @@ class Upgrade_model extends CI_Model {
 			$zip = file_get_contents($direct_url);
 		}
 		if (!$zip) {
-			log_message('error', 'upgrade_model get_file(): impossible to get the update from FoOlPod');
-			flash_notice('error', _('Can\'t get the update file from FoOlPod. It might be a momentary problem, or a problem with your server security configuration.'));
+			log_message('error', 'upgrade_model get_file(): impossible to get the update from Github');
+			flash_notice('error', _('Can\'t get the update file from Github. It might be a momentary problem, or a problem with your server security configuration.'));
 			return FALSE;
 		}
 
