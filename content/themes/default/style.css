@@ -171,7 +171,7 @@ input[type="text"]
 #header
 {
     color:#ddd;
-    background:333#;
+    background:#333;
     height: 2.8125rem;
     /*font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;*/
 }
@@ -211,10 +211,6 @@ input[type="text"]
 #footer .text
 {
     font-size:11px;
-}
-
-#footer>*>div{
-    float:left;
 }
 
 #footer>*>.cp_link{
@@ -278,7 +274,7 @@ input[type="text"]
 #navig a
 {
     display:inline-block;
-    padding: 6px 8px;
+    padding: 8px 8px;
 }
 
 #navig ul
@@ -965,6 +961,10 @@ ul.dropdown li a
     margin-right:5px;
 }
 
+.icon_wrapper.larg {
+    font-size: 32px;
+}
+
 .icon_wrapper{
     overflow:visible;
 }
@@ -1044,6 +1044,12 @@ ul.dropdown li a
     -moz-border-radius:0px;
     -webkit-border-radius:0px;
  }
+ .list .group .preview {
+    float: none;
+  }
+  .list.series .group {
+    border-bottom: 1px solid #FFF;
+  }
 }
 
 #header a:link {

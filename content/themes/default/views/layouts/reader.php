@@ -16,7 +16,7 @@
 			echo link_tag('content/themes/' . get_setting('fs_theme_dir') . '/style.css?v='.FOOLSLIDE_VERSION);?>
 		
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<?php echo site_url() . 'assets/css/font-awesome.min.css?v='.FOOLSLIDE_VERSION ?>">
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="<?php echo site_url() ?>sitemap.xml" />
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo site_url() ?>rss.xml" />
 		<link rel="alternate" type="application/atom+xml" title="Atom" href="<?php echo site_url() ?>atom.xml" />
@@ -24,8 +24,8 @@
 		<meta name="generator" content="FoOlSlide <?php echo FOOLSLIDE_VERSION ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<script src="<?php echo site_url() . 'js/vendor/jquery.min.js?v='.FOOLSLIDE_VERSION ?>"></script>
-		<script src="<?php echo site_url() . 'js/jquery.plugins.js?v='.FOOLSLIDE_VERSION ?>"></script>
+		<script src="<?php echo site_url() . 'assets/js/jquery.min.js?v='.FOOLSLIDE_VERSION ?>"></script>
+		<script src="<?php echo site_url() . 'assets/js/jquery.plugins.js?v='.FOOLSLIDE_VERSION ?>"></script>
 
 		<?php if ($this->agent->is_browser('MSIE')) : ?>
 		<script type="text/javascript">
@@ -56,12 +56,12 @@
 		<?php endif; ?>
 		<?php echo get_setting('fs_theme_header_code'); ?>
 	</head>
-	<body class="<?php if (isset($_COOKIE["night_mode"]) && $_COOKIE["night_mode"] == 1) echo 'night '; ?>" style="background: url('<?php echo base_url() ?>/content/themes/default/images/bgb.jpg') no-repeat center center fixed;">
+	<body class="<?php if (isset($_COOKIE["night_mode"]) && $_COOKIE["night_mode"] == 1) echo 'night '; ?>" style="background: url('<?php echo base_url() ?>content/themes/default/images/bg.jpg') no-repeat center center fixed;">
 		<div id="wrapper">
 			<?php echo get_setting('fs_theme_preheader_text'); ?>
 			<div id="header">
 				<?php echo get_setting('fs_theme_header_text'); ?>
-				<a href="<?php echo get_setting('fs_gen_back_url') //site_url('')?>"><img id="titl" src="<?php echo site_url() ?>images/logo.png" alt="<?php echo get_setting('fs_gen_site_title') ?>"></img></a>
+				<a href="<?php echo get_setting('fs_gen_back_url') //site_url('')?>"><img id="titl" src="<?php echo site_url() ?>assets/images/logo_footer_night.png" alt="<?php echo get_setting('fs_gen_site_title') ?>"></img></a>
 				<?php if (get_setting('fs_gen_back_url'))
 					echo'<!--<div class="home_url"><a href="' . get_setting('fs_gen_back_url') . '">' . _("Go back to site") . ' &crarr;</a></div>-->'; ?>
 				

@@ -29,7 +29,7 @@ if (!defined('BASEPATH'))
 					?>
 				</div>
 				<div class="tbtitle icon_wrapper dnone" ><img class="icon off" src="<?php echo glyphish(181); ?>" /><img class="icon on" src="<?php echo glyphish(181, TRUE); ?>" /></div>
-				<?php echo $chapter->download_url(NULL, "fleft"); ?>
+				<?php echo $chapter->download_url(NULL, "fleft larg"); ?>
 			</div>
 		</div>
 		<div class="clearer"></div>
