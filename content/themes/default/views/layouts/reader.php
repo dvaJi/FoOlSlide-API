@@ -61,7 +61,7 @@
 			<?php echo get_setting('fs_theme_preheader_text'); ?>
 			<div id="header">
 				<?php echo get_setting('fs_theme_header_text'); ?>
-				<a href="<?php echo get_setting('fs_gen_back_url') //site_url('')?>"><img id="title" src="<?php echo site_url() ?>images/logo.png" alt="<?php echo get_setting('fs_gen_site_title') ?>"></img></a>
+				<a href="<?php echo get_setting('fs_gen_back_url') //site_url('')?>"><img id="titl" src="<?php echo site_url() ?>images/logo.png" alt="<?php echo get_setting('fs_gen_site_title') ?>"></img></a>
 				<?php if (get_setting('fs_gen_back_url'))
 					echo'<!--<div class="home_url"><a href="' . get_setting('fs_gen_back_url') . '">' . _("Go back to site") . ' &crarr;</a></div>-->'; ?>
 				
@@ -212,16 +212,4 @@
 		</div>
 	</body>
 	<?php echo get_setting('fs_theme_footer_code'); ?>
-    <!--<script>
-    TODO: Google Analytics in options
-    
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-INSERT HERE', 'auto');
-    ga('send', 'pageview');
-
-    </script>-->
 </html>

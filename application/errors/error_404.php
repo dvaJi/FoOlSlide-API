@@ -224,7 +224,7 @@ body {
             <div class="red blink led"></div>
         </div>
         <div class="flip">
-            404 Page not Found
+            Error 404
             <div class="break">
                 <div class="link left"></div>
                 <div class="link right"></div>
@@ -235,7 +235,7 @@ body {
             // Display selected error message
             echo($errordesc);
             if (!$message == '') {
-            echo '<p><h1>'.$heading.'</h1>'.$message.'</p>';
+            echo '<h1>'.$message.'</h1>';
             } else {
             echo '<p><a href="javascript:history.go(-1)"><< Go back to previous page.</a></p>';
 

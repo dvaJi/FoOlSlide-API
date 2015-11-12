@@ -28,7 +28,7 @@ if (!defined('BASEPATH'))
 					echo '</ul>'
 					?>
 				</div>
-				<div class="tbtitle icon_wrapper dnone" ><img class="icon off" src="<?php echo glyphish(181); ?>" /><img class="icon on" src="<?php echo glyphish(181, TRUE); ?>" /></div>
+				<!--<div class="tbtitle icon_wrapper dnone" ><img class="icon off" src="<?php echo glyphish(181); ?>" /><img class="icon on" src="<?php echo glyphish(181, TRUE); ?>" /></div>-->
 				<?php echo $chapter->download_url(NULL, "fleft"); ?>
 			</div>
 			<div class="topbar_right">
@@ -106,7 +106,9 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
 	
 	<div id="disqus_thread" style="background-color: transparent;"></div>
 	<script type="text/javascript">
-    /*var disqus_shortname = 'INSERT DISQUS NAME HERE AND UNCOMMENT. TODO: MAKE AVAILABLE IN OPTIONS';
+    <?php
+    if (get_setting('fs_disqus_active')){ ?>
+    var disqus_shortname = '<?php echo get_setting('fs_disqus_name'); ?>';
     var disqus_title = '<?php echo $comic->title() ?> - <?php echo $chapter->title() ?> - Page <?php echo $current_page; ?>';
     var disqus_identifier = '<?php echo $comic->title() ?> :: <?php echo $chapter->title() ?> :: <?php echo $current_page; ?>';
     
@@ -114,20 +116,24 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();*/
+    })();
     
     /* * * Disqus Reset Function * * */
     function dreset(newUrl, pageNum) {
-        DISQUS.reset({
-            reload: true,
-            config: function () {
-                this.page.identifier = '<?php echo $comic->title() ?> :: <?php echo $chapter->title() ?> :: ' + pageNum;
-                this.page.url = newUrl;
-                this.page.title = '<?php echo $comic->title() ?> - <?php echo $chapter->title() ?> - Page ' + pageNum;
-            }
-        });
+        if(typeof(DISQUS) != "undefined" && DISQUS !== null) {
+            DISQUS.reset({
+                reload: true,
+                config: function () {
+                    this.page.identifier = '<?php echo $comic->title() ?> :: <?php echo $chapter->title() ?> :: ' + pageNum;
+                    this.page.url = newUrl;
+                    this.page.title = '<?php echo $comic->title() ?> - <?php echo $chapter->title() ?> - Page ' + pageNum;
+                }
+            });
+        }
+        return true;
     };
 	</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <?php } ?>
 </div>
 
 
@@ -172,9 +178,10 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
         
 		preload(id);
         
+        <?php if (get_setting('fs_disqus_active')){ ?>
         /*Disqus*/
-        //alert(base_url+'page/' + (id + 1));
         dreset(base_url+'page/' + (id + 1), (id + 1));
+        <?php } ?>
         
 		current_page = id;
         
@@ -196,7 +203,7 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
 		resizePage(id);
         
 		if(!nohash) History.pushState(null, null, base_url+'page/' + (current_page + 1));
-		document.title = gt_page + ' ' + (current_page+1) + ' :: ' + title;
+        jQuery(document).prop('title', gt_page + ' ' + (current_page+1) + ' :: ' + title);
         
 		update_numberPanel();
 		jQuery('#pagelist .current').removeClass('current');
