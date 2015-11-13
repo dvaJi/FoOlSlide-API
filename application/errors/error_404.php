@@ -233,7 +233,6 @@ body {
         <div class="sorry">
             <?php
             // Display selected error message
-            echo($errordesc);
             if (!$message == '') {
             echo '<h1>'.$message.'</h1>';
             } else {

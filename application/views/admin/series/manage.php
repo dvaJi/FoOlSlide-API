@@ -17,7 +17,7 @@ $CI->buttoner = array(
             <div class="smartsearch">
             <?php
             echo form_open(site_url('/admin/series/manage/'));
-            echo form_input(array('name'=>'search', 'placeholder' => _('To search, write and hit enter'), 'class' => 'form-control'));
+            echo form_input(array('name'=>'search', 'placeholder' => _('To search, type and hit enter'), 'class' => 'form-control'));
             echo form_close();
             ?>
             </div>
@@ -31,19 +31,19 @@ $CI->buttoner = array(
 				<div class="title"><a href="'.site_url("admin/series/series/".$comic->stub).'">'.$comic->name.'</a></div>
 				<div class="smalltext">'._('Quick tools').':
 					<a href="'.site_url("admin/series/add_new/".$comic->stub).'">'._('Add Chapter').'</a> |
-					<a href="'.site_url("admin/series/delete/serie/".$comic->id).'" onclick="confirmPlug(\''.site_url("admin/series/delete/serie/".$comic->id).'\', \''._('Do you really want to delete this serie and its chapters?').'\'); return false;">'._('Delete').'</a> |
+					<a href="'.site_url("admin/series/delete/serie/".$comic->id).'" onclick="confirmPlug(\''.site_url("admin/series/delete/serie/".$comic->id).'\', \''._('Do you really want to delete this series and its chapters?').'\'); return false;">'._('Delete').'</a> |
 					<a href="'.site_url("series/".$comic->stub).'">'._('Read').'</a>
 				</div>';
 			echo '</div>';
 		}
 		?>
 	</div>
+</div>
 <?php
 	if ($comics->paged->total_pages > 1)
 	{
 ?>
-	<div class="pagination" style="margin-bottom: -5px">
-		<ul>
+	<ul class="pagination" style="margin-top: -5px">
 		<?php
 			if ($comics->paged->has_previous)
 				echo '<li class="prev"><a href="' . site_url('admin/series/manage/'.$comics->paged->previous_page) . '">&larr; ' . _('Prev') . '</a></li>';
@@ -65,9 +65,7 @@ $CI->buttoner = array(
 			else
 				echo '<li class="next disabled"><a href="#">' . _('Next') . ' &rarr;</a></li>';
 		?>
-		</ul>
-	</div>
+	</ul>
 <?php
 	}
 ?>
-</div>

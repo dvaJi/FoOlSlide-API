@@ -9,8 +9,8 @@
         <link href="<?php echo base_url() ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url() ?>assets/css/admin/account.css" rel="stylesheet" type="text/css" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="<?php echo site_url() ?>js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo site_url() ?>assets/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             function slideDown(item) { jQuery(item).slideDown(); }
             function slideUp(item) { jQuery(item).slideUp(); }

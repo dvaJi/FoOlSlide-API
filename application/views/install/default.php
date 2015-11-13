@@ -152,19 +152,23 @@
 		</div>
 		
 		<!-- Modal Container for Admin Panel -->
-		<div id="modal-container" class="modal hide fade">
-			<div class="modal-header">
-				<a href="#" class="close">&times;</a>
-				<h3 id="modal-text-head">Warning!</h3>
-			</div>
-			<div class="modal-body">
-				<p id="modal-text-desc"></p>
-				<div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>assets/js/images/loader-18.gif"/></div>
-			</div>
-			<div class="modal-footer">
-				<a href="#" id="modal-btn-no" class="btn primary"><?php echo _('No'); ?></a>
-				<a href="#" id="modal-btn-yes" class="btn secondary"><?php echo _('Yes'); ?></a>
-			</div>
-		</div>
+		<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 id="modal-text-head">Warning!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-text-desc"></p>
+                        <div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>assets/js/images/loader-18.gif"/></div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" id="modal-btn-no" class="btn btn-danger"><?php echo _('No'); ?></a>
+                        <a href="#" id="modal-btn-yes" class="btn btn-success"><?php echo _('Yes'); ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</body>
 </html>

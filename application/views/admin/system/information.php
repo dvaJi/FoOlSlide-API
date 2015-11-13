@@ -215,14 +215,14 @@
 	</div>
 </div>
 
-<div id="modal-for-information" class="modal fade" role="dialog" style="display: none">
+<div id="modal-for-information" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <a class="close" href="#">&times;</a>
-                <h3><?php echo _('System Information'); ?></h3>
+                <a href="#" class="close">&times;</a>
+                <h3 id="modal-text-head"><?php echo _('System Information'); ?></h3>
             </div>
-            <div class="modal-body" style="text-align: center">
+            <div class="modal-body">
                 <textarea id="server-information-output" class="form-control" style="min-height: 300px; font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace !important" readonly="readonly"><?php
                 foreach ($information as $key => $item)
                 {
@@ -248,7 +248,6 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
 
 	var pasteSystemInfo = function() {
