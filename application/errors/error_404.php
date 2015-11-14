@@ -234,7 +234,7 @@ body {
             <?php
             // Display selected error message
             if (!$message == '') {
-            echo '<h1>'.$message.'</h1>';
+            echo '<p>'.$message.'</p>';
             } else {
             echo '<p><a href="javascript:history.go(-1)"><< Go back to previous page.</a></p>';
 

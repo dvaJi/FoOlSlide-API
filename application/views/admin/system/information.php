@@ -219,7 +219,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close">&times;</a>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h3 id="modal-text-head"><?php echo _('System Information'); ?></h3>
             </div>
             <div class="modal-body">
