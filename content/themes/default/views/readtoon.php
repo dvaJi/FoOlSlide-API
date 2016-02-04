@@ -8,7 +8,7 @@ if (!defined('BASEPATH'))
 		<div>
 			<div class="topbar_left">
 				<h1 class="tbtitle dnone"><?php echo $comic->url() ?> :: <?php echo $chapter->url() ?></h1>
-				<div class="tbtitle dropdown_parent"><div class="text"><?php echo $comic->url() ?> ⤵</div>
+				<div class="tbtitle dropdown_parent mmh"><div class="text"><?php echo $comic->url() ?> ⤵</div>
 					<?php
 					echo '<ul class="dropdown">';
 					foreach ($comics->all as $co)
@@ -18,7 +18,17 @@ if (!defined('BASEPATH'))
 					echo '</ul>'
 					?>
 				</div>
-				<div class="tbtitle dropdown_parent"><div class="text"><?php echo '<a href="' . $chapter->href() . '">' . ((strlen($chapter->title()) > 58) ? (substr($chapter->title(), 0, 50) . '...') : $chapter->title()) . '</a>' ?> ⤵</div>
+                <span class="dh">
+                    <?php
+					echo '<select id="osel" class="asel selecto">';
+					foreach ($comics->all as $co)
+					{
+						echo '<option value="' . $co->href() . '">' . $co->title() . '</option>';
+					}
+					echo '</select>'
+					?>
+                </span>
+				<div class="tbtitle dropdown_parent mmh"><div class="text"><?php echo '<a href="' . $chapter->href() . '">' . ((strlen($chapter->title()) > 58) ? (substr($chapter->title(), 0, 50) . '...') : $chapter->title()) . '</a>' ?> ⤵</div>
 					<?php
 					echo '<ul class="dropdown">';
 					foreach ($chapters->all as $ch)
@@ -28,7 +38,16 @@ if (!defined('BASEPATH'))
 					echo '</ul>'
 					?>
 				</div>
-				<div class="tbtitle icon_wrapper dnone" ><img class="icon off" src="<?php echo glyphish(181); ?>" /><img class="icon on" src="<?php echo glyphish(181, TRUE); ?>" /></div>
+                <span class="dh">
+                    <?php
+					echo '<select id="csel" class="asel selecto">';
+					foreach ($chapters->all as $ch)
+					{
+						echo '<option value="' . $ch->href() . '">' . $ch->title() . '</option>';
+					}
+					echo '</select>'
+					?>
+                </span>
 				<?php echo $chapter->download_url(NULL, "fleft larg"); ?>
 			</div>
 		</div>
@@ -78,7 +97,6 @@ if (!defined('BASEPATH'))
 	var site_url = '<?php echo site_url() ?>';
 
 	var gt_page = '<?php echo addslashes(_("Page")) ?>';
-	var gt_key_suggestion = '<?php echo addslashes(_("Use W-A-S-D or the arrow keys to navigate")) ?>';
 	var gt_key_tap = '<?php echo addslashes(_("Double-tap to change page")) ?>';
 
 	function changePage(id, noscroll, nohash)
@@ -86,10 +104,6 @@ if (!defined('BASEPATH'))
 		id = parseInt(id);
 		if (initialized && id == current_page)
 			return false;
-
-		if(!initialized) {
-			create_message('key_suggestion', 4000, gt_key_suggestion);
-		}
 
 		initialized = true;
 		if(id > pages.length-1)
@@ -253,6 +267,14 @@ if (!defined('BASEPATH'))
 		History.pushState(null, null, base_url+'page/' + (current_page+1));
 		changePage(current_page, false, true);
 		document.title = gt_page+' ' + (current_page+1) + ' :: ' + title;
+        
+        $('.asel').on('change', function() {//chapter
+            window.stateChangeIsLocal = false;
+            location.href = $(this).val();
+        });
+        
+        $('#osel').val("<?php echo $comic->href(); ?>");
+        $('#csel').val("<?php echo $chapter->href(); ?>");
 	});
 </script>
 

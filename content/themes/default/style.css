@@ -38,7 +38,6 @@ body
     margin:0 auto;
     overflow-y:scroll !important;
     background:#fff;
-    background: url('.../images/bgb.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -327,8 +326,6 @@ input[type="text"]
 .list
 {
     margin:0 0 10px;
-
-    overflow:hidden;
     border-radius:2px;
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
@@ -994,7 +991,21 @@ ul.dropdown li a
     text-align:center;
 }
 
+.selecto {
+    border: 1px solid #000;
+    font-size: 14px;
+    color: #fff;
+    background: #444;
+    padding: 9px;
+    max-width: 180px;
+}
+
 /*mobile*/
+
+.dh {
+  display: none;
+}
+
 @media all and (max-width: 1024px) {
  .sidebar {
    float: none;
@@ -1024,17 +1035,24 @@ ul.dropdown li a
  .topbar_left {
   margin-bottom: 5px;
  }
+ .mmh {
+   display: none;
+ }
+ .dh {
+   display: block;
+ }
 }
 
 @media all and (max-width: 640px) {
+
  .thumbnail img {
     width: 100%;
  }
  body {
-    background-image: none;
+    background: none !important;
  }
  .mh {
-   display: none
+   display: none;
  }
  #content {
     margin: 0px auto 0px;
@@ -1049,6 +1067,17 @@ ul.dropdown li a
   }
   .list.series .group {
     border-bottom: 1px solid #FFF;
+  }
+  .topbar_right {
+    float: none;
+    clear: both;
+  }
+  .selecto {
+    max-width: 140px;
+  }
+  .nivoSlider {
+    height: auto !important;
+    padding-top: 50%;
   }
 }
 

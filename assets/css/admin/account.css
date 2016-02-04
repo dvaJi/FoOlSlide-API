@@ -282,22 +282,32 @@ input:-moz-placeholder {
     display:block;
 }
 
-
-
-
-
-
-
-
 #footer
 {
-    /*font-family: Cambria, Georgia, Times, Times New Roman, serif;*/
-    color:#888;
+    color: #FFF;
+    text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+#footer a {
+    color: #FFF;
+    text-shadow:
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 
 #footer .text
 {
     padding:0.5em 1em 0;
+    
 }
 
 .wrapper
@@ -319,13 +329,6 @@ input:-moz-placeholder {
     color:#444;
     color:rgba(0,0,0,0.8);
 }
-
-
-#footer
-{
- 
-}
-
 
 #content_wrap
 {
@@ -486,5 +489,8 @@ input:-moz-placeholder {
         box-shadow: none;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
+    }
+    #footer {
+        display: none;
     }
 }

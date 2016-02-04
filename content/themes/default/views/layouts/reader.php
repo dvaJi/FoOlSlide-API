@@ -119,9 +119,9 @@
 							if (!$loaded_slideshow)
 							{
 								?>
-								<link rel="stylesheet" href="<?php echo site_url() ?>js/nivo-slider.css" type="text/css" media="screen" />
-								<link rel="stylesheet" href="<?php echo site_url() ?>js/nivoThemes/default/default.css" type="text/css" media="screen" />
-								<script src="<?php echo site_url() ?>js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+								<link rel="stylesheet" href="<?php echo site_url() ?>assets/js/nivo-slider.css" type="text/css" media="screen" />
+								<link rel="stylesheet" href="<?php echo site_url() ?>assets/js/nivoThemes/default/default.css" type="text/css" media="screen" />
+								<script src="<?php echo site_url() ?>assets/js/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 								<script type="text/javascript">
 									jQuery(window).load(function() {
 										jQuery('#slider').nivoSlider({
@@ -131,19 +131,18 @@
 								</script>
 								<style>
 									.nivoSlider {
-										position:relative;
-										width:680px !important; /* Change this to your images width */
-										height:280px !important; /* Change this to your images height */
-										margin-bottom:10px;
+										width:100% !important; /* Change this to your images width */
 										overflow:hidden;
-										margin-left:1px;
+                                        background-size: contain !important;
+                                        background-position: center !important;
 									}
 									.nivoSlider img {
 										position:absolute;
 										top:0px;
 										left:0px;
 										display:none;
-										width:690px !important;
+                                        width: auto;
+                                        height: auto;
 									}
 
 									.nivoSlider a {

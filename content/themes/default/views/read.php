@@ -8,7 +8,7 @@ if (!defined('BASEPATH'))
 		<div>
 			<div class="topbar_left">
 				<h1 class="tbtitle dnone"><?php echo $comic->url() ?> :: <?php echo $chapter->url() ?></h1>
-				<div class="tbtitle dropdown_parent"><div class="text"><?php echo $comic->url() ?> ⤵</div>
+				<div class="tbtitle dropdown_parent mmh"><div class="text"><?php echo $comic->url() ?> ⤵</div>
 					<?php
 					echo '<ul class="dropdown">';
 					foreach ($comics->all as $co)
@@ -18,7 +18,17 @@ if (!defined('BASEPATH'))
 					echo '</ul>'
 					?>
 				</div>
-				<div class="tbtitle dropdown_parent"><div class="text"><?php echo '<a href="' . $chapter->href() . '">' . ((strlen($chapter->title()) > 58) ? (substr($chapter->title(), 0, 50) . '...') : $chapter->title()) . '</a>' ?> ⤵</div>
+                <span class="dh">
+                    <?php
+					echo '<select id="osel" class="asel selecto">';
+					foreach ($comics->all as $co)
+					{
+						echo '<option value="' . $co->href() . '">' . $co->title() . '</option>';
+					}
+					echo '</select>'
+					?>
+                </span>
+				<div class="tbtitle dropdown_parent mmh"><div class="text"><?php echo '<a href="' . $chapter->href() . '">' . ((strlen($chapter->title()) > 58) ? (substr($chapter->title(), 0, 50) . '...') : $chapter->title()) . '</a>' ?> ⤵</div>
 					<?php
 					echo '<ul class="dropdown">';
 					foreach ($chapters->all as $ch)
@@ -28,11 +38,20 @@ if (!defined('BASEPATH'))
 					echo '</ul>'
 					?>
 				</div>
-				<!--<div class="tbtitle icon_wrapper dnone" ><img class="icon off" src="<?php echo glyphish(181); ?>" /><img class="icon on" src="<?php echo glyphish(181, TRUE); ?>" /></div>-->
+                <span class="dh">
+                    <?php
+					echo '<select id="csel" class="asel selecto">';
+					foreach ($chapters->all as $ch)
+					{
+						echo '<option value="' . $ch->href() . '">' . $ch->title() . '</option>';
+					}
+					echo '</select>'
+					?>
+                </span>
 				<?php echo $chapter->download_url(NULL, "fleft larg"); ?>
 			</div>
 			<div class="topbar_right">
-				<div class="tbtitle dropdown_parent dropdown_right"><div class="text"><?php echo count($pages); ?> ⤵</div>
+				<div class="tbtitle dropdown_parent dropdown_right mmh"><div class="text"><?php echo count($pages); ?> ⤵</div>
 					<?php
 					$url = $chapter->href();
 					echo '<ul class="dropdown" style="width:90px;">';
@@ -42,10 +61,17 @@ if (!defined('BASEPATH'))
 					}
 					echo '</ul>'
 					?>
-				</div>
-
-				<div class="divider"></div>
-				<span class="numbers">
+				</div><span class="dh">
+                <?php
+                echo _("Page") . ': <select id="psel" class="selecto">';
+                for ($i = 1; $i <= count($pages); $i++)
+                {
+                    echo '<option>' . $i . '</option>';//onClick="changePage(' . ($i - 1) . ');
+                }
+                echo '</select>'
+                ?></span>
+				<div class="divider mmh"></div>
+				<span class="numbers mmh">
 					<?php
 					//for ($i = (($val = $current_page - 3) <= 0)?(1):$val; $i <= count($pages) && $i < $current_page + 3; $i++) {
 					for ($i = (($val = $current_page + 2) >= count($pages)) ? (count($pages)) : $val; $i > 0 && $i > $current_page - 3; $i--)
@@ -94,7 +120,7 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
     </div>
     <div class="socialbuttons">
         <div class="tweet">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $chapter->href() ?>" data-count="horizontal" data-via="<?php echo get_setting_twitter(); ?>" data-related="<?php echo get_setting_twitter(); ?>">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $chapter->href() ?>" data-count="horizontal" data-via="<?php echo get_setting_twitter(); ?>" data-related="<?php echo get_setting_twitter(); ?>">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
         </div>
 		<div class="facebook">
 			<iframe src="https://www.facebook.com/plugins/like.php?href=<?php echo urlencode($chapter->href()) ?>&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:95px; height:21px;" allowTransparency="true"></iframe>
@@ -363,6 +389,7 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
 	var button_down_code;
 
 	jQuery(document).ready(function() {
+        window.stateChangeIsLocal = true;//keep from trigering statechange;
                 
         document.title = gt_page+' ' + (current_page+1) + ' :: ' + title;
 		jQuery(document).keydown(function(e){
@@ -435,18 +462,21 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
 		timeStamp39 = 0;
 
 		jQuery(window).bind('statechange',function(){
-			var State = History.getState();
-			url = parseInt(State.url.substr(State.url.lastIndexOf('/')+1));
-			changePage(url-1, false, true);
-			document.title = gt_page+' ' + (current_page+1) + ' :: ' + title;
+            if(window.stateChangeIsLocal){
+                var State = History.getState();
+                url = parseInt(State.url.substr(State.url.lastIndexOf('/')+1));
+                changePage(url-1, false, true);
+                document.title = gt_page+' ' + (current_page+1) + ' :: ' + title;
+            }
 		});
 
 
 
 		State = History.getState();
 		url = State.url.substr(State.url.lastIndexOf('/')+1);
-		if(url < 1)
+		if(url < 1){
 			url = 1;
+        }
 		current_page = url-1;
 		History.pushState(null, null, base_url+'page/' + (current_page+1));
 		changePage(current_page, false, true);
@@ -457,6 +487,18 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
 		jQuery(window).resize(function() {
 			resizePage(current_page);
 		});
+        
+        $('.asel').on('change', function() {//chapter
+            window.stateChangeIsLocal = false;
+            location.href = $(this).val();
+        });
+        
+        $('#osel').val("<?php echo $comic->href(); ?>");
+        $('#csel').val("<?php echo $chapter->href(); ?>");
+        
+        $('#psel').on('change', function() {//page
+            changePage($(this).find("option:selected").text() - 1);
+        });
 	});
 </script>
 

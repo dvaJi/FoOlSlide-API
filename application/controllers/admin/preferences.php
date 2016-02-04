@@ -208,7 +208,19 @@ class Preferences extends Admin_Controller
 				'type' => 'themes',
 				'name' => 'fs_theme_dir',
 				'placeholder' => '',
+                'class' => 'form-control',
 				'preferences' => 'fs_gen'
+			)
+		);
+        
+        $form[] = array(
+			_('Disqus Shortname (does not work yet)'),
+			array(
+				'type' => 'input',
+				'name' => 'fs_theme_disqus_code',
+				'placeholder' => '',
+				'preferences' => 'fs_gen',
+				'help' => _("<a href=\"https://help.disqus.com/customer/portal/articles/466208\">More info here</a>. If left empty, the Disqus comment section is disabled")
 			)
 		);
 
