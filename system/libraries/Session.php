@@ -322,7 +322,8 @@ class CI_Session {
 
 
 		// Save the data to the DB if needed
-		if ($this->sess_use_database === TRUE)
+        //custom chocolatkey Henry
+		if ($this->sess_use_database === TRUE && $this->userdata['ip_address'] != "0.0.0.0")
 		{
 			$this->CI->db->query($this->CI->db->insert_string($this->sess_table_name, $this->userdata));
 		}

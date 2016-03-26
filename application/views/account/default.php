@@ -200,7 +200,7 @@ if ($CI->agent->is_browser('MSIE'))
 
 		</div>
 
-		<div id="footer"><div class="text"></div></div>
+		<div id="footer"><div class="text">Art by <a href="http://seiga.nicovideo.jp/user/illust/221174">春原ロビンソン</a></div></div>
 	</body>
 
 </html>
