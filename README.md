@@ -15,6 +15,7 @@ Installation
 3.  Go to http://yourdomain.com/slidefolder/install
 4.  Insert database info and admin account info
 5.  Done
+6.  It is **very** recommended that you duplicate the default theme (/content/themes/default) folder and rename in reader_config.php, because the default theme's CSS, PHP and images will be overwritten by an update.
 
 New in version 2
 ------------
