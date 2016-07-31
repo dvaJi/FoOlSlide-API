@@ -288,7 +288,7 @@ class Reader extends Public_Controller
 		$chapters->where('comic_id', $comice->id)->order_by('volume', 'desc')->order_by('chapter', 'desc')->order_by('subchapter', 'desc')->get_bulk();
 
 		$comics = new Comic();
-		$comics->order_by('name', 'ASC')->limit(100)->get();
+        $comics->order_by('name', 'ASC')->limit(999)->get(); //A reasonable maximum amount of different comics on a foolslide site.
 
 		$this->template->set('is_reader', TRUE);
 		$this->template->set('comic', $comice);
