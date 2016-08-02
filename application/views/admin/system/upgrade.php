@@ -53,6 +53,9 @@ if (!$new_versions)
 	<?php
 	echo _('Current Version') . ': ' . $current_version . '<br/>';
 	echo ($new_versions ? _('Latest Version Available') . ': ' . ($new_versions[0]->version . '.' . $new_versions[0]->subversion . '.' . $new_versions[0]->subsubversion) : _('You have the latest version of FoOlSlide.')) . '<br/><br/>';
+    if (in_array(strtolower(PHP_OS), array("win32", "windows", "winnt"))) {
+        echo '<span style="color:#F00;">You are running Windows, automatic upgrades not supported</span>';
+    }
 	?>
 </div>
 

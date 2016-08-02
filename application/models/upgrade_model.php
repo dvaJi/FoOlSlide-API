@@ -44,7 +44,7 @@ class Upgrade_model extends CI_Model {
             $tn = substr($release["tag_name"], 1); 
             if (!$this->is_bigger_version(FOOLSLIDE_VERSION, $tn))
 				break;
-            if(true){
+            if(!$release["prerelease"]){
                 $tv = $this->version_to_object($tn);
                 $tv->changelog = $release["body"];
                 $tv->download = $release["zipball_url"];
