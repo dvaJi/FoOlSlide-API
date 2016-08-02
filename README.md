@@ -2,7 +2,7 @@ FoOlSlide 2
 =========
 __WARNING! THIS IS UNOFFICIAL!__
 
-__Current stable version: 2.2.2__
+__Current stable version: 2.2.5__
 
 FoOlSlide is a ridiculously elaborated comic reader meant for users to enjoy reading.
 Sick of waiting for the official FoolSlide2? Check out this "Version 2". The update primarily focuses on bringing the design/libraries up to date and making FoOlSlide mobile-friendly. The backend theme has been updated to Bootstrap 3 (lots of code mods) and the frontend has been improved. Feel free to make your own theme.
