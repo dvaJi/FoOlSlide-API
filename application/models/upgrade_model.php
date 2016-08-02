@@ -22,7 +22,7 @@ class Upgrade_model extends CI_Model {
 		if (function_exists('curl_init')) {
 			$this->load->library('curl');
             $this->curl->create($this->pod);
-            $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
+            $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Update Checker");
             $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
 			$result = $this->curl->execute();
             //set_notice('notice', json_encode($this->curl->info));
@@ -44,7 +44,7 @@ class Upgrade_model extends CI_Model {
             $tn = substr($release["tag_name"], 1); 
             if (!$this->is_bigger_version(FOOLSLIDE_VERSION, $tn))
 				break;
-            if(!$release["prerelease"]){
+            if(true){
                 $tv = $this->version_to_object($tn);
                 $tv->changelog = $release["body"];
                 $tv->download = $release["zipball_url"];
@@ -114,13 +114,21 @@ class Upgrade_model extends CI_Model {
 		$this->clean();
 		if (function_exists('curl_init')) {
 			$this->load->library('curl');
+            
+            
 			//$zip = $this->curl->simple_post($url, array('url' => site_url(), 'version' => FOOLSLIDE_VERSION)); Don't need dem analytics (there *was* a temptation)
 			if (!$zip) {
-				$zip = $this->curl->simple_get($direct_url);
+				$this->load->library('curl');
+                $this->curl->create($direct_url);
+                $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
+                $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
+                $result = $this->curl->execute();
 			}
 		}
 		else {
-			$zip = file_get_contents($direct_url);
+            $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
+            $context  = stream_context_create($options);
+            $result = file_get_contents($direct_url, false, $context);
 		}
 		if (!$zip) {
 			log_message('error', 'upgrade_model get_file(): impossible to get the update from Github');
