@@ -61,7 +61,7 @@ class Upgrade_model extends CI_Model {
 			return $new_versions;
 
 		if($force)
-			return array($data->versions[0]);
+			return array($data[0]->versions[0]);
 
 		return FALSE;
 	}

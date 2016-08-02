@@ -476,7 +476,7 @@ class System extends Admin_Controller
 
 		if (!isAjax())
 		{
-			//return false;
+			return false;
 		}
 
 		// triggers the upgrade
