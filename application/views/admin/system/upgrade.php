@@ -14,7 +14,8 @@ if ($new_versions)
 			'plug' => _('Do you really want to upgrade to the latest version?'),
 			'rel' => 'popover-below',
 			'title' => _('Automatic Upgrade'),
-			'data-content' => _('This will upgrade your FoOlSlide installation to the latest version.')
+			'data-content' => _('This will upgrade your FoOlSlide installation to the latest version.'),
+            'class' => "btn-success"
 		);
 	}
 
@@ -23,7 +24,8 @@ if ($new_versions)
 		'href' => $new_versions[0]->download,
 		'rel' => 'popover-left',
 		'title' => _('Download'),
-		'data-content' => _('This allows you to download the latest FoOlSlide package to re-install or update your installation manually.')
+		'data-content' => _('This allows you to download the latest FoOlSlide package to re-install or update your installation manually.'),
+        'class' => "btn-primary"
 	);
 }
 
@@ -37,15 +39,17 @@ if (!$new_versions)
 			'plug' => _('Do you really want to re-install FoOlSlide?'),
 			'rel' => 'popover-left',
 			'title' => _('Download'),
-			'data-content' => _('This will re-install FoOlslide automatically and repair any broken files during the process.')
+			'data-content' => _('This will re-install FoOlslide automatically and repair any broken files during the process.'),
+            'class' => "btn-warning"
 		);
 	}
 }
 ?>
 <div class="table" style="padding-bottom: 10px">
-	<h3 style="float: left"><?php echo _('Upgrade'); ?></h3>
-	<span style="float: right; padding: 5px"><?php echo buttoner(); ?></span>
-	<hr class="clear"/>
+    <div class="cont">
+        <h3 style="float: left"><?php echo _('Upgrade'); ?></h3>
+        <span style="float: right; padding: 15px"><?php echo buttoner(); ?></span>
+    </div>
 	<?php
 	echo _('Current Version') . ': ' . $current_version . '<br/>';
 	echo ($new_versions ? _('Latest Version Available') . ': ' . ($new_versions[0]->version . '.' . $new_versions[0]->subversion . '.' . $new_versions[0]->subsubversion) : _('You have the latest version of FoOlSlide.')) . '<br/><br/>';

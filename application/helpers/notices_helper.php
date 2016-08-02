@@ -20,7 +20,7 @@ if (!function_exists('get_notices'))
 		$echo = '';
 		foreach ($merge as $key => $value)
 		{
-			$echo .= '<div class="alert-message ' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
+			$echo .= '<div class="alert alert-' . $value["type"] . ' alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p>' . $value["message"] . '</p></div>';
 		}
 		return $echo;
 	}
@@ -58,7 +58,9 @@ if (!function_exists('set_notice'))
 		if ($type == 'warn')
 			$type = 'warning';
 		if ($type == 'notice')
-			$type = 'success';
+			$type = 'info';
+        if ($type == 'error')
+            $type = 'danger';
 
 		$CI = & get_instance();
 		$CI->notices[] = array("type" => $type, "message" => $message, "data" => $data);

@@ -20,11 +20,6 @@ class System extends Admin_Controller
 	}
 
 
-	/*
-	 * A page telling if there's an ugrade available
-	 *
-	 * @author Woxxy
-	 */
 	function index()
 	{
 		redirect('/admin/system/information');
@@ -442,7 +437,11 @@ class System extends Admin_Controller
 				)));
 	}
 
-
+    /*
+	 * Upgrade page
+	 *
+	 * @author Woxxy
+	 */
 	function upgrade()
 	{
 		$this->viewdata["function_title"] = _("Upgrade FoOlSlide");
@@ -490,7 +489,7 @@ class System extends Admin_Controller
 			flash_message('error', _('Upgrade failed: check file permissions.'));
 		}
 
-		// return an url
+		// return a url
 		$this->output->set_output(json_encode(array('href' => site_url('admin/system/upgrade'))));
 	}
 

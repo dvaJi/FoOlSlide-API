@@ -68,7 +68,7 @@ class Upgrade2_model extends CI_Model {
 		}
 
 		// Put FoOlSlide in maintenance
-		$this->db->update('preferences', array('value' => 'fs_priv_maintenance'), array('name' => _("We're currently upgrading FoOlSlide 2. This process usually takes few seconds or a couple minutes, check back soon!")));
+		$this->db->update('preferences', array('value' => 'fs_priv_maintenance'), array('name' => _("We're currently upgrading FoOlSlide2. This process usually takes few seconds or a couple minutes, check back soon!")));
 
 		if (!file_exists('content/cache/upgrade')) {
 			return FALSE;
@@ -91,6 +91,8 @@ class Upgrade2_model extends CI_Model {
 
 		unlink('index.php');
 		rename('content/cache/upgrade/index.php', 'index.php');
+        unlink('README.MD');
+        rename('content/cache/upgrade/README.MD', 'README.MD');
 		delete_files('application/', TRUE);
 		rename('content/cache/upgrade/application', 'application');
 		delete_files('system/', TRUE);

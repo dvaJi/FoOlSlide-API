@@ -8,34 +8,55 @@ class Upgrade_model extends CI_Model {
 	function __construct() {
 		// Call the Model constructor
 		parent::__construct();
-		$this->pod = 'http://foolrulez.com/pod';
+		$this->pod = 'https://api.github.com/repos/' . GITHUB_REPO . '/releases';
 	}
 
 	/**
-	 * Connects to FoOlPod to retrieve which is the latest version from the API
+	 * Connects to Github to retrieve app versions from the releases API
 	 *
 	 * @param type $force forces returning the download even if FoOlSlide is up to date
 	 * @return type FALSE or the download URL
+     * @author Woxxy, chocolatkey
 	 */
 	function check_latest($force = FALSE) {
 		if (function_exists('curl_init')) {
 			$this->load->library('curl');
-			$result = $this->curl->simple_post($this->pod . '/api/software/foolslide', array('url' => site_url(), 'version' => get_setting('fs_priv_version')));
+            $this->curl->create($this->pod);
+            $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
+            $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
+			$result = $this->curl->execute();
+            //set_notice('notice', json_encode($this->curl->info));
 		}
-		else
-			$result = file_get_contents($this->pod . '/api/software/foolslide');
+		else {
+            $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
+            $context  = stream_context_create($options);
+            $result = file_get_contents($this->pod, false, $context);
+            
+        }
+        
 		if (!$result) {
-			set_notice('error', _('GitHub could not be contacted: impossible to check for new versions.'));
+			set_notice('error', _('GitHub could not be contacted: impossible to check for new versions @ '.$this->pod.$result));
 			return FALSE;
 		}
-		$data = json_decode($result);
-
-		$new_versions = array();
-		foreach ($data->versions as $new) {
+		$data[] = json_decode($result, true);
+        $new_versions = array();
+        foreach ($data[0] as $release) {
+            $tn = substr($release["tag_name"], 1); 
+            if (!$this->is_bigger_version(FOOLSLIDE_VERSION, $tn))
+				break;
+            if(!$release["prerelease"]){
+                $tv = $this->version_to_object($tn);
+                $tv->changelog = $release["body"];
+                $tv->download = $release["zipball_url"];
+                $new_versions[] = $tv;
+            }
+        }
+		
+		/*foreach ($data->versions as $new) {
 			if (!$this->is_bigger_version(FOOLSLIDE_VERSION, $new))
 				break;
 			$new_versions[] = $new;
-		}
+		}*/
 		if (!empty($new_versions))
 			return $new_versions;
 
@@ -85,15 +106,15 @@ class Upgrade_model extends CI_Model {
 
 	/**
 	 *
-	 * @author Woxxy
+	 * @author Woxxy, chocolatkey
 	 * @param string $url
 	 * @return bool
 	 */
-	function get_file($url, $direct_url) {
+	function get_file($direct_url) {
 		$this->clean();
 		if (function_exists('curl_init')) {
 			$this->load->library('curl');
-			$zip = $this->curl->simple_post($url, array('url' => site_url(), 'version' => FOOLSLIDE_VERSION));
+			//$zip = $this->curl->simple_post($url, array('url' => site_url(), 'version' => FOOLSLIDE_VERSION)); Don't need dem analytics (there *was* a temptation)
 			if (!$zip) {
 				$zip = $this->curl->simple_get($direct_url);
 			}
@@ -188,7 +209,7 @@ class Upgrade_model extends CI_Model {
 	/**
 	 * Does further checking, updates the upgrade2 "stage 2" file to accomodate
 	 * changes to the upgrade script, updates the version number with the one
-	 * from FoOlPod, and cleans up.
+	 * from Github, and cleans up.
 	 *
 	 * @author Woxxy
 	 * @return bool
@@ -206,7 +227,7 @@ class Upgrade_model extends CI_Model {
 		// Pick the newest version
 		$latest = $new_versions[0];
 
-		$this->upgrade_model->get_file($latest->download, $latest->direct_download);
+		$this->upgrade_model->get_file($latest->download);
 
 		$this->upgrade_model->update_upgrade();
 
