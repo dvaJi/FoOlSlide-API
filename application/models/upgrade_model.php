@@ -112,17 +112,18 @@ class Upgrade_model extends CI_Model {
 	 */
 	function get_file($direct_url) {
 		$this->clean();
+        $zip = false;
 		if (function_exists('curl_init')) {
 			$this->load->library('curl');
             $this->curl->create($direct_url);
             $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
             $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
-            $result = $this->curl->execute();
+            $zip = $this->curl->execute();
 		}
 		else {
             $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
             $context  = stream_context_create($options);
-            $result = file_get_contents($direct_url, false, $context);
+            $zip = file_get_contents($direct_url, false, $context);
 		}
 		if (!$zip) {
 			log_message('error', 'upgrade_model get_file(): impossible to get the update from Github');
