@@ -10,8 +10,7 @@ if($_SERVER["HTTPS"] != "on")
 	<head>
 		<title>Installing FoOlSlide</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/admin/style.css" />
 		<style type="text/css">
 			body {
