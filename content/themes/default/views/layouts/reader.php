@@ -74,6 +74,9 @@
 						<li>
 							<a href="<?php echo site_url('directory') ?>"><i class="fa fa-list"></i><span class="mh"> <?php echo _('Series list'); ?></span></a>
 						</li>
+                        <li id="searchlink">
+							<a href="<?php echo site_url('search') ?>"><i class="fa fa-search"></i><span class="mh"> <?php echo _('Search'); ?></span></a>
+						</li>
 						<li style="">
 							<?php
 							echo form_open("search/");

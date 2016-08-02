@@ -7,7 +7,7 @@ if (!defined('BASEPATH'))
 		<?php echo _('Search series'); ?>:<br/>
 		<?php
 		echo form_open("search/");
-		echo form_input(array('name' => 'search', 'placeholder' => _('To search series, type and hit enter'), 'id' => 'searchbox'));
+		echo form_input(array('name' => 'search', 'placeholder' => _('To search series, type and hit enter'), 'id' => 'searchboxfull', 'style' => 'width: 80%;'));
 		echo form_close();
 		?>
 	</div>
