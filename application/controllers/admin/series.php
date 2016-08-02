@@ -167,13 +167,27 @@ class Series extends Admin_Controller
 				'name' => 'licensed',
 				'type' => 'nation',
 				'value' => $licenses->get_by_comic($comic->id),
-				'help' => _('Insert the nations where the series is licensed in order to limit the availability.')
+				'help' => _('Insert the nations where the series is licensed in order to limit the availability.'),
+                'class' => 'form-control'
 			)
 		);
+
+		$custom_slug = array(array(
+			_('Custom URL Slug'),
+			array(
+				'name' => 'has_custom_slug',
+				'type' => 'checkbox',
+				'text' => _('Has Custom URL Slug'),
+				'help' => _('If you want to have a custom url slug or the comic\'s title is written with non-latin letters tick this.'),
+				'class' => 'jqslugcb'
+			)
+		));
+		array_splice($table, 2, 0, $custom_slug);
 
 		$table = tabler($table);
 		$data['table'] = $table;
 
+		$this->viewdata["extra_script"] = '<script type="text/javascript" src="'.base_url().'assets/js/form-extra.js"></script>';
 		$this->viewdata["main_content_view"] = $this->load->view("admin/series/series.php", $data, TRUE);
 		$this->load->view("admin/default.php", $this->viewdata);
 	}
@@ -259,15 +273,27 @@ class Series extends Admin_Controller
 					'type' => 'nation',
 					'value' => array(),
 					'help' => _('Insert the nations where the series is licensed in order to limit the availability.'),
-                    'class' => 'form-control'
-				)
+				),
 			);
+
+			$custom_slug = array(array(
+				_('Custom URL Slug'),
+				array(
+					'name' => 'has_custom_slug',
+					'type' => 'checkbox',
+					'text' => _('Has Custom URL Slug'),
+					'help' => _('If you want to have a custom url slug or the comic\'s title is written with non-latin letters tick this.'),
+					'class' => 'jqslugcb'
+				)
+			));
+			array_splice($table, 2, 0, $custom_slug);
 
 			$table = tabler($table, FALSE, TRUE);
 			$data["form_title"] = _('Add New') . ' ' . _('Series');
 			$data['table'] = $table;
 
 			$this->viewdata["extra_title"][] = _("Series");
+			$this->viewdata["extra_script"] = '<script type="text/javascript" src="'.base_url().'assets/js/form-extra.js"></script>';
 			$this->viewdata["main_content_view"] = $this->load->view("admin/form.php", $data, TRUE);
 			$this->load->view("admin/default.php", $this->viewdata);
 		}
