@@ -114,16 +114,10 @@ class Upgrade_model extends CI_Model {
 		$this->clean();
 		if (function_exists('curl_init')) {
 			$this->load->library('curl');
-            
-            
-			//$zip = $this->curl->simple_post($url, array('url' => site_url(), 'version' => FOOLSLIDE_VERSION)); Don't need dem analytics (there *was* a temptation)
-			if (!$zip) {
-				$this->load->library('curl');
-                $this->curl->create($direct_url);
-                $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
-                $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
-                $result = $this->curl->execute();
-			}
+            $this->curl->create($direct_url);
+            $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
+            $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
+            $result = $this->curl->execute();
 		}
 		else {
             $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
