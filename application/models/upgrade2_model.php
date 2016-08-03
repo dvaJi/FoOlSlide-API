@@ -95,8 +95,10 @@ class Upgrade2_model extends CI_Model {
 
 		unlink('index.php');
 		rename($uzdir.'index.php', 'index.php');
-        unlink('README.MD');
-        rename($uzdir.'README.MD', 'README.MD');
+        try {
+            unlink('README.MD');
+            rename($uzdir.'README.MD', 'README.MD');
+        } catch (Exception $e) {}
 		delete_files('application/', TRUE);
 		rename($uzdir.'application', 'application');
 		delete_files('system/', TRUE);
