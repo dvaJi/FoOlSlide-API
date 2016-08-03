@@ -83,7 +83,7 @@ if ($CI->agent->is_browser('MSIE'))
 
 
 
-	<body style="background: url('<?php echo base_url() ?>assets/images/admin_background.png') no-repeat center center fixed" class="noselect">
+	<body style="background: url('<?php echo base_url() ?>assets/images/admin_background.jpg') no-repeat center center fixed" class="noselect">
 
 		<div class="wrapper">
             <nav class="navbar navbar-inverse">
@@ -207,7 +207,7 @@ if ($CI->agent->is_browser('MSIE'))
 
 		</div>
 
-		<div id="footer"><div class="text">Art by <a href="http://seiga.nicovideo.jp/user/illust/221174">春原ロビンソン</a></div></div>
+		<div id="footer"><div class="text">Art by <a href="//viperxtr.deviantart.com/">Emert X Repiv (ViperXTR)</a></div></div>
 	</body>
 
 </html>
