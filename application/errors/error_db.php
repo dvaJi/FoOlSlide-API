@@ -234,7 +234,7 @@ body {
         <div class="sorry">
             <?php
             // Display selected error message
-            echo($errordesc);
+            if(isset($errordesc)){echo($errordesc);}
             if (!$message == '') {
             echo '<p><h1>'.$heading.'</h1>'.$message.'</p>';
             } else {

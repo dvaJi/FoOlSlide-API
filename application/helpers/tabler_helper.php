@@ -464,6 +464,8 @@ if (!function_exists('form_dropdowner'))
 		}
 		else
 			$column['onChange'] = '';
+        
+        $column['onChange'] = " class='form-control'";
 		return form_dropdown($column['name'], $column['values'], $column['value'], $column['onChange']);
 	}
 
@@ -490,6 +492,8 @@ if (!function_exists('form_nation'))
 		}
 		else
 			$column['onChange'] = '';
+        
+        $column['onChange'] = " class='form-control'";
 		return form_dropdown($column['name'], $nationcodes, $column['value'], $column['onChange']);
 	}
 
@@ -504,7 +508,7 @@ if (!function_exists('form_language'))
 		$lang = config_item('fs_languages');
 		if (!isset($column['value']) || $column['value'] == "")
 			$column['value'] = get_setting('fs_gen_default_lang');
-		return form_dropdown($column['name'], $lang, $column['value'], array('class' => 'form-control'));
+		return form_dropdown($column['name'], $lang, $column['value'], "class='form-control'");
 	}
 
 
@@ -526,7 +530,7 @@ if (!function_exists('form_themes'))
 				$set[$item] = $item;
 			}
 		}
-		return form_dropdown($column['name'], $set, $column['value'], array('class' => 'form-control'));
+		return form_dropdown($column['name'], $set, $column['value'], "class='form-control'");
 	}
 
 
