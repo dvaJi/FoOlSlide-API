@@ -39,4 +39,3 @@ To do:
 - Add Disqus settings
 - Add Google Analytics settings
 - Multiple themes, possibly color choice
-- Make updater
