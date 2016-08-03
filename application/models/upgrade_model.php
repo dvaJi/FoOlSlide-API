@@ -117,11 +117,12 @@ class Upgrade_model extends CI_Model {
 			$this->load->library('curl');
             $this->curl->create($direct_url);
             $this->curl->option(CURLOPT_USERAGENT, "Foolslide2 Updater");
+            $this->curl->option(CURLOPT_FOLLOWLOCATION, true);
             $this->curl->option(CURLOPT_SSL_VERIFYPEER, false);//Because CURL *can* be retarded. Pls no mitm
             $zip = $this->curl->execute();
 		}
 		else {
-            $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT']));
+            $options  = array('http' => array('user_agent'=> $_SERVER['HTTP_USER_AGENT'], 'follow_location' => 1));
             $context  = stream_context_create($options);
             $zip = file_get_contents($direct_url, false, $context);
 		}

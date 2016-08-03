@@ -66,41 +66,45 @@ class Upgrade2_model extends CI_Model {
 			log_message('error', 'upgrade.php:_do_upgrade() check_files() failed');
 			return false;
 		}
+        
+        
 
 		// Put FoOlSlide in maintenance
 		$this->db->update('preferences', array('value' => 'fs_priv_maintenance'), array('name' => _("We're currently upgrading FoOlSlide2. This process usually takes few seconds or a couple minutes, check back soon!")));
 
-		if (!file_exists('content/cache/upgrade')) {
+        $uzdir = glob('content/cache/upgrade' . '/*' , GLOB_ONLYDIR)[0].'/';
+        
+		if (!file_exists($uzdir)) {
 			return FALSE;
 		}
-		if (!file_exists('content/cache/upgrade/index.php')) {
+		if (!file_exists($uzdir.'index.php')) {
 			return FALSE;
 		}
-		if (!file_exists('content/cache/upgrade/application')) {
+		if (!file_exists($uzdir.'application')) {
 			return FALSE;
 		}
-		if (!file_exists('content/cache/upgrade/system')) {
+		if (!file_exists($uzdir.'system')) {
 			return FALSE;
 		}
-		if (!file_exists('content/cache/upgrade/assets')) {
+		if (!file_exists($uzdir.'assets')) {
 			return FALSE;
 		}
-		if (!file_exists('content/cache/upgrade/content/themes/default')) {
+		if (!file_exists($uzdir.'content/themes/default')) {
 			return FALSE;
 		}
 
 		unlink('index.php');
-		rename('content/cache/upgrade/index.php', 'index.php');
+		rename($uzdir.'index.php', 'index.php');
         unlink('README.MD');
-        rename('content/cache/upgrade/README.MD', 'README.MD');
+        rename($uzdir.'README.MD', 'README.MD');
 		delete_files('application/', TRUE);
-		rename('content/cache/upgrade/application', 'application');
+		rename($uzdir.'application', 'application');
 		delete_files('system/', TRUE);
-		rename('content/cache/upgrade/system', 'system');
+		rename($uzdir.'system', 'system');
 		delete_files('assets/', TRUE);
-		rename('content/cache/upgrade/assets', 'assets');
+		rename($uzdir.'assets', 'assets');
 		delete_files('content/themes/default/', TRUE);
-		rename('content/cache/upgrade/content/themes/default', 'content/themes/default');
+		rename($uzdir.'content/themes/default', 'content/themes/default');
 		return TRUE;
 	}
 
