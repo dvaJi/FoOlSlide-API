@@ -14,7 +14,7 @@ if ($new_versions)
 			'plug' => _('Do you really want to upgrade to the latest version?'),
 			'rel' => 'popover-below',
 			'title' => _('Automatic Upgrade'),
-			'data-content' => _('This will upgrade your FoOlSlide installation to the latest version.'),
+			'data-content' => _('This will upgrade your FoOlSlide installation to the latest version.').' The default theme and any changes to system files WILL BE OVERWRITTEN!',
             'class' => "btn-success"
 		);
 	}

@@ -130,10 +130,10 @@ if (get_setting('fs_ads_bottom_banner') && get_setting('fs_ads_bottom_banner_act
 		</div>
     </div>
 	
-	<div id="disqus_thread" style="background-color: transparent;"></div>
-	<script type="text/javascript">
     <?php
     if (get_setting('fs_disqus_active')){ ?>
+	<div id="disqus_thread" style="background-color: transparent;"></div>
+	<script type="text/javascript">
     var disqus_shortname = '<?php echo get_setting('fs_disqus_name'); ?>';
     var disqus_title = '<?php echo $comic->title() ?> - <?php echo $chapter->title() ?> - Page <?php echo $current_page; ?>';
     var disqus_identifier = '<?php echo $comic->title() ?> :: <?php echo $chapter->title() ?> :: <?php echo $current_page; ?>';
