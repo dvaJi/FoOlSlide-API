@@ -10,7 +10,7 @@ $config['theme_name'] = 'Default';
 $config['theme_description'] = 'The default FoOlSlide 2 theme';
 $config['theme_tags'] = array('gray', 'top bar', 'mobile-optimized', 'pretty', 'FontAwesome');
 // for the default theme, this is the last FoOlSlide version there were changes to it
-$config['theme_version'] = '2.8.19';
+$config['theme_version'] = '2.3.0';
 
 // some personal data on the author
 $config['theme_author'] = 'Woxxy, chocolatkey';

@@ -4,6 +4,7 @@
 		'name' => 'password',
 		'id' => 'password',
 		'size' => 30,
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	?>

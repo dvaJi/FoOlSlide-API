@@ -4,6 +4,7 @@
 		'name' => 'password',
 		'id' => 'password',
 		'size' => 30,
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	$email = array(
@@ -12,6 +13,7 @@
 		'value' => set_value('email'),
 		'maxlength' => 80,
 		'size' => 30,
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	?>

@@ -45,7 +45,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 |
 */
 
-define('FOOLSLIDE_VERSION', '2.3.2');
+define('FOOLSLIDE_VERSION', '2.3.3');
 define('GITHUB_REPO', 'chocolatkey/foolslide2');// Github repository to get updates from
 define('FORCE_SSL', true);// Change to false if you really want to allow insecure access to the admin interface
 

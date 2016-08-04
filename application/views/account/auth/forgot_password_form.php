@@ -15,14 +15,15 @@
 		'maxlength' => 80,
 		'size' => 30,
         'class' => 'form-control',
+        'required' => 'required',
         'placeholder' => $login_label
 	);
 	?>
 	<?php echo form_open($this->uri->uri_string()); ?>
 	<div class="formgroup">
 		<?php echo form_input($login); ?>
-		<div style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? $errors[$login['name']] : ''; ?></div>
 	</div>
+    <?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? '<div class="alert alert-danger" role="alert">'.$errors[$login['name']].'</div>' : ''; ?>
 	<div class="formgroup">
 		<div>
 			<?php echo form_submit(array('name' => 'reset', 'class' => 'form-control btn btn-primary'), 'Get a new password'); ?>

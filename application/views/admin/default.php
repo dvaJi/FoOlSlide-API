@@ -149,11 +149,11 @@ if ($CI->agent->is_browser('MSIE'))
                                 <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $this->tank_auth->get_username(); ?> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php if (isset($this->tank_auth) && $this->tank_auth->is_allowed())
-                                    { ?><li><a href="<?php echo site_url('account'); ?>">
+                                    { ?><li><a href="<?php echo site_url('account'); ?>"><i class="fa fa-user-md"></i> 
                                                 <?php echo _("Your Profile") ?></a></li>
                                     <?php } ?>
                                     <?php if (isset($this->tank_auth) && $this->tank_auth->is_logged_in())
-                                    { ?><li><a href="<?php echo site_url('/account/auth/logout'); ?>">
+                                    { ?><li><a href="<?php echo site_url('/account/auth/logout'); ?>"><i class="fa fa-sign-out"></i>  
                                                 <?php echo _("Logout") ?></a></li>
                                     <?php } ?>
                                 </ul>

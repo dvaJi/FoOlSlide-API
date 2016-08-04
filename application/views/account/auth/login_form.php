@@ -20,6 +20,7 @@
 		'size' => 30,
 		'placeholder' => $login_label,
         'class' => 'form-control',
+        'required' => 'required',
         'aria-describedby' => 'uadd'
 	);
 	$password = array(
@@ -28,18 +29,20 @@
 		'size' => 30,
 		'placeholder' => 'Password',
         'class' => 'form-control',
+        'required' => 'required',
         'aria-describedby' => 'padd'
 	);
 	$remember = array(
 		'name' => 'remember',
 		'id' => 'remember',
 		'value' => 1,
-		'checked' => set_value('remember'),
+		'checked' => set_value('remember')
 	);
 	$captcha = array(
 		'name' => 'captcha',
 		'id' => 'captcha',
-		'maxlength' => 8,
+        'class' => 'form-control',
+		'maxlength' => 8
 	);
 	?>
 	<?php echo form_open($this->uri->uri_string()); ?>
@@ -47,14 +50,14 @@
 	<div class="input-group">
     <span class="input-group-addon" id="uadd"><i class="fa fa-user"></i></span>
 		<?php echo form_input($login); ?>
-		<div style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? $errors[$login['name']] : ''; ?></div>
 	</div>
+    <?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? '<div class="alert alert-danger" role="alert">'.$errors[$login['name']].'</div>' : ''; ?>
 
 	<div class="input-group">
         <span class="input-group-addon" id="padd" style="max-width: 36px;"><i class="fa fa-key"></i></span>
 		<?php echo form_password($password); ?>
-		<div style="color: red;"><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']]) ? $errors[$password['name']] : ''; ?></div>
 	</div>
+    <?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']]) ? '<div class="alert alert-danger" role="alert">'.$errors[$password['name']].'</div>' : ''; ?>
 
 	<?php
 	if ($show_captcha)
@@ -77,7 +80,7 @@
 					<div class="recaptcha_only_if_image">Enter the words above</div>
 					<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
 				</td>
-				<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
+				<td><input type="text" class="form-control" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
 				<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
 				<?php echo $recaptcha_html; ?>
 			</tr>

@@ -5,6 +5,7 @@
 		'id' => 'new_password',
 		'maxlength' => $this->config->item('password_max_length', 'tank_auth'),
 		'size' => 30,
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	$confirm_new_password = array(
@@ -12,6 +13,7 @@
 		'id' => 'confirm_new_password',
 		'maxlength' => $this->config->item('password_max_length', 'tank_auth'),
 		'size' => 30,
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	?>

@@ -10,6 +10,7 @@
 			'maxlength' => $this->config->item('username_max_length', 'tank_auth'),
 			'size' => 30,
 			'placeholder' => _('required'),
+            'required' => 'required',
         'class' => 'form-control'
 		);
 	}
@@ -20,6 +21,7 @@
 		'maxlength' => 80,
 		'size' => 30,
 		'placeholder' => _('required'),
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	$password = array(
@@ -29,6 +31,7 @@
 		'maxlength' => $this->config->item('password_max_length', 'tank_auth'),
 		'size' => 30,
 		'placeholder' => _('required'),
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	$confirm_password = array(
@@ -38,6 +41,7 @@
 		'maxlength' => $this->config->item('password_max_length', 'tank_auth'),
 		'size' => 30,
 		'placeholder' => _('required'),
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	$captcha = array(
@@ -45,6 +49,7 @@
 		'id' => 'captcha',
 		'maxlength' => 8,
 		'placeholder' => _('required'),
+        'required' => 'required',
         'class' => 'form-control'
 	);
 	?>
