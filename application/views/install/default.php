@@ -136,6 +136,10 @@ if($_SERVER["HTTPS"] != "on" && FORCE_SSL)
 				
 				<div class="alerts">
 					<?php
+                        if($_SERVER["HTTPS"] != "on" && !FORCE_SSL)
+                        {
+                            echo '<div class="alert alert-warning"><i class="fa fa-unlock-alt" aria-hidden="true"></i> '._("Potentially insecure connection, data could be intercepted.").'</div>';
+                        }
 						if (isset($this->notices))
 							foreach ($this->notices as $key => $value)
 							{

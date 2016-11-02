@@ -8,7 +8,7 @@
 |--------------------------------------------------------------------------
 */
 $config['website_name'] = 'FoOlSlide';
-$config['webmaster_email'] = 'chocolatkey@gmail.com';
+$config['webmaster_email'] = 'no-reply@foolsli.de';
 
 /*
 |--------------------------------------------------------------------------
