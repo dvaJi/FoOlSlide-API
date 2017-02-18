@@ -8,7 +8,6 @@ class Auth extends Account_Controller
 
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->load->library('security');
 		$this->load->library('tank_auth');
 		$this->lang->load('tank_auth');
 		$this->viewdata['controller_title'] = _("Authorization");

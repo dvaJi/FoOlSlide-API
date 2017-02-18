@@ -1,17 +1,17 @@
 <?php
-#
-# Portable PHP password hashing framework.
-#
-# Version 0.1 / genuine.
+/**
+ * Portable PHP password hashing framework.
+ * @package phpass
+ * @since 2.5.0
+ * @version 0.3 / WordPress
+ * @link http://www.openwall.com/phpass/
+ */
+
 #
 # Written by Solar Designer <solar at openwall.com> in 2004-2006 and placed in
-# the public domain.
+# the public domain.  Revised in subsequent years, still public domain.
 #
 # There's absolutely no warranty.
-#
-# The homepage URL for this framework is:
-#
-#	http://www.openwall.com/phpass/
 #
 # Please be sure to update the Version line if you edit this file in any way.
 # It is suggested that you leave the main version number intact, but indicate
@@ -24,13 +24,25 @@
 # Obviously, since this code is in the public domain, the above are not
 # requirements (there can be none), but merely suggestions.
 #
+
+/**
+ * Portable PHP password hashing framework.
+ *
+ * @package phpass
+ * @version 0.3 / WordPress
+ * @link http://www.openwall.com/phpass/
+ * @since 2.5.0
+ */
 class PasswordHash {
 	var $itoa64;
 	var $iteration_count_log2;
 	var $portable_hashes;
 	var $random_state;
 
-	function PasswordHash($iteration_count_log2, $portable_hashes)
+	/**
+	 * PHP5 constructor.
+	 */
+	function __construct( $iteration_count_log2, $portable_hashes )
 	{
 		$this->itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
@@ -40,13 +52,21 @@ class PasswordHash {
 
 		$this->portable_hashes = $portable_hashes;
 
-		$this->random_state = microtime() . getmypid();
+		$this->random_state = microtime() . uniqid(rand(), TRUE); // removed getmypid() for compatibility reasons
+	}
+
+	/**
+	 * PHP4 constructor.
+	 */
+	public function PasswordHash( $iteration_count_log2, $portable_hashes ) {
+		self::__construct( $iteration_count_log2, $portable_hashes );
 	}
 
 	function get_random_bytes($count)
 	{
 		$output = '';
-		if (($fh = @fopen('/dev/urandom', 'rb'))) {
+		if ( @is_readable('/dev/urandom') &&
+		    ($fh = @fopen('/dev/urandom', 'rb'))) {
 			$output = fread($fh, $count);
 			fclose($fh);
 		}
@@ -104,7 +124,9 @@ class PasswordHash {
 		if (substr($setting, 0, 2) == $output)
 			$output = '*1';
 
-		if (substr($setting, 0, 3) != '$P$')
+		$id = substr($setting, 0, 3);
+		# We use "$P$", phpBB3 uses "$H$" for the same thing
+		if ($id != '$P$' && $id != '$H$')
 			return $output;
 
 		$count_log2 = strpos($this->itoa64, $setting[3]);
@@ -202,6 +224,10 @@ class PasswordHash {
 
 	function HashPassword($password)
 	{
+		if ( strlen( $password ) > 4096 ) {
+			return '*';
+		}
+
 		$random = '';
 
 		if (CRYPT_BLOWFISH == 1 && !$this->portable_hashes) {
@@ -237,12 +263,14 @@ class PasswordHash {
 
 	function CheckPassword($password, $stored_hash)
 	{
+		if ( strlen( $password ) > 4096 ) {
+			return false;
+		}
+
 		$hash = $this->crypt_private($password, $stored_hash);
 		if ($hash[0] == '*')
 			$hash = crypt($password, $stored_hash);
 
-		return $hash == $stored_hash;
+		return $hash === $stored_hash;
 	}
 }
-
-?>

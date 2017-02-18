@@ -170,7 +170,7 @@ class Preferences extends Admin_Controller
 						'tr_TR.utf8' => 'Turkish'
 					),
 				'preferences' => 'fs_gen',
-				'help' => _('Changes the software language of FoOlSlide. Help with translation would me much appreciated now that there are new features in v2.')
+				'help' => _('Changes the software language of FoOlSlide. Help with translation would be much appreciated now that there are new features in v2.')
 			)
 		);
 

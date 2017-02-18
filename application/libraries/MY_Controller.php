@@ -53,7 +53,7 @@ class MY_Controller extends CI_Controller
 			$ignored_ips = array();
 			if (get_setting('fs_balancer_ips'))
 				$ignored_ips = @unserialize(get_setting('fs_balancer_ips'));
-			$ignored_ips[] = '127.0.0.1';
+			$ignored_ips[] = array('127.0.0.1', '::1');
 			$remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 			if ($this->session->userdata('nation') !== FALSE || !in_array($remote_addr, $ignored_ips))
 			{

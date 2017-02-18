@@ -10,19 +10,19 @@
  * @category    	Libraries
  * @author        	Philip Sturgeon
  * @license         http://philsturgeon.co.uk/code/dbad-license
- * @link			http://getsparks.org/packages/curl/show
+ * @link			http://philsturgeon.co.uk/code/codeigniter-curl
  */
 class Curl {
 
-	private $_ci;				// CodeIgniter instance
-	private $response = '';		  // Contains the cURL response for debug
-	private $session;		   // Contains the cURL handler for a session
-	private $url;			   // URL of the session
-	private $options = array(); // Populates curl_setopt_array
-	private $headers = array(); // Populates extra HTTP headers
-	public $error_code;		 // Error code returned as an int
-	public $error_string;	   // Error message returned as a string
-	public $info;			   // Returned after request (elapsed time, etc)
+	protected $_ci;                 // CodeIgniter instance
+	protected $response = '';       // Contains the cURL response for debug
+	protected $session;             // Contains the cURL handler for a session
+	protected $url;                 // URL of the session
+	protected $options = array();   // Populates curl_setopt_array
+	protected $headers = array();   // Populates extra HTTP headers
+	public $error_code;             // Error code returned as an int
+	public $error_string;           // Error message returned as a string
+	public $info;                   // Returned after request (elapsed time, etc)
 
 	function __construct($url = '')
 	{
@@ -37,11 +37,11 @@ class Curl {
 		$url AND $this->create($url);
 	}
 
-	function __call($method, $arguments)
+	public function __call($method, $arguments)
 	{
-		if (in_array($method, array('simple_get', 'simple_post', 'simple_put', 'simple_delete')))
+		if (in_array($method, array('simple_get', 'simple_post', 'simple_put', 'simple_delete', 'simple_patch')))
 		{
-			// Take off the "simple_" and past get/post/put/delete to _simple_call
+			// Take off the "simple_" and past get/post/put/delete/patch to _simple_call
 			$verb = str_replace('simple_', '', $method);
 			array_unshift($arguments, $verb);
 			return call_user_func_array(array($this, '_simple_call'), $arguments);
@@ -59,7 +59,7 @@ class Curl {
 		if ($method === 'get')
 		{
 			// If a URL is provided, create new session
-			$this->create($url.($params ? '?'.http_build_query($params) : ''));
+			$this->create($url.($params ? '?'.http_build_query($params, NULL, '&') : ''));
 		}
 
 		else
@@ -147,6 +147,24 @@ class Curl {
 		$this->option(CURLOPT_HTTPHEADER, array('X-HTTP-Method-Override: PUT'));
 	}
 
+	public function patch($params = array(), $options = array())
+	{
+		// If its an array (instead of a query string) then format it correctly
+		if (is_array($params))
+		{
+			$params = http_build_query($params, NULL, '&');
+		}
+
+		// Add in the specific options provided
+		$this->options($options);
+
+		$this->http_method('patch');
+		$this->option(CURLOPT_POSTFIELDS, $params);
+
+		// Override method, I think this overrides $_POST with PATCH data but... we'll see eh?
+		$this->option(CURLOPT_HTTPHEADER, array('X-HTTP-Method-Override: PATCH'));
+	}
+
 	public function delete($params, $options = array())
 	{
 		// If its an array (instead of a query string) then format it correctly
@@ -177,6 +195,7 @@ class Curl {
 	public function http_header($header, $content = NULL)
 	{
 		$this->headers[] = $content ? $header . ': ' . $content : $header;
+		return $this;
 	}
 
 	public function http_method($method)
@@ -211,11 +230,15 @@ class Curl {
 		{
 			$this->option(CURLOPT_SSL_VERIFYPEER, TRUE);
 			$this->option(CURLOPT_SSL_VERIFYHOST, $verify_host);
-			$this->option(CURLOPT_CAINFO, $path_to_cert);
+			if (isset($path_to_cert)) {
+				$path_to_cert = realpath($path_to_cert);
+				$this->option(CURLOPT_CAINFO, $path_to_cert);
+			}
 		}
 		else
 		{
 			$this->option(CURLOPT_SSL_VERIFYPEER, FALSE);
+			$this->option(CURLOPT_SSL_VERIFYHOST, $verify_host);
 		}
 		return $this;
 	}
@@ -234,11 +257,11 @@ class Curl {
 		return $this;
 	}
 
-	public function option($code, $value)
+	public function option($code, $value, $prefix = 'opt')
 	{
 		if (is_string($code) && !is_numeric($code))
 		{
-			$code = constant('CURLOPT_' . strtoupper($code));
+			$code = constant('CURL' . strtoupper($prefix) . '_' . strtoupper($code));
 		}
 
 		$this->options[$code] = $value;
@@ -279,7 +302,7 @@ class Curl {
 		}
 
 		// Only set follow location if not running securely
-		if ( ! ini_get('safe_mode') && !ini_get('open_basedir'))
+		if ( ! ini_get('safe_mode') && ! ini_get('open_basedir'))
 		{
 			// Ok, follow location is not set already so lets set it to true
 			if ( ! isset($this->options[CURLOPT_FOLLOWLOCATION]))
@@ -302,11 +325,14 @@ class Curl {
 		// Request failed
 		if ($this->response === FALSE)
 		{
-			$this->error_code = curl_errno($this->session);
-			$this->error_string = curl_error($this->session);
+			$errno = curl_errno($this->session);
+			$error = curl_error($this->session);
 
 			curl_close($this->session);
 			$this->set_defaults();
+
+			$this->error_code = $errno;
+			$this->error_string = $error;
 
 			return FALSE;
 		}
@@ -315,9 +341,9 @@ class Curl {
 		else
 		{
 			curl_close($this->session);
-			$response = $this->response;
+			$this->last_response = $this->response;
 			$this->set_defaults();
-			return $response;
+			return $this->last_response;
 		}
 	}
 
@@ -332,7 +358,7 @@ class Curl {
 		echo "<h2>CURL Test</h2>\n";
 		echo "=============================================<br/>\n";
 		echo "<h3>Response</h3>\n";
-		echo "<code>" . nl2br(htmlentities($this->response)) . "</code><br/>\n\n";
+		echo "<code>" . nl2br(htmlentities($this->last_response)) . "</code><br/>\n\n";
 
 		if ($this->error_string)
 		{
@@ -356,7 +382,7 @@ class Curl {
 		);
 	}
 
-	private function set_defaults()
+	public function set_defaults()
 	{
 		$this->response = '';
 		$this->headers = array();

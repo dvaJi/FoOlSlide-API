@@ -53,7 +53,9 @@ class Index extends Account_Controller
 
 			if ($this->form_validation->run())
 			{
-				$profile = new Profile($this->tank_auth->get_user_id());
+				$profile = new Profile();
+				$user_id = $this->tank_auth->get_user_id();
+				$profile->where('user_id', $user_id)->limit(1)->get();
 				// use the from_array to be sure what's being inputted
 				$profile->display_name = $this->form_validation->set_value('display_name');
 				$profile->twitter = $this->form_validation->set_value('twitter');
@@ -64,8 +66,10 @@ class Index extends Account_Controller
 				}
 			}
 		}
-		$user = new User($this->tank_auth->get_user_id());
-		$profile = new Profile($this->tank_auth->get_user_id());
+        $user_id = $this->tank_auth->get_user_id();
+        $user = new User($user_id);
+        $profile = new Profile();
+        $profile->where('user_id', $user_id)->limit(1)->get();
 
 		$data["user_id"] = $user->id;
 		$data["user_name"] = $user->username;

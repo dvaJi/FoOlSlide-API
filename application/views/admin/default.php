@@ -1,8 +1,16 @@
 <?php
-if($_SERVER["HTTPS"] != "on" && FORCE_SSL)
+$muhSSL = false;
+if(isset( $_SERVER["HTTPS"] ) && strtolower( $_SERVER["HTTPS"] ) == "on")
 {
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
+    $muhSSL = true;
+}
+else
+{
+    if(FORCE_SSL)
+    {
+        header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -190,7 +198,7 @@ if ($CI->agent->is_browser('MSIE'))
 
 				<div class="alerts">
 					<?php
-                        if($_SERVER["HTTPS"] != "on" && !FORCE_SSL)
+                        if(!$muhSSL)
                         {
                             echo '<div class="alert alert-warning"><i class="fa fa-unlock-alt" aria-hidden="true"></i> '._("Potentially insecure connection, data could be intercepted.").'</div>';
                         }
