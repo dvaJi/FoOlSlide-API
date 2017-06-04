@@ -13,4 +13,8 @@
 	echo $table;
 	echo form_close();
 ?>
+<script>
+	CKEDITOR.replace( 'description' );
+	CKEDITOR.config.width = '95%';
+</script>
 </div>
