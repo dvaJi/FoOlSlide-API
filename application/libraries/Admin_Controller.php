@@ -96,7 +96,18 @@ class Admin_Controller extends MY_Controller
 			"icon" => 357,
 			"content" => array(
 				"manage" => array("level" => "mod", "name" => _("Manage Posts"), "icon" => 184),
-				"add_new" => array("level" => "mod", "name" => _("Add Post"), "icon" => 154)
+				"add_new" => array("level" => "mod", "name" => _("Add Post"), "icon" => 154),
+			)
+		);
+
+		$sidebar["pages"] = array(
+			"name" => _("Pages"),
+			"level" => "mod",
+			"default" => "manage",
+			"icon" => 118,
+			"content" => array(
+				"manage" => array("level" => "mod", "name" => _("Manage Pages"), "icon" => 184),
+				"add_new" => array("level" => "mod", "name" => _("Add Page"), "icon" => 154),
 			)
 		);
 

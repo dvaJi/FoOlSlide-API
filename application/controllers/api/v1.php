@@ -449,7 +449,7 @@ class V1 extends REST_Controller
 	}
 
 	/**
-	 * Returns all post and sseleccted one by id and stub
+	 * Returns all post and seleccted one by id and stub
 	 *
 	 * Available filters: page, per_page (default:30, max:100), orderby
 	 * 
@@ -493,6 +493,55 @@ class V1 extends REST_Controller
 		} else {
 			// there's no post with that id
 			$this->response(array('error' => _('Post could not be found')), 404);
+		}
+	}
+
+	/**
+	 * Returns all custompage and seleccted one by id and stub
+	 *
+	 * Available filters: page, per_page (default:30, max:100), orderby
+	 * 
+	 * @author dvaJi
+	 */
+	function pages_get() {
+		if ($this->get('id')) {
+			$this->_check_id();
+			$custompage = new Custompage();
+			$custompage->where('id', $this->get('id'))->limit(1)->get();
+			$custompage->get_users();
+
+		} else if ($this->get('stub')) { 
+			$custompage = new custompage();
+			$custompage->where('stub', $this->get('stub'));
+			$custompage->limit(1)->get();
+			$custompage->get_users();
+
+		} else {
+			$custompages = new custompage();
+			// filter with orderby
+			$this->_orderby($custompages);
+			// use page_to_offset function
+			$this->_page_to_offset($custompages);
+			$custompages->get();
+		}
+
+		if ($custompage != null && $custompage->result_count() == 1) {
+			$result["data"]["custompage"] = $custompage->to_array();
+			$this->response($result, 200); // 200 being the HTTP response code
+		} else if ($custompages != null && $custompages->result_count() > 0) {
+			$result = array();
+			$result['data'] = array();
+			foreach ($custompages->all as $key => $custompage)
+			{
+				// We only need those elements
+				$result['data'][$key]['title'] = $custompage->title();
+				$result['data'][$key]['stub'] = $custompage->stub;
+			}
+
+			$this->response($result, 200); // 200 being the HTTP response code
+		} else {
+			// there's no custompage with that id
+			$this->response(array('error' => _('custompage could not be found')), 404);
 		}
 	}
 
