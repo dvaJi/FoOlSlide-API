@@ -6,9 +6,9 @@ class V1 extends REST_Controller
 {
 	/**
 	 * Returns 100 comics from selected page
-	 * 
+	 *
 	 * Available filters: page, per_page (default:30, max:100), orderby
-	 * 
+	 *
 	 * @author Woxxy
 	 */
 	function comics_get()
@@ -30,6 +30,14 @@ class V1 extends REST_Controller
 			foreach ($comics->all as $key => $comic)
 			{
 				$result['data'][0]['comics'][$key] = $comic->to_array();
+				$descriptions = new Description();
+				$descriptions->where('comic_id', $comic->id)->get();
+				if ($descriptions->result_count() > 0) {
+					foreach ($descriptions->all as $keydesc => $desc) {
+						$result['data'][0]['comics'][$key]['descriptions'][$keydesc] = $desc->to_array();
+						$result['data'][0]['comics'][$key]['languages'][$keydesc] = $desc->language;
+					}
+				}
 			}
 			$this->response($result, 200); // 200 being the HTTP response code
 		}
@@ -40,12 +48,11 @@ class V1 extends REST_Controller
 		}
 	}
 
-	
 	/**
 	 * Returns the comic
-	 * 
+	 *
 	 * Available filters: id (required)
-	 * 
+	 *
 	 * @author Woxxy
 	 */
 	function comic_get()
@@ -81,6 +88,12 @@ class V1 extends REST_Controller
 			$result = array();
 
 			$result["comic"] = $comic->to_array();
+			$descriptions = new Description();
+			$descriptions->where('comic_id', $comic->id)->get();
+			foreach ($descriptions->all as $key => $desc) {
+				$result["comic"]['descriptions'][$key] = $desc->to_array();
+				$result["comic"]['languages'][$key] = $desc->language;
+			}
 
 			// order in the beautiful [comic][chapter][teams][page]
 			$result["chapters"] = array();
@@ -102,7 +115,7 @@ class V1 extends REST_Controller
 				}
 				if ($this->get('chapter') == $chapter->chapter && $chapter->subchapter == $subchapter)
 				{
-					
+
 					$pages = new Page();
 					$pages->where('chapter_id', $chapter->id)->get();
 					$result["chapters"][$key]["chapter"]["pages"] = $chapter->get_pages();
@@ -127,11 +140,10 @@ class V1 extends REST_Controller
 		}
 	}
 
-	/**	
+	/**
 	* chapters+pages+comic_get
 	*/
-	function chaptersp_get()
-	{
+	function chaptersp_get() {
 		$chapters = new Chapter();
 
 		// filter with orderby
@@ -141,33 +153,31 @@ class V1 extends REST_Controller
 
 
 		// get the generic chapters and the comic coming with them
+		if ($this->get('lang')) {
+			$chapters->where('language', $this->get('lang'));
+		}
 		$chapters->get();
 		$chapters->get_comic();
 
-		if ($chapters->result_count() > 0)
-		{
+		if ($chapters->result_count() > 0) {
 
 			// let's create a pretty array of chapters [comic][chapter][teams]
 			$result['data'] = array();
 			$result['data'][0]['chapters'] = array();
-			foreach ($chapters->all as $key => $chapter)
-			{
+			foreach ($chapters->all as $key => $chapter) {
 				$result['data'][0]['chapters'][$key]['comic'] = $chapter->comic->to_array();
 				$result['data'][0]['chapters'][$key]['chapter'] = $chapter->to_array();
 				$result['data'][0]['chapters'][$key]['pages'] = $chapter->get_pages();
 				$chapter->get_teams();
-				foreach ($chapter->teams as $item)
-				{
+				foreach ($chapter->teams as $item) {
 					$result['data'][0]['chapters'][$key]['teams'][] = $item->to_array();
 				}
 			}
-			
 
 			// all good
 			$this->response($result, 200); // 200 being the HTTP response code
 		}
-		else
-		{
+		else {
 			// no comics
 			$this->response(array('error' => _('Comics could not be found')), 404);
 		}
@@ -175,9 +185,9 @@ class V1 extends REST_Controller
 
 	/**
 	 * Returns chapters from selected page
-	 * 
+	 *
 	 * Available filters: page, per_page (default:30, max:100), orderby
-	 * 
+	 *
 	 * @author Woxxy
 	 */
 	function chapters_get()
@@ -223,7 +233,7 @@ class V1 extends REST_Controller
 
 	/**
 	 * Returns the chapter
-	 * 
+	 *
 	 * Available filters: id (required)
 	 *
 	 * @author Woxxy
@@ -231,9 +241,9 @@ class V1 extends REST_Controller
 	function chapter_get()
 	{
 		if (	($this->get('comic_stub'))
-				|| is_numeric($this->get('comic_id')) 
-				|| is_numeric($this->get('volume')) 
-				|| is_numeric($this->get('chapter')) 
+				|| is_numeric($this->get('comic_id'))
+				|| is_numeric($this->get('volume'))
+				|| is_numeric($this->get('chapter'))
 				|| is_numeric($this->get('subchapter'))
 				|| is_numeric($this->get('team_id'))
 				|| is_numeric($this->get('joint_id'))
@@ -245,7 +255,7 @@ class V1 extends REST_Controller
 			{
 				$chapter->where_related('comic', 'stub', $this->get('comic_stub'));
 			}
-			
+
 			// this mess is a complete search system through integers!
 			if (is_numeric($this->get('comic_id')))
 				$chapter->where('comic_id', $this->get('comic_id'));
@@ -259,7 +269,7 @@ class V1 extends REST_Controller
 				$chapter->where('team_id', $this->get('team_id'));
 			if (is_numeric($this->get('joint_id')))
 				$chapter->where('joint_id', $this->get('joint_id'));
-			
+
 			// and we'll still give only one result
 			$chapter->limit(1)->get();
 		}
@@ -306,11 +316,11 @@ class V1 extends REST_Controller
 	/**
 	 * Returns chapters per page from team ID
 	 * Includes releases from joints too
-	 * 
+	 *
 	 * This is NOT a method light enough to lookup teams. use api/members/team for that
-	 * 
+	 *
 	 * Available filters: id (required), page, per_page (default:30, max:100), orderby
-	 * 
+	 *
 	 * @author Woxxy
 	 */
 	function team_get()
@@ -390,11 +400,11 @@ class V1 extends REST_Controller
 	/**
 	 * Returns chapters per page by joint ID
 	 * Also returns the teams
-	 * 
+	 *
 	 * This is not a method light enough to lookup teams. use api/members/joint for that
-	 * 
+	 *
 	 * Available filters: id (required), page, per_page (default:30, max:100), orderby
-	 * 
+	 *
 	 * @author Woxxy
 	 */
 	function joint_get()
@@ -452,7 +462,7 @@ class V1 extends REST_Controller
 	 * Returns all post and seleccted one by id and stub
 	 *
 	 * Available filters: page, per_page (default:30, max:100), orderby
-	 * 
+	 *
 	 * @author dvaJi
 	 */
 	function blog_get() {
@@ -462,7 +472,7 @@ class V1 extends REST_Controller
 			$post->where('id', $this->get('id'))->limit(1)->get();
 			$post->get_users();
 
-		} else if ($this->get('stub')) { 
+		} else if ($this->get('stub')) {
 			$post = new Post();
 			$post->where('stub', $this->get('stub'));
 			$post->limit(1)->get();
@@ -470,6 +480,9 @@ class V1 extends REST_Controller
 
 		} else {
 			$posts = new Post();
+			if ($this->get('lang')) {
+				$posts->where('language', $this->get('lang'));
+			}
 			// filter with orderby
 			$this->_orderby($posts);
 			// use page_to_offset function
@@ -500,7 +513,7 @@ class V1 extends REST_Controller
 	 * Returns all custompage and seleccted one by id and stub
 	 *
 	 * Available filters: page, per_page (default:30, max:100), orderby
-	 * 
+	 *
 	 * @author dvaJi
 	 */
 	function pages_get() {
@@ -510,7 +523,7 @@ class V1 extends REST_Controller
 			$custompage->where('id', $this->get('id'))->limit(1)->get();
 			$custompage->get_users();
 
-		} else if ($this->get('stub')) { 
+		} else if ($this->get('stub')) {
 			$custompage = new custompage();
 			$custompage->where('stub', $this->get('stub'));
 			$custompage->limit(1)->get();
@@ -518,6 +531,9 @@ class V1 extends REST_Controller
 
 		} else {
 			$custompages = new custompage();
+			if ($this->get('lang')) {
+				$custompages->where('language', $this->get('lang'));
+			}
 			// filter with orderby
 			$this->_orderby($custompages);
 			// use page_to_offset function

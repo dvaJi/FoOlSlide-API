@@ -76,7 +76,6 @@ class Blog extends Admin_Controller
 				redirect('/admin/blog/post/' . $post->stub);
 			}
 		}
-
 		$data["post"] = $post;
 
 		$custom_slug = array(array(
@@ -92,9 +91,9 @@ class Blog extends Admin_Controller
 
 		$table = ormer($post);
 		array_splice($table, 2, 0, $custom_slug);
-		$table = tabler($table);
+		$table = tabler($table, FALSE, TRUE);
 		$data['table'] = $table;
-		
+
 		$this->viewdata["extra_script"] = '<script type="text/javascript" src="'.base_url().'assets/js/form-extra.js"></script>';
 		$this->viewdata["extra_script"] = '<script type="text/javascript" src="'.base_url().'assets/ckeditor/ckeditor.js"></script>';
 		$this->viewdata["main_content_view"] = $this->load->view("admin/blog/post.php", $data, TRUE);
@@ -155,7 +154,7 @@ class Blog extends Admin_Controller
 			return false;
 		}
 		$id = intval($id);
-		
+
 		switch ($type)
 		{
 			case("post"):

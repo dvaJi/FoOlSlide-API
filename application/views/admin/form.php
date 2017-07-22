@@ -14,7 +14,10 @@
 	echo form_close();
 ?>
 <script>
-	CKEDITOR.replace( 'description' );
-	CKEDITOR.config.width = '95%';
+	try {
+     CKEDITOR.instances['description'].destroy(true);
+	 } catch (e) { }
+	 CKEDITOR.replace('description');
+	//CKEDITOR.config.width = '95%';
 </script>
 </div>

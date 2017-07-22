@@ -33,6 +33,11 @@ class Custompage extends DataMapper
 			'type' => 'checkbox',
 			'values' => array('0' => 'Visible', '1' => 'Hidden')
 		),
+		'language' => array(
+			'rules' => array('required'),
+			'label' => 'Language',
+			'type' => 'language'
+		),
 		'lastseen' => array(
 			'rules' => array(),
 			'label' => 'Lastseen'
@@ -146,7 +151,7 @@ class Custompage extends DataMapper
 			$user = new User();
 			$item->creator = $user->where("id", $item->creator)->get()->username;
 			$item->editor = $user->where("id", $item->editor)->get()->username;
-			
+
 		}
 
 		// All good, return true.
@@ -196,10 +201,10 @@ class Custompage extends DataMapper
 		$this->to_stub = $data['name'];
 
 		// in case the user specified a stub
-		if (array_key_exists('has_custom_slug', $data) && $data['has_custom_slug'] == 1 
+		if (array_key_exists('has_custom_slug', $data) && $data['has_custom_slug'] == 1
 			&& isset($data['stub']) && $data['stub'] != '')
 			$this->to_stub = $data['stub'];
-		
+
 		// stub() checks for to_stub and makes a stub.
 		$this->stub = $this->stub();
 
