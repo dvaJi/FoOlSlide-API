@@ -30,6 +30,28 @@ class V1 extends REST_Controller
 			foreach ($comics->all as $key => $comic)
 			{
 				$result['data'][0]['comics'][$key] = $comic->to_array();
+				$comicDir = "content/comics/" . $comic->stub . "_" . $comic->uniqid . "/";
+				
+				$image_path = $comicDir . $comic->thumbnail;
+				$image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
+				if ( !file_exists( $image_thumb ) ) {
+					// LOAD LIBRARY
+					$this->load->library( 'image_lib' );
+
+					// CONFIGURE IMAGE LIBRARY
+					$config['image_library']    = 'gd2';
+					$config['source_image']     = $image_path;
+					$config['new_image']        = $image_thumb;
+					$config['maintain_ratio']   = TRUE;
+					$config['height']           = 390;
+					$config['width']            = 300;
+					$this->image_lib->initialize( $config );
+					$this->image_lib->resize();
+					$this->image_lib->clear();
+				}
+				
+				$result['data'][0]['comics'][$key]['thumb2'] = $this->config->base_url() . $image_thumb;
+				
 				$descriptions = new Description();
 				$descriptions->where('comic_id', $comic->id)->get();
 				if ($descriptions->result_count() > 0) {
@@ -168,6 +190,30 @@ class V1 extends REST_Controller
 				$result['data'][0]['chapters'][$key]['comic'] = $chapter->comic->to_array();
 				$result['data'][0]['chapters'][$key]['chapter'] = $chapter->to_array();
 				$result['data'][0]['chapters'][$key]['pages'] = $chapter->get_pages();
+				
+				$comicDir = "content/comics/" . $chapter->comic->stub . "_" . $chapter->comic->uniqid . "/";
+				
+				$image_path = $comicDir . $chapter->stub . "_" . $chapter->uniqid . "/" . $result['data'][0]['chapters'][$key]['pages'][2]['filename'];
+				$image_thumb = $comicDir . $chapter->stub . "_" . $chapter->uniqid . "/thumb_" . $result['data'][0]['chapters'][$key]['pages'][2]['filename'];
+
+				if ( !file_exists( $image_thumb ) ) {
+					// LOAD LIBRARY
+					$this->load->library( 'image_lib' );
+
+					// CONFIGURE IMAGE LIBRARY
+					$config['image_library']    = 'gd2';
+					$config['source_image']     = $image_path;
+					$config['new_image']        = $image_thumb;
+					$config['maintain_ratio']   = TRUE;
+					$config['height']           = 390;
+					$config['width']            = 300;
+					$this->image_lib->initialize( $config );
+					$this->image_lib->resize();
+					$this->image_lib->clear();
+				}
+				
+				$result['data'][0]['chapters'][$key]['chapter']['thumbnail'] = $this->config->base_url() . $image_thumb;
+				
 				$chapter->get_teams();
 				foreach ($chapter->teams as $item) {
 					$result['data'][0]['chapters'][$key]['teams'][] = $item->to_array();

@@ -286,6 +286,8 @@ class REST_Controller extends MY_Controller
 			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 			header('Status: ' . $http_code);
 			header('Content-Length: ' . strlen($output));
+			header('Access-Control-Allow-Origin: *');
+			header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 		}
 		else
 		{
