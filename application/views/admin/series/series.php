@@ -6,6 +6,12 @@ $this->buttoner[] = array(
     'class' => "btn-danger"
 );
 ?>
+<?php
+$this->buttoner[] = array(
+	'text' => _('Add Description'),
+	'href' => site_url('/admin/series/add_desc/'.$comic->id)
+);
+?>
 <div class="table">
     <h3><?php echo _('Series Information'); ?> <?php echo buttoner(); ?></h3>
 	<?php

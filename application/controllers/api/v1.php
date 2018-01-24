@@ -20,57 +20,45 @@ class V1 extends REST_Controller
 		// use page_to_offset function
 		$this->_page_to_offset($comics);
 
-		$lang = $this->get('lang');
-
 		$comics->get();
 
 		if ($comics->result_count() > 0)
 		{
 			$result = array();
-			$index = 0;
+			$result['data'] = array();
 			foreach ($comics->all as $key => $comic)
 			{
-				$isAvailable = FALSE;
-				$description = "";
+				$result['data'][0]['comics'][$key] = $comic->to_array();
+				$comicDir = "content/comics/" . $comic->stub . "_" . $comic->uniqid . "/";
+				
+				$image_path = $comicDir . $comic->thumbnail;
+				$image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
+				if ( !file_exists( $image_thumb ) ) {
+					// LOAD LIBRARY
+					$this->load->library( 'image_lib' );
 
+					// CONFIGURE IMAGE LIBRARY
+					$config['image_library']    = 'gd2';
+					$config['source_image']     = $image_path;
+					$config['new_image']        = $image_thumb;
+					$config['maintain_ratio']   = TRUE;
+					$config['height']           = 390;
+					$config['width']            = 300;
+					$this->image_lib->initialize( $config );
+					$this->image_lib->resize();
+					$this->image_lib->clear();
+				}
+				
+				$result['data'][0]['comics'][$key]['thumb2'] = $this->config->base_url() . $image_thumb;
+				
 				$descriptions = new Description();
 				$descriptions->where('comic_id', $comic->id)->get();
 				if ($descriptions->result_count() > 0) {
 					foreach ($descriptions->all as $keydesc => $desc) {
-						if ($desc->language == $lang) {
-							$isAvailable = TRUE;
-							$description = $desc->to_array()['description'];
-						}
+						$result['data'][0]['comics'][$key]['descriptions'][$keydesc] = $desc->to_array();
+						$result['data'][0]['comics'][$key]['languages'][$keydesc] = $desc->language;
 					}
 				}
-
-				if ($isAvailable) {
-					$result[$index] = $comic->to_array();
-					$result[$index]['description'] = $description;
-					$comicDir = "content/comics/" . $comic->stub . "_" . $comic->uniqid . "/";
-
-					$image_path = $comicDir . $comic->thumbnail;
-					$image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
-					if ( !file_exists( $image_thumb ) ) {
-						// LOAD LIBRARY
-						$this->load->library( 'image_lib' );
-
-						// CONFIGURE IMAGE LIBRARY
-						$config['image_library']    = 'gd2';
-						$config['source_image']     = $image_path;
-						$config['new_image']        = $image_thumb;
-						$config['maintain_ratio']   = TRUE;
-						$config['height']           = 390;
-						$config['width']            = 300;
-						$this->image_lib->initialize( $config );
-						$this->image_lib->resize();
-						$this->image_lib->clear();
-					}
-
-					$result[$index]['thumb2'] = $image_thumb;
-					$index++;
-				}
-
 			}
 			$this->response($result, 200); // 200 being the HTTP response code
 		}
@@ -120,58 +108,46 @@ class V1 extends REST_Controller
 			$chapters->get_teams();
 			$result = array();
 
-			$result = $comic->to_array();
+			$result["comic"] = $comic->to_array();
 			$descriptions = new Description();
 			$descriptions->where('comic_id', $comic->id)->get();
 			foreach ($descriptions->all as $key => $desc) {
-				if ($desc->language == $this->get('lang')) {
-					$result['description'] = $desc->to_array()['description'];
-				}
-				$result['descriptions'][$key] = $desc->to_array();
-				$result['languages'][$key] = $desc->language;
+				$result["comic"]['descriptions'][$key] = $desc->to_array();
+				$result["comic"]['languages'][$key] = $desc->language;
 			}
-
-			$comicDir = "content/comics/" . $comic->stub . "_" . $comic->uniqid . "/";
-
-			$image_path = $comicDir . $comic->thumbnail;
-			$image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
-			if ( !file_exists( $image_thumb ) ) {
-				// LOAD LIBRARY
-				$this->load->library( 'image_lib' );
-
-				// CONFIGURE IMAGE LIBRARY
-				$config['image_library']    = 'gd2';
-				$config['source_image']     = $image_path;
-				$config['new_image']        = $image_thumb;
-				$config['maintain_ratio']   = TRUE;
-				$config['height']           = 390;
-				$config['width']            = 300;
-				$this->image_lib->initialize( $config );
-				$this->image_lib->resize();
-				$this->image_lib->clear();
-			}
-
-			$result['thumb2'] = site_url() . $image_thumb;
 
 			// order in the beautiful [comic][chapter][teams][page]
 			$result["chapters"] = array();
-			$chaptersIndex = 0;
 			foreach ($chapters->all as $key => $chapter)
 			{
-				if ($chapter->language == $this->get('lang')) {
-					$result['chapters'][$chaptersIndex] = $chapter->to_array();
-					$subchapter = 0;
-					if($this->get('subchapter') == $chapter->subchapter){
-						$subchapter = $this->get('subchapter');
-					}
-					if ($this->get('chapter') == $chapter->chapter && $chapter->subchapter == $subchapter)
-					{
+				$result['chapters'][$key]['chapter'] = $chapter->to_array();
 
-						$pages = new Page();
-						$pages->where('chapter_id', $chapter->id)->get();
-						$result["chapters"][$chaptersIndex]["chapter"]["pages"] = $chapter->get_pages();
-					}
-					$chaptersIndex++;
+				// if it's requested, throw in also the pages (for load balancer)
+				/*if ($this->get('chapter_stub') == $chapter->stub
+						&& $this->get('chapter_uniqid') == $chapter->uniqid)
+				{
+					$pages = new Page();
+					$pages->where('chapter_id', $chapter->id)->get();
+					$result["chapters"][$key]["chapter"]["pages"] = $pages->all_to_array();
+				}*/
+				$subchapter = 0;
+				if($this->get('subchapter') == $chapter->subchapter){
+					$subchapter = $this->get('subchapter');
+				}
+				if ($this->get('chapter') == $chapter->chapter && $chapter->subchapter == $subchapter)
+				{
+
+					$pages = new Page();
+					$pages->where('chapter_id', $chapter->id)->get();
+					$result["chapters"][$key]["chapter"]["pages"] = $chapter->get_pages();
+				}
+
+
+
+				// teams is a normal array, can't use $team->all_to_array()
+				foreach ($chapter->teams as $team)
+				{
+					$result['chapters'][$key]['teams'][] = $team->to_array();
 				}
 			}
 
@@ -188,13 +164,8 @@ class V1 extends REST_Controller
 	/**
 	* chapters+pages+comic_get
 	*/
-	function releases_get() {
+	function chaptersp_get() {
 		$chapters = new Chapter();
-
-		// get the generic chapters and the comic coming with them
-		if ($this->get('lang')) {
-			$chapters->where('language', $this->get('lang'));
-		}
 
 		// filter with orderby
 		$this->_orderby($chapters);
@@ -202,26 +173,27 @@ class V1 extends REST_Controller
 		$this->_page_to_offset($chapters);
 
 
-
+		// get the generic chapters and the comic coming with them
+		if ($this->get('lang')) {
+			$chapters->where('language', $this->get('lang'));
+		}
 		$chapters->get();
 		$chapters->get_comic();
 
 		if ($chapters->result_count() > 0) {
 
 			// let's create a pretty array of chapters [comic][chapter][teams]
-			$result['chapters'] = array();
+			$result['data'] = array();
+			$result['data'][0]['chapters'] = array();
 			foreach ($chapters->all as $key => $chapter) {
-				$result['chapters'][$key]['comic'] = $chapter->comic->to_array();
-				$result['chapters'][$key]['chapter'] = $chapter->to_array();
-
-				// TODO: SOLO OBTENER LA PÁGINA NECESARIA.
-				$pages = $chapter->get_pages();
-				//$result['chapters'][$key]['pages'] = $chapter->get_pages();
-
+				$result['data'][0]['chapters'][$key]['comic'] = $chapter->comic->to_array();
+				$result['data'][0]['chapters'][$key]['chapter'] = $chapter->to_array();
+				$result['data'][0]['chapters'][$key]['pages'] = $chapter->get_pages();
+				
 				$comicDir = "content/comics/" . $chapter->comic->stub . "_" . $chapter->comic->uniqid . "/";
-
-				$image_path = $comicDir . $chapter->stub . "_" . $chapter->uniqid . "/" . $pages[2]['filename'];
-				$image_thumb = $comicDir . $chapter->stub . "_" . $chapter->uniqid . "/thumb_" . $pages[2]['filename'];
+				
+				$image_path = $comicDir . $chapter->stub . "_" . $chapter->uniqid . "/" . $result['data'][0]['chapters'][$key]['pages'][2]['filename'];
+				$image_thumb = $comicDir . $chapter->stub . "_" . $chapter->uniqid . "/thumb_" . $result['data'][0]['chapters'][$key]['pages'][2]['filename'];
 
 				if ( !file_exists( $image_thumb ) ) {
 					// LOAD LIBRARY
@@ -238,20 +210,17 @@ class V1 extends REST_Controller
 					$this->image_lib->resize();
 					$this->image_lib->clear();
 				}
-
-				$result['chapters'][$key]['chapter']['thumbnail'] = $image_thumb;
-				//$result['chapters'][$key]['chapter']['thumbnail'] = 'api/' . $image_thumb;
-				$result['chapters'][$key]['id'] = $chapter->id;
-				$result['chapters'][$key]['loading'] = false;
-
+				
+				$result['data'][0]['chapters'][$key]['chapter']['thumbnail'] = $this->config->base_url() . $image_thumb;
+				
 				$chapter->get_teams();
 				foreach ($chapter->teams as $item) {
-					$result['chapters'][$key]['teams'][] = $item->to_array();
+					$result['data'][0]['chapters'][$key]['teams'][] = $item->to_array();
 				}
 			}
 
 			// all good
-			$this->response($result['chapters'], 200); // 200 being the HTTP response code
+			$this->response($result, 200); // 200 being the HTTP response code
 		}
 		else {
 			// no comics
@@ -260,34 +229,40 @@ class V1 extends REST_Controller
 	}
 
 	/**
-	 * Returns chapters from selected comic
+	 * Returns chapters from selected page
 	 *
+	 * Available filters: page, per_page (default:30, max:100), orderby
 	 *
 	 * @author Woxxy
 	 */
 	function chapters_get()
 	{
-		if ($this->get('stub')) {
-			$chapter = new Chapter();
+		$chapters = new Chapter();
 
-			// filter with orderby
-			$this->_orderby($chapter);
-			// use page_to_offset function
-			$this->_page_to_offset($chapter);
+		// filter with orderby
+		$this->_orderby($chapters);
+		// use page_to_offset function
+		$this->_page_to_offset($chapters);
 
-			$chapter->where_related('comic', 'stub', $this->get('stub'));
-			$chapter->get()->to_array();
-		} else {
-			$chapter = array();
-		}
-		if ($chapter->result_count() > 0) {
 
-			$result = array();
-			$chapter->get_comic();
-			foreach ($chapter->all as $key => $chapter) {
-				$result[$key] = $chapter->to_array();
-				$result[$key]['comic'] = $chapter->comic->to_array();
-				$result[$key]['pages'] = $chapter->get_pages();
+		// get the generic chapters and the comic coming with them
+		$chapters->get();
+		$chapters->get_comic();
+
+		if ($chapters->result_count() > 0)
+		{
+
+			// let's create a pretty array of chapters [comic][chapter][teams]
+			$result['chapters'] = array();
+			foreach ($chapters->all as $key => $chapter)
+			{
+				$result['chapters'][$key]['comic'] = $chapter->comic->to_array();
+				$result['chapters'][$key]['chapter'] = $chapter->to_array();
+				$chapter->get_teams();
+				foreach ($chapter->teams as $item)
+				{
+					$result['chapters'][$key]['teams'][] = $item->to_array();
+				}
 			}
 
 			// all good
@@ -295,8 +270,8 @@ class V1 extends REST_Controller
 		}
 		else
 		{
-			// the chapter with that id doesn't exist
-			$this->response(array('error' => _('Chapter could not be found')), 404);
+			// no comics
+			$this->response(array('error' => _('Comics could not be found')), 404);
 		}
 	}
 
