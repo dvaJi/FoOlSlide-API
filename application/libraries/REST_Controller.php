@@ -284,6 +284,8 @@ class REST_Controller extends MY_Controller
 			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 			header('Status: ' . $http_code);
 			header('Content-Length: ' . strlen($output));
+			header('Access-Control-Allow-Origin: *');
+			header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 		}
 		else
 		{
@@ -813,12 +815,12 @@ class REST_Controller extends MY_Controller
 
 		$verify = $this->CI->curl->simple_get($verify_url, array(), array(CURLOPT_FAILONERROR => FALSE));
 
-		// Successful response from the auth server				
+		// Successful response from the auth server
 		if ($verify)
 		{
 			$verify = json_decode($verify);
 
-			// Access token was invalid	
+			// Access token was invalid
 			if (isset($verify->error))
 			{
 				header('HTTP/1.0 401 Unauthorized');
@@ -879,14 +881,14 @@ class REST_Controller extends MY_Controller
 
 
 	/*
-	 * 
+	 *
 	 * FUNCTIONS ADDED FOR FOOLSLIDE
-	 * 
+	 *
 	 */
 
 	/*
 	 * Commodity to check that the ID is not wrong and return a coherent error
-	 * 
+	 *
 	 * @author Woxxy
 	 */
 	function _check_id()
@@ -909,7 +911,7 @@ class REST_Controller extends MY_Controller
 
 	/*
 	 * Checks that the orderby method is correct or ignores it if wrong.
-	 * 
+	 *
 	 * @author Woxxy
 	 * @param DataMapper $object database query
 	 * @param array $add add accepted values for search
@@ -925,7 +927,7 @@ class REST_Controller extends MY_Controller
 		// the tag is set
 		$order = $this->get('orderby');
 
-		
+
 		// add and remove from default array
 		$default = array_merge($default, $add);
 		$default = array_diff($default, $remove);
@@ -955,7 +957,7 @@ class REST_Controller extends MY_Controller
 		// fix for compatibility FoOlSlide 0.8.4 (05/10/2011)
 		if($order == 'edited')
 			$order = 'updated';
-		
+
 		// check that the orderby method exists
 		if (in_array($order, $default))
 		{
@@ -971,13 +973,13 @@ class REST_Controller extends MY_Controller
 
 	/*
 	 * Retrieves the page tag and returns the correct limit for DataMapper
-	 * 
+	 *
 	 * @author Woxxy
 	 * @param Datamapper $object
 	 * @param int $limit entries per page
 	 * @return $entry the entry from which the Datamapper limit function gets results
 	 */
-	function _page_to_offset($object, $default = 30, $max = 100)
+	function _page_to_offset($object, $default = 30, $max = 120)
 	{
 		// Give at least the first page if the page tag is not set or wrongly set
 		if (!$this->get('page'))

@@ -16,4 +16,11 @@
 	echo $table;
 	echo form_close();
 ?>
+<script>
+	try {
+     CKEDITOR.instances['description'].destroy(true);
+	 } catch (e) { }
+	 CKEDITOR.replace('description');
+	//CKEDITOR.config.width = '95%';
+</script>
 </div>

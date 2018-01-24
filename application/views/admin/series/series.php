@@ -25,7 +25,7 @@ $this->buttoner[] = array(
             'class' => "btn-success"
 		)
 	);
-	
+
 	if($this->tank_auth->is_admin())
 	{
 		$this->buttoner[] = array(
@@ -57,7 +57,7 @@ $this->buttoner[] = array(
 						else echo ' By <a href="'.site_url("/admin/users/teams/".$item->team_stub).'">'.$item->team_name.'</a>';
 						echo '</div>
 				<div class="smalltext">
-					'._('Quick tools').': 
+					'._('Quick tools').':
 						<a href="'.site_url("admin/series/delete/chapter/".$item->id).'" onclick="confirmPlug(\''.site_url("admin/series/delete/chapter/".$item->id).'\', \''._('Do you really want to delete this chapter and its pages?'). '\'); return false;">' . _('Delete') . '</a> |
 						<a href="';
 							echo $item->href();

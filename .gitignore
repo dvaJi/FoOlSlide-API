@@ -5,6 +5,7 @@
 nbproject
 Thumbs.db
 Desktop.ini
+<<<<<<< HEAD
 .buildpath
 .project
 .settings
@@ -13,3 +14,8 @@ content/cache
 content/comics
 content/tags
 content/logs
+=======
+config.php
+
+content/*
+>>>>>>> Initial state

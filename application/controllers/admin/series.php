@@ -549,5 +549,9 @@ class Series extends Admin_Controller
 		$this->load->view("admin/default.php", $this->viewdata);
 	}
 
+	function add_desc () {
+		
+	}
+
 
 }
