@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -26,7 +25,7 @@
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_odbc_driver extends CI_DB {
@@ -49,9 +48,9 @@ class CI_DB_odbc_driver extends CI_DB {
 	var $_random_keyword;
 
 
-	function __construct($params)
+	function CI_DB_odbc_driver($params)
 	{
-		parent::__construct($params);
+		parent::CI_DB($params);
 
 		$this->_random_keyword = ' RND('.time().')'; // database specific random keyword
 	}
@@ -340,7 +339,6 @@ class CI_DB_odbc_driver extends CI_DB {
 		}
 
 		$row = $query->row();
-		$this->_reset_select();
 		return (int) $row->numrows;
 	}
 

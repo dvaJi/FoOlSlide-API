@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -22,7 +21,7 @@
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Exceptions
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/exceptions.html
  */
 class CI_Exceptions {
@@ -31,21 +30,8 @@ class CI_Exceptions {
 	var $message;
 	var $filename;
 	var $line;
-
-	/**
-	 * Nesting level of the output buffering mechanism
-	 *
-	 * @var int
-	 * @access public
-	 */
 	var $ob_level;
 
-	/**
-	 * List if available error levels
-	 *
-	 * @var array
-	 * @access public
-	 */
 	var $levels = array(
 						E_ERROR				=>	'Error',
 						E_WARNING			=>	'Warning',
@@ -98,8 +84,7 @@ class CI_Exceptions {
 	 * 404 Page Not Found Handler
 	 *
 	 * @access	private
-	 * @param	string	the page
-	 * @param 	bool	log error yes/no
+	 * @param	string
 	 * @return	string
 	 */
 	function show_404($page = '', $log_error = TRUE)
@@ -130,7 +115,6 @@ class CI_Exceptions {
 	 * @param	string	the heading
 	 * @param	string	the message
 	 * @param	string	the template name
-	 * @param 	int		the status code
 	 * @return	string
 	 */
 	function show_error($heading, $message, $template = 'error_general', $status_code = 500)

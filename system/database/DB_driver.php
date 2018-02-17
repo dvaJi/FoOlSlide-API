@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -26,7 +25,7 @@
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_driver {
@@ -79,7 +78,7 @@ class CI_DB_driver {
 	 *
 	 * @param array
 	 */
-	function __construct($params)
+	function CI_DB_driver($params)
 	{
 		if (is_array($params))
 		{
@@ -219,7 +218,7 @@ class CI_DB_driver {
 
 		// Some DBs have functions that return the version, and don't run special
 		// SQL queries per se. In these instances, just return the result.
-		$driver_version_exceptions = array('oci8', 'sqlite', 'cubrid');
+		$driver_version_exceptions = array('oci8', 'sqlite');
 
 		if (in_array($this->dbdriver, $driver_version_exceptions))
 		{
@@ -266,12 +265,6 @@ class CI_DB_driver {
 			$sql = preg_replace("/(\W)".$this->swap_pre."(\S+?)/", "\\1".$this->dbprefix."\\2", $sql);
 		}
 
-		// Compile binds if needed
-		if ($binds !== FALSE)
-		{
-			$sql = $this->compile_binds($sql, $binds);
-		}
-
 		// Is query caching enabled?  If the query is a "read type"
 		// we will load the caching class and return the previously
 		// cached query if it exists
@@ -285,6 +278,12 @@ class CI_DB_driver {
 					return $cache;
 				}
 			}
+		}
+
+		// Compile binds if needed
+		if ($binds !== FALSE)
+		{
+			$sql = $this->compile_binds($sql, $binds);
 		}
 
 		// Save the  query for debugging
@@ -1016,14 +1015,8 @@ class CI_DB_driver {
 		else
 		{
 			$args = (func_num_args() > 1) ? array_splice(func_get_args(), 1) : null;
-			if (is_null($args))
-			{
-				return call_user_func($function);
-			}
-			else
-			{
-				return call_user_func_array($function, $args);
-			}
+
+			return call_user_func_array($function, $args);
 		}
 	}
 
@@ -1268,14 +1261,11 @@ class CI_DB_driver {
 
 		// If the item has an alias declaration we remove it and set it aside.
 		// Basically we remove everything to the right of the first space
+		$alias = '';
 		if (strpos($item, ' ') !== FALSE)
 		{
-			$alias = strstr($item, ' ');
+			$alias = strstr($item, " ");
 			$item = substr($item, 0, - strlen($alias));
-		}
-		else
-		{
-			$alias = '';
 		}
 
 		// This is basically a bug fix for queries that use MAX, MIN, etc.
@@ -1392,20 +1382,9 @@ class CI_DB_driver {
 		return $item.$alias;
 	}
 
-	// --------------------------------------------------------------------
-
-	/**
-	 * Dummy method that allows Active Record class to be disabled
-	 *
-	 * This function is used extensively by every db driver.
-	 *
-	 * @return	void
-	 */
-	protected function _reset_select()
-	{
-	}
 
 }
+
 
 /* End of file DB_driver.php */
 /* Location: ./system/database/DB_driver.php */

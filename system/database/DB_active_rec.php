@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -24,7 +23,7 @@
  * @package		CodeIgniter
  * @subpackage	Drivers
  * @category	Database
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
 class CI_DB_active_record extends CI_DB_driver {
@@ -256,7 +255,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	public function from($from)
 	{
-		foreach ((array) $from as $val)
+		foreach ((array)$from as $val)
 		{
 			if (strpos($val, ',') !== FALSE)
 			{
@@ -661,12 +660,8 @@ class CI_DB_active_record extends CI_DB_driver {
 			$prefix = (count($this->ar_like) == 0) ? '' : $type;
 
 			$v = $this->escape_like_str($v);
-			
-			if ($side == 'none')
-			{
-				$like_statement = $prefix." $k $not LIKE '{$v}'";
-			}
-			elseif ($side == 'before')
+
+			if ($side == 'before')
 			{
 				$like_statement = $prefix." $k $not LIKE '%{$v}'";
 			}
@@ -875,11 +870,11 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	public function limit($value, $offset = '')
 	{
-		$this->ar_limit = (int) $value;
+		$this->ar_limit = $value;
 
 		if ($offset != '')
 		{
-			$this->ar_offset = (int) $offset;
+			$this->ar_offset = $offset;
 		}
 
 		return $this;
@@ -895,7 +890,7 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	public function offset($offset)
 	{
-		$this->ar_offset = (int) $offset;
+		$this->ar_offset = $offset;
 		return $this;
 	}
 
@@ -1327,7 +1322,7 @@ class CI_DB_active_record extends CI_DB_driver {
 		{
 			if ($this->db_debug)
 			{
-				return $this->display_error('db_must_use_index');
+				return $this->display_error('db_myst_use_index');
 			}
 
 			return FALSE;
@@ -1405,7 +1400,7 @@ class CI_DB_active_record extends CI_DB_driver {
 				}
 				else
 				{
-					$not[] = $k2.'-'.$v2;
+					$not[] = $k.'-'.$v;
 				}
 
 				if ($escape === FALSE)
@@ -1648,7 +1643,7 @@ class CI_DB_active_record extends CI_DB_driver {
 		if (strpos($table, " ") !== FALSE)
 		{
 			// if the alias is written with the AS keyword, remove it
-			$table = preg_replace('/\s+AS\s+/i', ' ', $table);
+			$table = preg_replace('/ AS /i', ' ', $table);
 
 			// Grab the alias
 			$table = trim(strrchr($table, " "));

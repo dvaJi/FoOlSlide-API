@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -24,39 +23,14 @@
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	URI
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/uri.html
  */
 class CI_URI {
 
-	/**
-	 * List of cached uri segments
-	 *
-	 * @var array
-	 * @access public
-	 */
 	var	$keyval			= array();
-	/**
-	 * Current uri string
-	 *
-	 * @var string
-	 * @access public
-	 */
 	var $uri_string;
-	/**
-	 * List of uri segments
-	 *
-	 * @var array
-	 * @access public
-	 */
 	var $segments		= array();
-	/**
-	 * Re-indexed list of uri segments
-	 * Starts at 1 instead of 0
-	 *
-	 * @var array
-	 * @access public
-	 */
 	var $rsegments		= array();
 
 	/**
@@ -153,7 +127,6 @@ class CI_URI {
 	 * Set the URI String
 	 *
 	 * @access	public
-	 * @param 	string
 	 * @return	string
 	 */
 	function _set_uri_string($str)
@@ -392,11 +365,6 @@ class CI_URI {
 	}
 	/**
 	 * Identical to above only it uses the re-routed segment array
-	 *
-	 * @access 	public
-	 * @param 	integer	the starting segment number
-	 * @param 	array	an array of default values
-	 * @return 	array
 	 *
 	 */
 	function ruri_to_assoc($n = 3, $default = array())

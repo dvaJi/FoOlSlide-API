@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -22,22 +21,12 @@
  * @package		CodeIgniter
  * @subpackage	Libraries
  * @category	Language
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/language.html
  */
 class CI_Lang {
 
-	/**
-	 * List of translations
-	 *
-	 * @var array
-	 */
 	var $language	= array();
-	/**
-	 * List of loaded language files
-	 *
-	 * @var array
-	 */
 	var $is_loaded	= array();
 
 	/**
@@ -58,9 +47,6 @@ class CI_Lang {
 	 * @access	public
 	 * @param	mixed	the name of the language file to be loaded. Can be an array
 	 * @param	string	the language (english, etc.)
-	 * @param	bool	return loaded array of translations
-	 * @param 	bool	add suffix to $langfile
-	 * @param 	string	alternative path to look for language file
 	 * @return	mixed
 	 */
 	function load($langfile = '', $idiom = '', $return = FALSE, $add_suffix = TRUE, $alt_path = '')

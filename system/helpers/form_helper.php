@@ -5,9 +5,8 @@
  * An open source application development framework for PHP 5.1.6 or newer
  *
  * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright		Copyright (c) 2008 - 2014, EllisLab, Inc.
- * @copyright		Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @author		ExpressionEngine Dev Team
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -22,7 +21,7 @@
  * @package		CodeIgniter
  * @subpackage	Helpers
  * @category	Helpers
- * @author		EllisLab Dev Team
+ * @author		ExpressionEngine Dev Team
  * @link		http://codeigniter.com/user_guide/helpers/form_helper.html
  */
 
@@ -65,8 +64,8 @@ if ( ! function_exists('form_open'))
 
 		$form .= '>';
 
-		// Add CSRF field if enabled, but leave it out for GET requests and requests to external websites	
-		if ($CI->config->item('csrf_protection') === TRUE AND ! (strpos($action, $CI->config->base_url()) === FALSE OR strpos($form, 'method="get"')))	
+		// CSRF
+		if ($CI->config->item('csrf_protection') === TRUE)
 		{
 			$hidden[$CI->security->get_csrf_token_name()] = $CI->security->get_csrf_hash();
 		}
@@ -95,7 +94,7 @@ if ( ! function_exists('form_open'))
  */
 if ( ! function_exists('form_open_multipart'))
 {
-	function form_open_multipart($action = '', $attributes = array(), $hidden = array())
+	function form_open_multipart($action, $attributes = array(), $hidden = array())
 	{
 		if (is_string($attributes))
 		{
@@ -250,7 +249,7 @@ if ( ! function_exists('form_textarea'))
 {
 	function form_textarea($data = '', $value = '', $extra = '')
 	{
-		$defaults = array('name' => (( ! is_array($data)) ? $data : ''), 'cols' => '40', 'rows' => '10');
+		$defaults = array('name' => (( ! is_array($data)) ? $data : ''), 'cols' => '90', 'rows' => '12');
 
 		if ( ! is_array($data) OR ! isset($data['value']))
 		{
