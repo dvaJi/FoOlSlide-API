@@ -36,6 +36,6 @@ $amount = isset($_GET['p']) ? TRUE : FALSE;//first item
 	        </item>
 
 
-<?php endforeach; ?>
+        <?php endforeach; ?>
 
     </channel></rss>
