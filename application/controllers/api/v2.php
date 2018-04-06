@@ -2,8 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class V2 extends REST_Controller {
-    
+class V2 extends REST_Controller
+{
+
     private $READER_PATH = "/lector/content/comics/";
 
     /**
@@ -13,7 +14,8 @@ class V2 extends REST_Controller {
      *
      * @author Woxxy
      */
-    function comics_get() {
+    function comics_get()
+    {
         $comics = new Comic();
 
         // filter with orderby
@@ -49,28 +51,28 @@ class V2 extends REST_Controller {
                     $comicDir = $this->READER_PATH . $comic->stub . "_" . $comic->uniqid . "/";
 
                     $image_path = $comicDir . $comic->thumbnail;
-					if ($comic->thumbnail != "") {
-						$image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
-						if (!file_exists($image_thumb)) {
-							// LOAD LIBRARY
-							$this->load->library('image_lib');
+                    if ($comic->thumbnail != "") {
+                        $image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
+                        if (!file_exists($image_thumb)) {
+                            // LOAD LIBRARY
+                            $this->load->library('image_lib');
 
-							// CONFIGURE IMAGE LIBRARY
-							$config['image_library'] = 'gd2';
-							$config['source_image'] = $image_path;
-							$config['new_image'] = $image_thumb;
-							$config['maintain_ratio'] = TRUE;
-							$config['height'] = 390;
-							$config['width'] = 300;
-							$this->image_lib->initialize($config);
-							$this->image_lib->resize();
-							$this->image_lib->clear();
-						}
-						
-						$result[$index]['thumb2'] = $image_thumb;
-					} else {
-						$result[$index]['thumb2'] = NULL;
-					}
+                            // CONFIGURE IMAGE LIBRARY
+                            $config['image_library'] = 'gd2';
+                            $config['source_image'] = $image_path;
+                            $config['new_image'] = $image_thumb;
+                            $config['maintain_ratio'] = TRUE;
+                            $config['height'] = 390;
+                            $config['width'] = 300;
+                            $this->image_lib->initialize($config);
+                            $this->image_lib->resize();
+                            $this->image_lib->clear();
+                        }
+
+                        $result[$index]['thumb2'] = $image_thumb;
+                    } else {
+                        $result[$index]['thumb2'] = NULL;
+                    }
 
                     $index++;
                 }
@@ -89,7 +91,8 @@ class V2 extends REST_Controller {
      *
      * @author Woxxy
      */
-    function comic_get() {
+    function comic_get()
+    {
         if ($this->get('id')) {
             //// check that the id is at least a valid number
             $this->_check_id();
@@ -104,8 +107,7 @@ class V2 extends REST_Controller {
             if ($this->get('uniqid'))
                 $comic->where('uniqid', $this->get('uniqid'));
             $comic->limit(1)->get();
-        }
-        else {
+        } else {
             $this->response(array('error' => _('You didn\'t use the necessary parameters')), 404);
         }
 
@@ -129,28 +131,28 @@ class V2 extends REST_Controller {
             $comicDir = $this->READER_PATH . $comic->stub . "_" . $comic->uniqid . "/";
 
             $image_path = $comicDir . $comic->thumbnail;
-			if ($comic->thumbnail != "") {
-				$image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
-				if (!file_exists($image_thumb)) {
-					// LOAD LIBRARY
-					$this->load->library('image_lib');
+            if ($comic->thumbnail != "") {
+                $image_thumb = $comicDir . "thumb2_" . $comic->thumbnail;
+                if (!file_exists($image_thumb)) {
+                    // LOAD LIBRARY
+                    $this->load->library('image_lib');
 
-					// CONFIGURE IMAGE LIBRARY
-					$config['image_library'] = 'gd2';
-					$config['source_image'] = $image_path;
-					$config['new_image'] = $image_thumb;
-					$config['maintain_ratio'] = TRUE;
-					$config['height'] = 390;
-					$config['width'] = 300;
-					$this->image_lib->initialize($config);
-					$this->image_lib->resize();
-					$this->image_lib->clear();
-				}
+                    // CONFIGURE IMAGE LIBRARY
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = $image_path;
+                    $config['new_image'] = $image_thumb;
+                    $config['maintain_ratio'] = TRUE;
+                    $config['height'] = 390;
+                    $config['width'] = 300;
+                    $this->image_lib->initialize($config);
+                    $this->image_lib->resize();
+                    $this->image_lib->clear();
+                }
 
-				$result['thumb2'] = $image_thumb;
-			} else {
-				$result['thumb2'] = NULL;
-			}
+                $result['thumb2'] = $image_thumb;
+            } else {
+                $result['thumb2'] = NULL;
+            }
 
             // order in the beautiful [comic][chapter][teams][page]
             $result["chapters"] = array();
@@ -183,7 +185,8 @@ class V2 extends REST_Controller {
     /**
      * chapters+pages+comic_get
      */
-    function releases_get() {
+    function releases_get()
+    {
         $chapters = new Chapter();
 
         // get the generic chapters and the comic coming with them
@@ -195,7 +198,6 @@ class V2 extends REST_Controller {
         $this->_orderby($chapters);
         // use page_to_offset function
         $this->_page_to_offset($chapters);
-
 
 
         $chapters->get();
@@ -259,7 +261,8 @@ class V2 extends REST_Controller {
      *
      * @author Woxxy
      */
-    function chapters_get() {
+    function chapters_get()
+    {
         if ($this->get('stub') && $this->get('lang')) {
             $chapter = new Chapter();
             // filter with orderby
@@ -297,7 +300,8 @@ class V2 extends REST_Controller {
      *
      * @author Woxxy
      */
-    function chapter_get() {
+    function chapter_get()
+    {
         if (($this->get('comic_stub')) || is_numeric($this->get('comic_id')) || is_numeric($this->get('volume')) || is_numeric($this->get('chapter')) || is_numeric($this->get('subchapter')) || is_numeric($this->get('team_id')) || is_numeric($this->get('joint_id'))
         ) {
             $chapter = new Chapter();
@@ -319,13 +323,12 @@ class V2 extends REST_Controller {
                 $chapter->where('team_id', $this->get('team_id'));
             if (is_numeric($this->get('joint_id')))
                 $chapter->where('joint_id', $this->get('joint_id'));
-			if (is_numeric($this->get('lang')))
+            if (is_numeric($this->get('lang')))
                 $chapter->where('language', $this->get('lang'));
 
             // and we'll still give only one result
             $chapter->limit(1)->get();
-        }
-        else {
+        } else {
             // check that the id is at least a valid number
             $this->_check_id();
 
