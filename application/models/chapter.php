@@ -1048,7 +1048,7 @@ class Chapter extends DataMapper
 
         // This part of the URL won't change for sure.
         $subchapter = $this->subchapter ? $this->subchapter : 0;
-        $this->unique_href = $this->comic->stub . '/' . $this->language . '/' . $this->volume . '/' . $this->chapter . '/' . $subchapter;
+        $this->unique_href = $this->comic->stub . '/' . $this->language . '/' . $this->volume . '/' . $this->chapter . '.' . $subchapter;
 
         return $this->unique_href;
     }
