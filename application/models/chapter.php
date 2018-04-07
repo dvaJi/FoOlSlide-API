@@ -1012,7 +1012,7 @@ class Chapter extends DataMapper
      */
     public function href()
     {
-        return $this->config->item('READERFRONT_URL') . $this->unique_href();
+        return $this->config->item('READERFRONT_URL') . 'read/' . $this->unique_href();
     }
 
 
