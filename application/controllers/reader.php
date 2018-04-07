@@ -97,10 +97,6 @@ class Reader extends Public_Controller
                 $result['chapters'][$key]['thumb'] = $chapter->comic->get_thumb();
                 $result['chapters'][$key]['href'] = $chapter->href();
                 $result['chapters'][$key]['created'] = $chapter->created;
-                $chapter->get_teams();
-                foreach ($chapter->teams as $item) {
-                    $result['chapters'][$key]['teams'] = implode(' | ', $item->to_array());
-                }
             }
         } else
             show_404();
