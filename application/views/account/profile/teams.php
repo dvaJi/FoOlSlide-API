@@ -68,7 +68,7 @@
 			<div style="color: red;"><?php echo form_error($team_name['name']); ?><?php echo isset($errors[$team_name['name']]) ? $errors[$team_name['name']] : ''; ?></div>
 		</div>
 		<div class="formgroup">
-			<div><?php echo form_submit(array('name' => 'submit', 'class' => 'form-control btn btn-primary'), _('Apply')); ?></div>
+			<div><?php echo form_submit('submit', _('Apply')); ?></div>
 		</div>
 		<?php
 		echo '<br/><br/>';

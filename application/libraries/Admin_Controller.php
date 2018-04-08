@@ -37,7 +37,7 @@ class Admin_Controller extends MY_Controller
 	 * Non-dynamic sidebar array.
 	 * Permissions are set inside
 	 *
-	 * @author Woxxy & chocolatkey
+	 * @author Woxxy
 	 * @return sidebar array
 	 */
 	function sidebar_val()
@@ -51,26 +51,26 @@ class Admin_Controller extends MY_Controller
 				"name" => _("Members"),
 				"level" => "member",
 				"default" => "members",
-				"icon" => "graduation-cap",
+				"icon" => 258,
 				"content" => array(
-					"members" => array("level" => "mod", "name" => _("Member List"), "icon" => "user"),
+					"members" => array("level" => "mod", "name" => _("Member List"), "icon" => 382),
 				)
 			);
 			$sidebar["preferences"] = array(
 				"name" => _("Preferences"),
 				"level" => "admin",
 				"default" => "general",
-				"icon" => "cogs",
+				"icon" => 402,
 				"content" => array(
-					"registration" => array("level" => "admin", "name" => _("Registration"), "icon" => "credit-card"),
+					"registration" => array("level" => "admin", "name" => _("Registration"), "icon" => 360),
 				)
 			);
 			$sidebar["balancer"] = array("name" => _("Load balancer"),
 				"level" => "admin",
 				"default" => "balancers",
-				"icon" => "line-chart",
+				"icon" => 255,
 				"content" => array(
-					"client" => array("level" => "admin", "name" => _("Client"), "icon" => "download"),
+					"client" => array("level" => "admin", "name" => _("Client"), "icon" => 120),
 				)
 			);
 
@@ -81,11 +81,11 @@ class Admin_Controller extends MY_Controller
 			"name" => _("Series"),
 			"level" => "mod",
 			"default" => "manage",
-			"icon" => "th-list",
+			"icon" => 146,
 			"content" => array(
-				"manage" => array("level" => "mod", "name" => _("Manage"), "icon" => "archive"),
-				"add_new" => array("level" => "mod", "name" => _("Add Series"), "icon" => "edit"),
-				"add_new_chapter" => array("level" => "mod", "name" => _("Add Chapter"), "icon" => "pencil")
+				"manage" => array("level" => "mod", "name" => _("Manage"), "icon" => 184),
+				"add_new" => array("level" => "mod", "name" => _("Add Series"), "icon" => 154),
+				"add_new_chapter" => array("level" => "mod", "name" => _("Add Chapter"), "icon" => 274)
 			)
 		);
 
@@ -115,56 +115,56 @@ class Admin_Controller extends MY_Controller
 			"name" => _("Members"),
 			"level" => "member",
 			"default" => "members",
-			"icon" => "graduation-cap",
+			"icon" => 258,
 			"content" => array(
-				"members" => array("level" => "mod", "name" => _("Member List"), "icon" => "user"),
-				"teams" => array("level" => "member", "name" => _("Team List"), "icon" => "users"),
-				"home_team" => array("level" => "member", "name" => _("Home Team"), "icon" => "home"),
-				"add_team" => array("level" => "mod", "name" => _("Add Team"), "icon" => "plus")
+				"members" => array("level" => "mod", "name" => _("Member List"), "icon" => 382),
+				"teams" => array("level" => "member", "name" => _("Team List"), "icon" => 357),
+				"home_team" => array("level" => "member", "name" => _("Home Team"), "icon" => 210),
+				"add_team" => array("level" => "mod", "name" => _("Add Team"), "icon" => 328)
 			)
 		);
 		$sidebar["preferences"] = array(
 			"name" => _("Preferences"),
 			"level" => "admin",
 			"default" => "general",
-			"icon" => "cogs",
+			"icon" => 402,
 			"content" => array(
-				"general" => array("level" => "admin", "name" => _("General"), "icon" => "cog"),
-				"reader" => array("level" => "admin", "name" => _("Reader"), "icon" => "book"),
-				"theme" => array("level" => "admin", "name" => _("Theme"), "icon" => "eye"),
-				"slideshow" => array("level" => "admin", "name" => _("Slideshow"), "icon" => "camera-retro"),
-				"registration" => array("level" => "admin", "name" => _("Registration"), "icon" => "credit-card"),
-				"advertising" => array("level" => "admin", "name" => _("Advertising"), "icon" => "puzzle-piece"),
+				"general" => array("level" => "admin", "name" => _("General"), "icon" => 147),
+				"reader" => array("level" => "admin", "name" => _("Reader"), "icon" => 118),
+				"theme" => array("level" => "admin", "name" => _("Theme"), "icon" => 176),
+				"slideshow" => array("level" => "admin", "name" => _("Slideshow"), "icon" => 113),
+				"registration" => array("level" => "admin", "name" => _("Registration"), "icon" => 360),
+				"advertising" => array("level" => "admin", "name" => _("Advertising"), "icon" => 285),
 			)
 		);
 		$sidebar["balancer"] = array("name" => _("Load Balancer"),
 			"level" => "admin",
 			"default" => "balancers",
-			"icon" => "line-chart",
+			"icon" => 255,
 			"content" => array(
-				"balancers" => array("level" => "admin", "name" => _("Master"), "icon" => "upload"),
-				"client" => array("level" => "admin", "name" => _("Client"), "icon" => "download"),
+				"balancers" => array("level" => "admin", "name" => _("Master"), "icon" => 121),
+				"client" => array("level" => "admin", "name" => _("Client"), "icon" => 120),
 			)
 		);
 		$sidebar["system"] = array("name" => _("System"),
 			"level" => "admin",
 			"default" => "system",
-			"icon" => "server",
+			"icon" => 248,
 			"content" => array(
-				"information" => array("level" => "admin", "name" => _("Information"), "icon" => "info"),
-				"tools" => array("level" => "admin", "name" => _("Tools"), "icon" => "wrench"),
-				"upgrade" => array("level" => "admin", "name" => _("Upgrade") . ((get_setting('fs_cron_autoupgrade_version') && version_compare(FOOLSLIDE_VERSION, get_setting('fs_cron_autoupgrade_version')) < 0) ? ' <span class="label label-success">' . _('New') . '</span>' : ''), "icon" => "cloud-upload"),
+				"information" => array("level" => "admin", "name" => _("Information"), "icon" => 150),
+				"tools" => array("level" => "admin", "name" => _("Tools"), "icon" => 351),
+				"upgrade" => array("level" => "admin", "name" => _("Upgrade") . ((get_setting('fs_cron_autoupgrade_version') && version_compare(FOOLSLIDE_VERSION, get_setting('fs_cron_autoupgrade_version')) < 0) ? ' <span class="label success">' . _('New') . '</span>' : ''), "icon" => 353),
 			)
 		);
 
 		$sidebar["meta"] = array("name" => "Meta", // no gettext because meta must be meta
 			"level" => "member",
 			"default" => "http://blog.foolz.us",
-			"icon" => "comments",
+			"icon" => 423,
 			"content" => array(
-				"http://archive.foolz.us/dev/" => array("level" => "member", "name" => _("Developer Community"), "icon" => "comments-o"),
-				"http://chocolatkey.com" => array("level" => "member", "name" => _("Developer Site"), "icon" => "building"),
-				"http://github.com/chocolatkey/" => array("level" => "member", "name" => _("Chocolatkey Github"), "icon" => "github"),
+				"http://archive.foolz.us/dev/" => array("level" => "member", "name" => _("Developer Community"), "icon" => 356),
+				"http://www.foolz.us" => array("level" => "member", "name" => _("Developer Site"), "icon" => 390),
+				"http://github.com/FoolCode/" => array("level" => "member", "name" => _("FoolCode GitHub"), "icon" => 154),
 			)
 		);
 
@@ -173,10 +173,9 @@ class Admin_Controller extends MY_Controller
 
 
 	/*
-	 * Returns the topnavbar code
+	 * Returns the sidebar code
 	 *
 	 * @todo comment this
-     * @author chocolatkey
 	 */
 	public function sidebar()
 	{
@@ -195,9 +194,8 @@ class Admin_Controller extends MY_Controller
 				$active = FALSE;
 			if (($this->tank_auth->is_admin() || $this->tank_auth->is_group($item["level"])) && !empty($item))
 			{
-				$result .= '<li class="dropdown ' . ($active ? 'active' : '') . '">';
-                $result .= '<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="' . ((substr($item["default"], 0, 7) == 'http://') ? $item["default"] : site_url(array("admin", $key, $item["default"]))) . '" ' . ((substr($item["default"], 0, 7) == 'http://') ? 'target="_blank"' : '') . '><i class="fa fa-' . $item['icon'] . '""></i> ' . $item["name"] . ' <span class="caret"></span></a>';
-				$result .= '<ul class="dropdown-menu">';
+				$result .= '<h5><a href="' . ((substr($item["default"], 0, 7) == 'http://') ? $item["default"] : site_url(array("admin", $key, $item["default"]))) . '" ' . ((substr($item["default"], 0, 7) == 'http://') ? 'target="_blank"' : '') . '><img src="' . icons($item['icon']) . '" class="icon">' . $item["name"] . '</a></h5>';
+				$result .= '<ul class="sidebar">';
 				foreach ($item["content"] as $subkey => $subitem)
 				{
 					if ($active && $this->uri->segment(3) == $subkey)
@@ -208,10 +206,10 @@ class Admin_Controller extends MY_Controller
 					{
 						//if($subitem["name"] == $_GET["location"]) $is_active = " active"; else $is_active = "";
 						$is_active = "";
-						$result .= '<li class="' . ($subactive ? 'active' : '') . '"><a href="' . ((substr($subkey, 0, 7) == 'http://') ? $subkey : site_url(array("admin", $key, $subkey))) . '"  ' . ((substr($subkey, 0, 7) == 'http://') ? 'target="_blank"' : '') . '><i class="fa fa-' . $subitem['icon'] . '""></i> ' . $subitem["name"] . '</a></li>';
+						$result .= '<li class="' . ($subactive ? 'active' : '') . '"><a href="' . ((substr($subkey, 0, 7) == 'http://') ? $subkey : site_url(array("admin", $key, $subkey))) . '"  ' . ((substr($subkey, 0, 7) == 'http://') ? 'target="_blank"' : '') . '><img src="' . icons($subitem['icon'], 16) . '" class="icon icon-small">' . $subitem["name"] . '</a></li>';
 					}
 				}
-				$result .= '</ul></li>';
+				$result .= '</ul>';
 			}
 		}
 		return $result;

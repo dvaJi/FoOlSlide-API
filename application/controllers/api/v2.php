@@ -194,6 +194,8 @@ class V2 extends REST_Controller
             $chapters->where('language', $this->get('lang'));
         }
 
+        $chapters->where('hidden', 0);
+
         // filter with orderby
         $this->_orderby($chapters);
         // use page_to_offset function
@@ -211,9 +213,7 @@ class V2 extends REST_Controller
                 $result['chapters'][$key]['comic'] = $chapter->comic->to_array();
                 $result['chapters'][$key]['chapter'] = $chapter->to_array();
 
-                // TODO: SOLO OBTENER LA PÁGINA NECESARIA.
                 $pages = $chapter->get_pages();
-                //$result['chapters'][$key]['pages'] = $chapter->get_pages();
 
                 $comicDir = $this->READER_PATH . $chapter->comic->stub . "_" . $chapter->comic->uniqid . "/";
 

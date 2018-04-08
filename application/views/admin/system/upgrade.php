@@ -14,8 +14,7 @@ if ($new_versions)
 			'plug' => _('Do you really want to upgrade to the latest version?'),
 			'rel' => 'popover-below',
 			'title' => _('Automatic Upgrade'),
-			'data-content' => _('This will upgrade your FoOlSlide installation to the latest version.').' The default theme and any changes to system files WILL BE OVERWRITTEN!',
-            'class' => "btn-success"
+			'data-content' => _('This will upgrade your FoOlSlide installation to the latest version.')
 		);
 	}
 
@@ -24,8 +23,7 @@ if ($new_versions)
 		'href' => $new_versions[0]->download,
 		'rel' => 'popover-left',
 		'title' => _('Download'),
-		'data-content' => _('This allows you to download the latest FoOlSlide package to re-install or update your installation manually.'),
-        'class' => "btn-primary"
+		'data-content' => _('This allows you to download the latest FoOlSlide package to re-install or update your installation manually.')
 	);
 }
 
@@ -39,24 +37,25 @@ if (!$new_versions)
 			'plug' => _('Do you really want to re-install FoOlSlide?'),
 			'rel' => 'popover-left',
 			'title' => _('Download'),
-			'data-content' => _('This will re-install FoOlslide automatically and repair any broken files during the process.'),
-            'class' => "btn-warning"
+			'data-content' => _('This will re-install FoOlslide automatically and repair any broken files during the process.')
 		);
 	}
 }
 ?>
 <div class="table" style="padding-bottom: 10px">
-    <div class="cont">
-        <h3 style="float: left"><?php echo _('Upgrade'); ?></h3>
-        <span style="float: right; padding: 15px"><?php echo buttoner(); ?></span>
-    </div>
+	<h3 style="float: left"><?php echo _('Upgrade'); ?></h3>
+	<span style="float: right; padding: 5px"><?php echo buttoner(); ?></span>
+	<hr class="clear"/>
 	<?php
 	echo _('Current Version') . ': ' . $current_version . '<br/>';
 	echo ($new_versions ? _('Latest Version Available') . ': ' . ($new_versions[0]->version . '.' . $new_versions[0]->subversion . '.' . $new_versions[0]->subsubversion) : _('You have the latest version of FoOlSlide.')) . '<br/><br/>';
-    if (in_array(strtolower(PHP_OS), array("win32", "windows", "winnt"))) {
-        echo '<span style="color:#F00;">You are running Windows, automatic upgrades not supported</span>';
-    }
 	?>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.transifex.net/projects/p/foolslide/resource/defaultpot/chart/inc_js/"></script>
+	<div id="transifex_chart" style="text-align: center">Loading chart...<br/></div>
+	<div class="help-inline"><?php echo sprintf(_('Note: If you\'re fluent in another language, please help contribute by translating our software into your language with %s. All localization updates of FoOlSlide is normally available within 48 hours.'), '<a href="https://www.transifex.net" rel="twipsy" title="' . _('A web based portal for translations.') . '">Transifex</a>'); ?></div><br/>
+<?php echo _('This chart provides information regarding the percentage of localized strings completed in another language. If you\'re using FoOlSlide relying on language localization, please check our <a href="https://www.transifex.net/projects/p/foolslide/resource/defaultpot/">Transifex translation project</a> for this software and ensure that it is above 90% before proceeding with an upgrade.'); ?>
+
 </div>
 
 <br/>

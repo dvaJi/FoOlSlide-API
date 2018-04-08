@@ -32,22 +32,22 @@
 				foreach ($balancers as $key => $item)
 				{
 					echo '<tr>
-						<td>'.form_input(array('class' => 'form-control', 'name' => 'url[]'), $item["url"]).'</td>
+						<td>'.form_input('url[]', $item["url"]).'</td>
 						<td width="140px">
-							<div class="input-group">
-								<input class="form-control" type="number" name="priority[]" min="0" max="100" value="'.form_prep($item["priority"]).'" />
-                                <span class="input-group-addon">%</span>
+							<div class="input-append">
+								<input style="text-align: right; width: 100px" type="number" name="priority[]" min="0" max="100" value="'.form_prep($item["priority"]).'" />
+								<span class="add-on">%</span>
 							</div>
 						</td>';
 					echo '</tr>';
 				}
 				$url["value"] = "";
 					echo '<tr>
-						<td>'.form_input(array('class' => 'form-control', 'name' => 'url[]')).'</td>
+						<td>'.form_input('url[]').'</td>
 						<td width="140px">
-							<div class="input-group">
-								<input class="form-control" type="number" name="priority[]" min="0" max="100" value="0" />
-								<span class="input-group-addon">%</span>
+							<div class="input-append">
+								<input style="text-align: right; width: 100px" type="number" name="priority[]" min="0" max="100" value="0" />
+								<span class="add-on">%</span>
 							</div>
 						</td>';
 					echo '</tr>';
@@ -55,9 +55,9 @@
 			</tbody>
 		</table>
 	<?php
-		echo form_submit(array('class' => 'btn btn-primary', 'name' => 'submit'), _("Add/Save"));
+		echo form_submit('submit', _("Add/Save"));
 		echo form_close();
-		echo('<hr />');
+		
 		$form = array();
 		$form[] = array(
 			_('IPs of Load Balancing Servers'),
@@ -70,7 +70,7 @@
 		);
 		echo form_open('', array('class' => 'form-stacked'));
 		echo tabler($form, FALSE, TRUE);
-		echo form_close();      
+		echo form_close();
 	?>
 	</div>
 </div>
