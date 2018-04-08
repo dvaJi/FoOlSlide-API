@@ -1,0 +1,25 @@
+{
+  "name": "readerfront-api",
+  "version": "2.5.0",
+  "description": "ReaderFront-API",
+  "main": "index.php",
+  "scripts": {
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dvaJi/ReaderFront-API.git"
+  },
+  "keywords": [
+    "readerfront",
+    "manga",
+    "scanlator",
+    "php"
+  ],
+  "author": "dvaJi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dvaJi/ReaderFront-API/issues"
+  },
+  "homepage": "https://github.com/dvaJi/ReaderFront-API#readme"
+}
