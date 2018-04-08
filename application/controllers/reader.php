@@ -71,12 +71,12 @@ class Reader extends Public_Controller
 
     function feeds($format = NULL, $unlimited = FALSE, $lang = 'es')
     {
-        //if (is_null($format))
-        //	redirect('feeds/rss');
         $this->load->helper('xml');
         $chapters = new Chapter();
 
         $chapters->where('language', $lang);
+
+        $chapters->where('hidden', 0);
 
         // filter with orderby
         $chapters->order_by('created', 'DESC');

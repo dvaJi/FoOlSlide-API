@@ -4,8 +4,6 @@
 		'name' => 'password',
 		'id' => 'password',
 		'size' => 30,
-        'required' => 'required',
-        'class' => 'form-control'
 	);
 	$email = array(
 		'name' => 'email',
@@ -13,8 +11,6 @@
 		'value' => set_value('email'),
 		'maxlength' => 80,
 		'size' => 30,
-        'required' => 'required',
-        'class' => 'form-control'
 	);
 	?>
 	<?php echo form_open($this->uri->uri_string()); ?>
@@ -30,11 +26,11 @@
 	</div>
 	<div class="formgroup">
 		<div>
-			<?php echo form_submit(array('name' => 'change', 'class' => 'form-control btn btn-primary'), 'Send confirmation email'); ?>
+			<?php echo form_submit('change', 'Send confirmation email'); ?>
 		</div>
 	</div>
 	<?php echo form_close(); ?>
 
-	<a href="<?php echo site_url('/account/profile/') ?>" class="btn btn-warning"><?php echo _("Back to profile") ?></a>
+	<a href="<?php echo site_url('/account/profile/') ?>" class="button yellow"><?php echo _("Back to profile") ?></a>
 
 </div>

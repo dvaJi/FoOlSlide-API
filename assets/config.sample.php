@@ -31,7 +31,7 @@ $db['default']['dbprefix'] = 'fs_';
 // Session encryption: just tap randomly on your keyboard to make a random key
 $config['encryption_key'] = '';
 
-
+$config['READERFRONT_URL'] = '/';
 
 
 // Leave this alone, it's an automation

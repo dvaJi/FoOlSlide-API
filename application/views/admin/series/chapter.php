@@ -2,19 +2,19 @@
 $this->buttoner[] = array(
 	'text' => _('Delete chapter'),
 	'href' => site_url('/admin/series/delete/chapter/' . $chapter->id),
-	'plug' => _('Do you really want to delete this chapter and its pages?'),
-    'class' => 'btn-danger'
+	'plug' => _('Do you really want to delete this chapter and its pages?')
 );
 
 $this->buttoner[] = array(
 	'text' => _('Read chapter'),
-	'href' => $chapter->href(),
-    'class' => 'btn-success'
+	'href' => $chapter->href()
 );
 ?>
 
 <div class="table">
-	<h3><?php echo _('Chapter Information'); ?> <?php echo buttoner(); ?></h3>
+	<h3 style="float: left"><?php echo _('Chapter Information'); ?></h3>
+	<span style="float: right; padding: 5px"><?php echo buttoner(); ?></span>
+	<hr class="clear"/>
 	<?php
 		echo form_open('', array('class' => 'form-stacked'));
 		echo $table;
@@ -33,7 +33,8 @@ $this->buttoner[] = array(
 		<div class="fileupload-buttonbar">
 			<?php echo form_open_multipart("", array('style' => 'margin-bottom:0px;')); ?>
 			<label class="fileinput-button">
-				Browse <input type="file" name="Filedata[]" multiple>
+				<span><?php echo _("Add files...") ?></span>
+				<input type="file" name="Filedata[]" multiple>
 			</label>
 			<button type="submit" class="start"><?php echo _("Start upload") ?></button>
 			<button type="reset" class="cancel"><?php echo _("Cancel upload") ?></button>
@@ -41,7 +42,7 @@ $this->buttoner[] = array(
 			<?php echo form_close(); ?>
 		</div>
 		<div class="fileupload-content">
-			<table class="table files table-striped"></table>
+			<table class="files zebra-striped"></table>
 			<div class="fileupload-progressbar"></div>
 		</div>
 	</div>

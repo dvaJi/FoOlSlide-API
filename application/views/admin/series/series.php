@@ -2,8 +2,7 @@
 $this->buttoner[] = array(
 	'text' => _('Delete Series'),
 	'href' => site_url('/admin/series/delete/serie/'.$comic->id),
-	'plug' => _('Do you really want to delete this series and its chapters?'),
-    'class' => "btn-danger"
+	'plug' => _('Do you really want to delete this series and its chapters?')
 );
 ?>
 <?php
@@ -13,7 +12,9 @@ $this->buttoner[] = array(
 );
 ?>
 <div class="table">
-    <h3><?php echo _('Series Information'); ?> <?php echo buttoner(); ?></h3>
+	<h3 style="float: left"><?php echo _('Series Information'); ?></h3>
+	<span style="float: right; padding: 5px"><?php echo buttoner(); ?></span>
+	<hr class="clear"/>
 	<?php
 		echo form_open_multipart("", array('class' => 'form-stacked'));
 		echo $table;
@@ -27,8 +28,7 @@ $this->buttoner[] = array(
 	$this->buttoner = array(
 		array(
 			'href' => site_url('/admin/series/add_new/'.$comic->stub),
-			'text' => _('Add Chapter'),
-            'class' => "btn-success"
+			'text' => _('Add Chapter')
 		)
 	);
 
@@ -41,7 +41,9 @@ $this->buttoner[] = array(
 	}
 ?>
 <div class="table" style="padding-bottom: 15px">
-	<h3><?php echo _('Chapters'); ?> <?php echo buttoner(); ?></h3>
+	<h3 style="float: left"><?php echo _('Chapters'); ?></h3>
+	<span style="float: right; padding: 5px"><?php echo buttoner(); ?></span>
+	<hr class="clear">
 	<div class="list chapters">
 	<?php
 		foreach ($chapters as $item)

@@ -46,7 +46,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 */
 
 define('FOOLSLIDE_VERSION', '2.5.0');
-define('GITHUB_REPO', 'dvaJi/FoOlSlide');// Github repository to get updates from
+define('GITHUB_REPO', 'dvaJi/ReaderFront-API');// Github repository to get updates from
 define('FORCE_SSL', false);// Can be buggy when reverse proxying etc.
 
 

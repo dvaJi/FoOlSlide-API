@@ -1,6 +1,14 @@
 <div class="incontent login">
 	<?php
-    if ($login_by_username AND $login_by_email)
+	$login = array(
+		'name' => 'login',
+		'id' => 'login',
+		'value' => set_value('login'),
+		'maxlength' => 80,
+		'size' => 30,
+		'placeholder' => _('required')
+	);
+	if ($login_by_username AND $login_by_email)
 	{
 		$login_label = _('Email or username');
 	}
@@ -12,52 +20,37 @@
 	{
 		$login_label = _('Email');
 	}
-	$login = array(
-		'name' => 'login',
-		'id' => 'login',
-		'value' => set_value('login'),
-		'maxlength' => 80,
-		'size' => 30,
-		'placeholder' => $login_label,
-        'class' => 'form-control',
-        'required' => 'required',
-        'aria-describedby' => 'uadd'
-	);
 	$password = array(
 		'name' => 'password',
 		'id' => 'password',
 		'size' => 30,
-		'placeholder' => 'Password',
-        'class' => 'form-control',
-        'required' => 'required',
-        'aria-describedby' => 'padd'
+		'placeholder' => _('required')
 	);
 	$remember = array(
 		'name' => 'remember',
 		'id' => 'remember',
 		'value' => 1,
-		'checked' => set_value('remember')
+		'checked' => set_value('remember'),
 	);
 	$captcha = array(
 		'name' => 'captcha',
 		'id' => 'captcha',
-        'class' => 'form-control',
-		'maxlength' => 8
+		'maxlength' => 8,
 	);
 	?>
 	<?php echo form_open($this->uri->uri_string()); ?>
 
-	<div class="input-group">
-    <span class="input-group-addon" id="uadd"><i class="fa fa-user"></i></span>
-		<?php echo form_input($login); ?>
+	<div class="formgroup">
+		<div><?php echo form_label($login_label, $login['id']); ?></div>
+		<div><?php echo form_input($login); ?></div>
+		<div style="color: red;"><?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? $errors[$login['name']] : ''; ?></div>
 	</div>
-    <?php echo form_error($login['name']); ?><?php echo isset($errors[$login['name']]) ? '<div class="alert alert-danger" role="alert">'.$errors[$login['name']].'</div>' : ''; ?>
 
-	<div class="input-group">
-        <span class="input-group-addon" id="padd" style="max-width: 36px;"><i class="fa fa-key"></i></span>
-		<?php echo form_password($password); ?>
+	<div class="formgroup">
+		<div><?php echo form_label('Password', $password['id']); ?></div>
+		<div><?php echo form_password($password); ?></div>
+		<div style="color: red;"><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']]) ? $errors[$password['name']] : ''; ?></div>
 	</div>
-    <?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']]) ? '<div class="alert alert-danger" role="alert">'.$errors[$password['name']].'</div>' : ''; ?>
 
 	<?php
 	if ($show_captcha)
@@ -80,7 +73,7 @@
 					<div class="recaptcha_only_if_image">Enter the words above</div>
 					<div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
 				</td>
-				<td><input type="text" class="form-control" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
+				<td><input type="text" id="recaptcha_response_field" name="recaptcha_response_field" /></td>
 				<td style="color: red;"><?php echo form_error('recaptcha_response_field'); ?></td>
 				<?php echo $recaptcha_html; ?>
 			</tr>
@@ -108,7 +101,7 @@
 		</div>
 	</div>
 	<div class="formgroup">
-		<div><?php echo form_submit(array('name' => 'submit', 'class' => 'form-control btn btn-success'), _('Login')); ?></div>
+		<div><?php echo form_submit('submit', _('Login')); ?></div>
 	</div>
 </table>
 <?php echo form_close(); ?>
@@ -116,12 +109,12 @@
 <table>
 	<tr>
 		<td>
-			<a href="<?php echo site_url('/account/auth/forgot_password/') ?>" class="btn btn-warning form-control"><?php echo _("Forgot password") ?></a>
+			<a href="<?php echo site_url('/account/auth/forgot_password/') ?>" class="button yellow"><?php echo _("Forgot password") ?></a>
 		</td>
 		<?php
 		if ($this->config->item('allow_registration', 'tank_auth'))
 		{
-			echo '<td><a href="' . site_url('/account/auth/register/') . '" class="btn btn-primary form-control">' . _("Register") . '</a></td>';
+			echo '<td><a href="' . site_url('/account/auth/register/') . '" class="button">' . _("Register") . '</a></td>';
 		}
 		?>
 	</tr>

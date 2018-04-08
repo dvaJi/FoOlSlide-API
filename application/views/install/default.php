@@ -1,32 +1,18 @@
-<?php
-$muhSSL = false;
-if(isset( $_SERVER["HTTPS"] ) && strtolower( $_SERVER["HTTPS"] ) == "on")
-{
-    $muhSSL = true;
-}
-else
-{
-    if(FORCE_SSL)
-    {
-        header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-        exit();
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Installing FoOlSlide</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/admin/style.css" />
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/bootstrap/style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/admin/style.css" />
 		<style type="text/css">
 			body {
 				padding-top: 60px;
 			}
 		</style>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.min.js"></script>
-		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/js/jquery.js"></script>
+		<script type="text/javascript" src="<?php echo site_url() ?>assets/bootstrap/bootstrap.js"></script>
 		<script type="text/javascript">
 			function slideDown(item) { jQuery(item).slideDown(); }
 			function slideUp(item) { jQuery(item).slideUp(); }
@@ -101,6 +87,7 @@ else
 				jQuery(":input:first").focus(); // Focus on first input generated
 				
 				// Bootstrap jQuery
+				jQuery("a[rel=twipsy]").twipsy({ live: true });
 				jQuery("a[rel^='popover']").each(function() {
 					var direction = $(this).attr('rel').replace("popover-", "");
 					$(this).popover({ offset: 10, placement: direction });
@@ -111,14 +98,13 @@ else
 	</head>
 	
 	<body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <a class="navbar-brand" href="/">FoOlSlide 2</a>
-                </div>
-            </div>
-		</nav>
+		<div class="topbar" data-dropdown="dropdown">
+			<div class="topbar-inner">
+				<div class="container-fluid">
+					<a class="brand" href="#">Installing FoOlSlide</a>
+				</div>
+			</div>
+		</div>
 		
 		<div class="container-fluid">
 			
@@ -144,14 +130,10 @@ else
 				
 				<div class="alerts">
 					<?php
-                        if(!$muhSSL)
-                        {
-                            echo '<div class="alert alert-warning"><i class="fa fa-unlock-alt" aria-hidden="true"></i> '._("Potentially insecure connection, data could be intercepted.").'</div>';
-                        }
 						if (isset($this->notices))
 							foreach ($this->notices as $key => $value)
 							{
-								echo '<div class="alert alert-' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
+								echo '<div class="alert-message ' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
 							}
 						if (isset($this->tank_auth))
 						{
@@ -159,7 +141,7 @@ else
 							if (!empty($flashdata))
 								foreach ($flashdata as $key => $value)
 								{
-									echo '<div class="alert alert-' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
+									echo '<div class="alert-message ' . $value["type"] . ' fade in" data-alert="alert"><a class="close" href="#">&times;</a><p>' . $value["message"] . '</p></div>';
 								}
 						}
 					?>
@@ -169,24 +151,24 @@ else
 			</div>
 		</div>
 		
+		<footer style="position: relative; bottom: 0px; width: 100%">
+			<p style="padding-left: 20px;">FoOlSlide Install</p>
+		</footer>
+		
 		<!-- Modal Container for Admin Panel -->
-		<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 id="modal-text-head">Warning!</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p id="modal-text-desc"></p>
-                        <div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>assets/js/images/loader-18.gif"/></div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" id="modal-btn-no" class="btn btn-danger"><?php echo _('No'); ?></a>
-                        <a href="#" id="modal-btn-yes" class="btn btn-success"><?php echo _('Yes'); ?></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div id="modal-container" class="modal hide fade">
+			<div class="modal-header">
+				<a href="#" class="close">&times;</a>
+				<h3 id="modal-text-head">Warning!</h3>
+			</div>
+			<div class="modal-body">
+				<p id="modal-text-desc"></p>
+				<div id="modal-loading" class="loading"><img src="<?php echo site_url() ?>assets/js/images/loader-18.gif"/></div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" id="modal-btn-no" class="btn primary"><?php echo _('No'); ?></a>
+				<a href="#" id="modal-btn-yes" class="btn secondary"><?php echo _('Yes'); ?></a>
+			</div>
+		</div>
 	</body>
 </html>

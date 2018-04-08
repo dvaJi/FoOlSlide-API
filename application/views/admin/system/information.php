@@ -1,16 +1,11 @@
 <?php if (!defined('BASEPATH'))
 	exit('No direct script access allowed'); ?>
 
-<style>
-.table {
-    width: inherit;
-}
-</style>
 <div class="table">
-    <div class="cont">
-        <?php if (isset($form_title))
-            echo '<h3 style="float: left">' . $form_title; ?><a href="#" class="btn" data-toggle="modal" data-target="#modal-for-information"><?php echo _('Output Server Information'); ?></a></h3>
-    </div>
+	<?php if (isset($form_title))
+		echo '<h3 style="float: left">' . $form_title . '</h3>'; ?>
+	<span style="float: right; padding: 5px"><a href="#" class="btn" data-keyboard="true" data-backdrop="true" data-controls-modal="modal-for-information"><?php echo _('Output Server Information'); ?></a></span>
+	<hr class="clear"/>
 	<div style="margin-right: 10px; padding-bottom: 10px">
 		<?php
 		// name = non-localized for developers
@@ -200,14 +195,14 @@
 			echo '<h4>' . $item['title'] . '</h4>';
 			if (isset($item['text']))
 				echo '<p>' . $item['text'] . '</p>';
-			echo '<div class="table-responsive"><table class="table table-striped table-bordered"><tbody>';
+			echo '<table class="zebra-striped fixed-table"><tbody>';
 			foreach ($item['data'] as $subkey => $subitem)
 			{
-				$tooltip = (isset($subitem['text']) && $subitem['text'] != "") ? '<a rel="popover-right" href="#" data-content="' . htmlspecialchars($subitem['text']) . '" data-original-title="' . htmlspecialchars($subitem['title']) . '"><i class="fa fa-info-circle"></i></a>' : '';
-				$tooltip2 = (isset($subitem['alert']) && $subitem['alert']['text'] != "" && $subitem['alert']['if']) ? '<span class="text-danger ' . $subitem['alert']['type'] . '">' . _(isset($subitem['alert']['type_text'])?$subitem['alert']['type_text']:$subitem['alert']['type']) . '</span> <a rel="popover-right" href="#" data-content="' . htmlspecialchars($subitem['alert']['text']) . '" data-original-title="' . htmlspecialchars($subitem['alert']['title']) . '"><i class="fa fa-info-circle"></i></a>' : '';
+				$tooltip = (isset($subitem['text']) && $subitem['text'] != "") ? '<a rel="popover-right" href="#" data-content="' . htmlspecialchars($subitem['text']) . '" data-original-title="' . htmlspecialchars($subitem['title']) . '"><img src="' . icons(219, 16) . '" class="icon icon-small"></a>' : '';
+				$tooltip2 = (isset($subitem['alert']) && $subitem['alert']['text'] != "" && $subitem['alert']['if']) ? '<span class="label ' . $subitem['alert']['type'] . '">' . _(isset($subitem['alert']['type_text'])?$subitem['alert']['type_text']:$subitem['alert']['type']) . '</span><a rel="popover-right" href="#" data-content="' . htmlspecialchars($subitem['alert']['text']) . '" data-original-title="' . htmlspecialchars($subitem['alert']['title']) . '"><img src="' . icons(388, 16) . '" class="icon icon-small"></a>' : '';
 				echo '<tr><td>' . $subitem['title'] . ' ' . $tooltip . '</td><td>' . $subitem['value'] . ' ' . $tooltip2 . '</td></tr>';
 			}
-			echo '</tbody></table></div>';
+			echo '</tbody></table>';
 		}
 		?>
 
@@ -215,39 +210,36 @@
 	</div>
 </div>
 
-<div id="modal-for-information" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h3 id="modal-text-head"><?php echo _('System Information'); ?></h3>
-            </div>
-            <div class="modal-body">
-                <textarea id="server-information-output" class="form-control" style="min-height: 300px; font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace !important" readonly="readonly"><?php
-                foreach ($information as $key => $item)
-                {
-                    echo $item['name'] . "\n";
-                    echo "------------------------------\n";
-                    foreach ($item['data'] as $subkey => $subitem)
-                    {
-                        echo $subitem['name'] . ' = ' . $subitem['value'] . "\n";
-                    }
-                    echo "\n";
-                }
-                echo 'Report Generated: ' . date(DATE_RFC822) . "\n";
-                ?></textarea>
-            </div>
-            <div class="modal-footer">
-                <?php
-                if (function_exists('curl_init'))
-                {
-                    echo '<center><a class="btn btn-primary" style="float: none" href="#" onclick="return pasteSystemInfo();">' . _('Pastebin It!') . '</a></center>';
-                }
-                ?>
-            </div>
-        </div>
-    </div>
+<div id="modal-for-information" class="modal hide fade" style="display: none">
+	<div class="modal-header">
+		<a class="close" href="#">&times;</a>
+		<h3><?php echo _('System Information'); ?></h3>
+	</div>
+	<div class="modal-body" style="text-align: center">
+		<textarea id="server-information-output" style="min-height: 300px; font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace !important" readonly="readonly"><?php
+		foreach ($information as $key => $item)
+		{
+			echo $item['name'] . "\n";
+			echo "------------------------------\n";
+			foreach ($item['data'] as $subkey => $subitem)
+			{
+				echo $subitem['name'] . ' = ' . $subitem['value'] . "\n";
+			}
+			echo "\n";
+		}
+		echo 'Report Generated: ' . date(DATE_RFC822) . "\n";
+		?></textarea>
+	</div>
+	<div class="modal-footer">
+		<?php
+		if (function_exists('curl_init'))
+		{
+			echo '<center><a class="btn" style="float: none" href="#" onclick="return pasteSystemInfo();">' . _('Pastebin It!') . '</a></center>';
+		}
+		?>
+	</div>
 </div>
+
 <script type="text/javascript">
 
 	var pasteSystemInfo = function() {
