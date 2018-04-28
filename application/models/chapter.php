@@ -1024,7 +1024,7 @@ class Chapter extends DataMapper
      */
     public function download_href()
     {
-        return site_url('download/' . $this->unique_href());
+        return site_url('download/' . $this->unique_href_download());
     }
 
     public function download_volume_href()
@@ -1032,6 +1032,25 @@ class Chapter extends DataMapper
         return site_url('download/' . $this->unique_volume_href());
     }
 
+	public function unique_href_download()
+    {
+        // If we already used this function, no need to recalc it.
+        if (isset($this->unique_href_download))
+            return $this->unique_href_download;
+
+        // We need the comic
+        $this->get_comic();
+
+        // Identify the chapter through data, not ID. This allows us to find out if there are multiple similar chapters.
+        $chapter = new Chapter();
+        $chapter->where('comic_id', $this->comic->id)->where('volume', $this->volume)->where('chapter', $this->chapter)->where('language', $this->language)->where('subchapter', $this->subchapter)->get();
+
+        // This part of the URL won't change for sure.
+        $subchapter = $this->subchapter ? $this->subchapter : 0;
+        $this->unique_href_download = $this->comic->stub . '/' . $this->language . '/' . $this->volume . '/' . $this->chapter . '/' . $subchapter;
+
+        return $this->unique_href_download;
+    }
 
     public function unique_href()
     {

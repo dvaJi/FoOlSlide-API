@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class V2 extends REST_Controller
 {
 
-    private $READER_PATH = "/lector/content/comics/";
+    private $READER_PATH = "/comics/";
 
     /**
      * Returns 100 comics from selected page
@@ -158,7 +158,7 @@ class V2 extends REST_Controller
             $result["chapters"] = array();
             $chaptersIndex = 0;
             foreach ($chapters->all as $key => $chapter) {
-                if ($chapter->language == $this->get('lang')) {
+                //if ($chapter->language == $this->get('lang')) {
                     $result['chapters'][$chaptersIndex] = $chapter->to_array();
                     $subchapter = 0;
                     if ($this->get('subchapter') == $chapter->subchapter) {
@@ -171,7 +171,7 @@ class V2 extends REST_Controller
                         $result["chapters"][$chaptersIndex]["chapter"]["pages"] = $chapter->get_pages();
                     }
                     $chaptersIndex++;
-                }
+                //}
             }
 
             // all good
