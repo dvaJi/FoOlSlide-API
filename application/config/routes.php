@@ -40,8 +40,9 @@
 
 $route['default_controller'] = "reader";
 $route['sitemap.xml'] = "reader/sitemap";
-$route['rss.xml'] = "reader/feeds";
-$route['atom.xml'] = "reader/feeds/atom";
+$route['feeds'] = "feeds";
+$route['feeds/rss.xml'] = "feeds";
+$route['feeds/atom.xml'] = "feeds/atom";
 $route['admin'] = "admin/series";
 $route['admin/series/series/(:any)'] = "admin/series/serie/$1";
 $route['admin/blog/post/(:any)'] = "admin/blog/post/$1";
