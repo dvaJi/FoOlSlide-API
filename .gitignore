@@ -1,27 +1,4 @@
-.DS_Store
-*.pyc
-.svn
-.idea
-nbproject
-Thumbs.db
-Desktop.ini
-<<<<<<< HEAD
-<<<<<<< HEAD
-.buildpath
-.project
-.settings
-config.php
-content/cache
-content/comics
-content/tags
-content/logs
-=======
-config.php
-
-content/*
->>>>>>> Initial state
-=======
-config.php
-
-content/*
->>>>>>> 971d95869a1187dd123658cca5ee25b9f66df3f3
+node_modules/
+build/
+public/images/uploads/*
+!public/images/uploads/.gitkeep
