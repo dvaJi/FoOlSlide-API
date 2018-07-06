@@ -1,15 +1,15 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLString, GraphQLInt, GraphQLList } from 'graphql';
 
 // App Imports
-import { WorkType, WorksStatusType } from "./types";
+import { WorkType, WorksStatusType } from './types';
 import {
   getAll,
   getByStub,
   getById,
-  getRelated,
+  getRandom,
   getStatusTypes
-} from "./resolvers";
+} from './resolvers';
 
 // Works All
 export const works = {
@@ -43,14 +43,13 @@ export const workById = {
   resolve: getById
 };
 
-// Works Related
-export const worksRelated = {
-  type: new GraphQLList(WorkType),
+// Random Work
+export const workRandom = {
+  type: WorkType,
   args: {
-    workId: { type: GraphQLInt },
     language: { type: GraphQLString }
   },
-  resolve: getRelated
+  resolve: getRandom
 };
 
 // Work Types

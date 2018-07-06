@@ -5,16 +5,16 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLBoolean
-} from "graphql";
+} from 'graphql';
 
 // App Imports
-import { WorkType } from "../works/types";
-import { PageType } from "../page/types";
+import { WorkType } from '../works/types';
+import { PageType } from '../page/types';
 
 // Chapter type
 const ChapterType = new GraphQLObjectType({
-  name: "chapter",
-  description: "Chapter Type",
+  name: 'chapter',
+  description: 'Chapter Type',
 
   fields: () => ({
     id: { type: GraphQLInt },

@@ -1,9 +1,9 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLString, GraphQLInt, GraphQLList } from 'graphql';
 
 // App Imports
-import { GenresType, DemographicType } from "./types";
-import { getGenresTypes, getDemographicTypes } from "./resolvers";
+import { GenresType, DemographicType } from './types';
+import { getGenresTypes, getDemographicTypes } from './resolvers';
 
 // Genres Types
 export const genresTypes = {

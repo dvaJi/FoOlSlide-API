@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // WorksGenres
 export default function(sequelize, DataTypes) {
-  let WorksGenres = sequelize.define("works_genres", {
+  let WorksGenres = sequelize.define('works_genres', {
     genreId: {
       type: DataTypes.INTEGER
     }

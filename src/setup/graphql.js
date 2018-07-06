@@ -1,14 +1,14 @@
 // Imports
-import graphqlHTTP from "express-graphql";
+import graphqlHTTP from 'express-graphql';
 
 // App Imports
-import serverConfig from "../config/server.json";
-import authentication from "./authentication";
-import schema from "./schema";
+import serverConfig from '../config/server.json';
+import authentication from './authentication';
+import schema from './schema';
 
 // Setup GraphQL
 export default function(server) {
-  console.info("SETUP - GraphQL...");
+  console.info('SETUP - GraphQL...');
 
   server.use(authentication);
 

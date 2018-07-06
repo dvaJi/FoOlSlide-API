@@ -1,6 +1,6 @@
 // Imports
-import jwt from "jsonwebtoken";
-import serverConfig from "../config/server.json";
+import jwt from 'jsonwebtoken';
+import serverConfig from '../config/server.json';
 
 // Authentication middleware
 export default function(request, response, next) {
@@ -8,10 +8,10 @@ export default function(request, response, next) {
 
   if (authToken && authToken !== null) {
     try {
-      const token = authToken.split(" ");
+      const token = authToken.split(' ');
       request.user = jwt.verify(token[1], serverConfig.secret);
     } catch (e) {
-      console.warn("Invalid token detected.");
+      console.warn('Invalid token detected.');
     }
   } else {
     request.user = {};

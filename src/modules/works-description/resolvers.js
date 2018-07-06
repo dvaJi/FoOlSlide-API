@@ -1,6 +1,6 @@
 // App Imports
-import params from "../../config/params";
-import models from "../../setup/models";
+import params from '../../config/params';
+import models from '../../setup/models';
 
 // Get worksDescription by work
 export async function getByWork(parentValue, { workId, language }) {
@@ -9,7 +9,7 @@ export async function getByWork(parentValue, { workId, language }) {
       workId: Number(workId),
       language: language
     },
-    include: [{ model: models.Works, as: "work" }]
+    include: [{ model: models.Works, as: 'work' }]
   });
 }
 
@@ -26,7 +26,7 @@ export async function create(
       description
     });
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -46,7 +46,7 @@ export async function update(
       { where: { id } }
     );
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -59,12 +59,12 @@ export async function remove(parentValue, { id }, { auth }) {
 
     if (!worksDescription) {
       // WorksDescription does not exists
-      throw new Error("The worksDescription does not exists.");
+      throw new Error('The worksDescription does not exists.');
     } else {
       return await models.WorksDescription.destroy({ where: { id } });
     }
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 

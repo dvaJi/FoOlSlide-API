@@ -1,12 +1,12 @@
 // Imports
-import { Sequelize } from "sequelize";
+import { Sequelize } from 'sequelize';
 
 // App Imports
-import { NODE_ENV } from "../config/env";
-import databaseConfig from "../config/database.json";
+import { NODE_ENV } from '../config/env';
+import databaseConfig from '../config/database.json';
 
 // Load database config
-const databaseConfigEnv = databaseConfig["development"];
+const databaseConfigEnv = databaseConfig['development'];
 
 // Create new database connection
 const connection = new Sequelize(
@@ -22,15 +22,15 @@ const connection = new Sequelize(
 );
 
 // Test connection
-console.info("SETUP - Connecting database...");
+console.info('SETUP - Connecting database...');
 
 connection
   .authenticate()
   .then(() => {
-    console.info("INFO - Database connected.");
+    console.info('INFO - Database connected.');
   })
   .catch(err => {
-    console.error("ERROR - Unable to connect to the database:", err);
+    console.error('ERROR - Unable to connect to the database:', err);
   });
 
 export default connection;

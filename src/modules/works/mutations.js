@@ -1,66 +1,61 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLBoolean } from "graphql";
+import { GraphQLString, GraphQLInt, GraphQLBoolean } from 'graphql';
 
 // App Imports
-import { WorkType } from "./types";
-import { create, update, remove } from "./resolvers";
+import { WorkType } from './types';
+import { create, update, remove } from './resolvers';
 
 // Work create
 export const workCreate = {
   type: WorkType,
   args: {
     name: {
-      name: "name",
+      name: 'name',
       type: GraphQLString
     },
 
     stub: {
-      name: "stub",
+      name: 'stub',
       type: GraphQLString
     },
 
     uniqid: {
-      name: "uniqid",
+      name: 'uniqid',
       type: GraphQLString
     },
 
     type: {
-      name: "type",
+      name: 'type',
       type: GraphQLString
     },
 
     hidden: {
-      name: "hidden",
+      name: 'hidden',
       type: GraphQLBoolean
     },
 
     demographicId: {
-      name: "demographicId",
+      name: 'demographicId',
       type: GraphQLInt
     },
 
     status: {
-      name: "status",
+      name: 'status',
       type: GraphQLInt
     },
 
     statusReason: {
-      name: "statusReason",
-      type: GraphQLString
-    },
-
-    thumbnail: {
-      name: "thumbnail",
+      name: 'statusReason',
       type: GraphQLString
     },
 
     adult: {
-      name: "adult",
+      name: 'adult',
       type: GraphQLBoolean
     },
 
     visits: {
-      name: "visits",
+      name: 'visits',
       type: GraphQLInt
     }
   },
@@ -72,62 +67,62 @@ export const workUpdate = {
   type: WorkType,
   args: {
     id: {
-      name: "id",
+      name: 'id',
       type: GraphQLInt
     },
 
     name: {
-      name: "name",
+      name: 'name',
       type: GraphQLString
     },
 
     stub: {
-      name: "stub",
+      name: 'stub',
       type: GraphQLString
     },
 
     uniqid: {
-      name: "uniqid",
+      name: 'uniqid',
       type: GraphQLString
     },
 
     type: {
-      name: "type",
+      name: 'type',
       type: GraphQLString
     },
 
     hidden: {
-      name: "hidden",
+      name: 'hidden',
       type: GraphQLBoolean
     },
 
     demographicId: {
-      name: "demographicId",
+      name: 'demographicId',
       type: GraphQLInt
     },
 
     status: {
-      name: "status",
+      name: 'status',
       type: GraphQLInt
     },
 
     statusReason: {
-      name: "statusReason",
+      name: 'statusReason',
       type: GraphQLString
     },
 
     thumbnail: {
-      name: "thumbnail",
+      name: 'thumbnail',
       type: GraphQLString
     },
 
     adult: {
-      name: "adult",
+      name: 'adult',
       type: GraphQLBoolean
     },
 
     visits: {
-      name: "visits",
+      name: 'visits',
       type: GraphQLInt
     }
   },
@@ -139,7 +134,7 @@ export const workRemove = {
   type: WorkType,
   args: {
     id: {
-      name: "id",
+      name: 'id',
       type: GraphQLInt
     }
   },

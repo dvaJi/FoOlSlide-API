@@ -1,0 +1,46 @@
+'use strict';
+
+const params = require('../config/params');
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert(
+      'works',
+      [
+        {
+          name: 'Senpai, Sore Hitokuchi Kudasai!',
+          stub: 'senpai_sore_hitokuchi_kudasai',
+          uniqid: '56ff02b19f342',
+          hidden: false,
+          type: 'Manga',
+          demographicId: params.genres.demographic.shounen.id,
+          status: params.works.status.onGoing.id,
+          statusReason: null,
+          adult: false,
+          visits: 1000,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          name: 'Caterpillar',
+          stub: 'caterpillar',
+          uniqid: '57095fed60ed1',
+          hidden: false,
+          type: 'Manga',
+          demographicId: params.genres.demographic.seinen.id,
+          status: params.works.status.onGoing.id,
+          statusReason: null,
+          adult: false,
+          visits: 5000,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ],
+      {}
+    );
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('works', null, {});
+  }
+};

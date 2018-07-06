@@ -1,9 +1,9 @@
 // Imports
-import { GraphQLInt, GraphQLString, GraphQLList } from "graphql";
+import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql';
 
 // App Imports
-import { PeopleType, PeopleRolType } from "./types";
-import { getAll, getById, getByStub, getRoles } from "./resolvers";
+import { PeopleType, PeopleRolType } from './types';
+import { getAll, getById, getByStub, getRoles } from './resolvers';
 
 // Peoples All
 export const peoples = {

@@ -1,13 +1,13 @@
 // Imports
-import { GraphQLObjectType, GraphQLString, GraphQLInt } from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 
 // App Imports
-import { WorkType } from "../works/types";
+import { WorkType } from '../works/types';
 
 // WorksDescription type
 const WorksDescriptionType = new GraphQLObjectType({
-  name: "worksDescription",
-  description: "WorksDescription Type",
+  name: 'worksDescription',
+  description: 'WorksDescription Type',
 
   fields: () => ({
     id: { type: GraphQLInt },

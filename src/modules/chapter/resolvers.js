@@ -1,17 +1,20 @@
 // App Imports
-import params from "../../config/params";
-import models from "../../setup/models";
+import params from '../../config/params';
+import models from '../../setup/models';
 
 // Get all chapters
-export async function getAll(parentValue, { language, orderBy, first, offset }) {
+export async function getAll(
+  parentValue,
+  { language, orderBy, first, offset }
+) {
   return await models.Chapter.findAll({
     where: {
       language
     },
-    order: [["id", orderBy]],
+    order: [['id', orderBy]],
     include: [
-      { model: models.Works, as: "work" },
-      { model: models.Page, as: "pages" }
+      { model: models.Works, as: 'work' },
+      { model: models.Page, as: 'pages' }
     ],
     offset: offset,
     limit: first
@@ -26,8 +29,8 @@ export async function getByWork(parentValue, { workId }) {
       language
     },
     include: [
-      { model: models.Works, as: "work" },
-      { model: models.Page, as: "pages" }
+      { model: models.Works, as: 'work' },
+      { model: models.Page, as: 'pages' }
     ]
   });
 }
@@ -65,7 +68,7 @@ export async function create(
       thumbnail
     });
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -106,7 +109,7 @@ export async function update(
       { where: { id } }
     );
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -117,12 +120,12 @@ export async function remove(parentValue, { id }, { auth }) {
 
     if (!chapter) {
       // Chapter does not exists
-      throw new Error("The chapter does not exists.");
+      throw new Error('The chapter does not exists.');
     } else {
       return await models.Chapter.destroy({ where: { id } });
     }
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 

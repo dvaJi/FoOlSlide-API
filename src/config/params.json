@@ -1,16 +1,4 @@
 {
-  "product": {
-    "types": {
-      "cloth": {
-        "id": 1,
-        "name": "Cloth"
-      },
-      "accessory": {
-        "id": 2,
-        "name": "Accessories"
-      }
-    }
-  },
   "user": {
     "roles": {
       "admin": "ADMIN",
@@ -28,6 +16,32 @@
     }
   },
   "works": {
+    "cover_type": {
+      "small_thumb": {
+        "id": 1,
+        "name": "small_thumb",
+        "width": 170,
+        "height": 240
+      },
+      "medium_thumb": {
+        "id": 2,
+        "name": "medium_thumb",
+        "width": 340,
+        "height": 500
+      },
+      "large_thumb": {
+        "id": 3,
+        "name": "large_thumb",
+        "width": 442,
+        "height": 640
+      },
+      "portrait": {
+        "id": 4,
+        "name": "portrait",
+        "width": 1900,
+        "height": 1080
+      }
+    },
     "status": {
       "onGoing": {
         "id": 1,

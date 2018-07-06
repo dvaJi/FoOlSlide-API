@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // Pages
 module.exports = function(sequelize, DataTypes) {
-  let Pages = sequelize.define("pages", {
+  let Pages = sequelize.define('pages', {
     filename: {
       type: DataTypes.STRING
     },

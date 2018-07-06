@@ -1,41 +1,41 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLBoolean } from "graphql";
+import { GraphQLString, GraphQLInt, GraphQLBoolean } from 'graphql';
 
 // App Imports
-import { PeopleType } from "./types";
-import { create, update, remove } from "./resolvers";
+import { PeopleType } from './types';
+import { create, update, remove } from './resolvers';
 
 // People create
 export const peopleCreate = {
   type: PeopleType,
   args: {
     name: {
-      name: "name",
+      name: 'name',
       type: GraphQLString,
-      description: "People name"
+      description: 'People name'
     },
     name_kanji: {
-      name: "name_kanji",
+      name: 'name_kanji',
       type: GraphQLString
     },
     stub: {
-      name: "stub",
+      name: 'stub',
       type: GraphQLString
     },
     uniqid: {
-      name: "uniqid",
+      name: 'uniqid',
       type: GraphQLString
     },
     description: {
-      name: "description",
+      name: 'description',
       type: GraphQLString
     },
     twitter: {
-      name: "twitter",
+      name: 'twitter',
       type: GraphQLString
     },
     thumbnail: {
-      name: "thumbnail",
+      name: 'thumbnail',
       type: GraphQLString
     }
   },
@@ -47,36 +47,36 @@ export const peopleUpdate = {
   type: PeopleType,
   args: {
     id: {
-      name: "id",
+      name: 'id',
       type: GraphQLInt
     },
 
     name: {
-      name: "name",
+      name: 'name',
       type: GraphQLString
     },
     name_kanji: {
-      name: "name_kanji",
+      name: 'name_kanji',
       type: GraphQLString
     },
     stub: {
-      name: "stub",
+      name: 'stub',
       type: GraphQLString
     },
     uniqid: {
-      name: "uniqid",
+      name: 'uniqid',
       type: GraphQLString
     },
     description: {
-      name: "description",
+      name: 'description',
       type: GraphQLString
     },
     twitter: {
-      name: "twitter",
+      name: 'twitter',
       type: GraphQLString
     },
     thumbnail: {
-      name: "thumbnail",
+      name: 'thumbnail',
       type: GraphQLString
     }
   },
@@ -88,7 +88,7 @@ export const peopleRemove = {
   type: PeopleType,
   args: {
     id: {
-      name: "id",
+      name: 'id',
       type: GraphQLInt
     }
   },

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // People
 module.exports = function(sequelize, DataTypes) {
-  let People = sequelize.define("peoples", {
+  let People = sequelize.define('peoples', {
     name: {
       type: DataTypes.STRING
     },

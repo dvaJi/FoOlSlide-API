@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // Chapters
 module.exports = function(sequelize, DataTypes) {
-  let Chapters = sequelize.define("chapters", {
+  let Chapters = sequelize.define('chapters', {
     chapter: {
       type: DataTypes.INTEGER
     },

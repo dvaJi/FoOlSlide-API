@@ -1,6 +1,6 @@
 // App Imports
-import params from "../../config/params";
-import models from "../../setup/models";
+import params from '../../config/params';
+import models from '../../setup/models';
 
 // Genres types
 export async function getGenresTypes() {

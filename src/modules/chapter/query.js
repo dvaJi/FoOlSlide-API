@@ -1,9 +1,9 @@
 // Imports
-import { GraphQLInt, GraphQLString, GraphQLList } from "graphql";
+import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql';
 
 // App Imports
-import { ChapterType } from "./types";
-import { getAll, getByWork } from "./resolvers";
+import { ChapterType } from './types';
+import { getAll, getByWork } from './resolvers';
 
 // Chapters All
 export const chapters = {

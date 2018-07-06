@@ -1,11 +1,11 @@
 // App Imports
-import params from "../../config/params";
-import models from "../../setup/models";
+import params from '../../config/params';
+import models from '../../setup/models';
 
 // Get all peoples
 export async function getAll(parentValue, { orderBy, first, offset }) {
   return await models.People.findAll({
-    order: [["id", orderBy]],
+    order: [['id', orderBy]],
     offset: offset,
     limit: first,
     include: [
@@ -49,7 +49,7 @@ export async function create(
       thumbnail
     });
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -73,7 +73,7 @@ export async function update(
       { where: { id } }
     );
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -84,12 +84,12 @@ export async function remove(parentValue, { id }, { auth }) {
 
     if (!people) {
       // People does not exists
-      throw new Error("The people does not exists.");
+      throw new Error('The people does not exists.');
     } else {
       return await models.People.destroy({ where: { id } });
     }
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 

@@ -4,16 +4,16 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLBoolean
-} from "graphql";
+} from 'graphql';
 
 // App Imports
-import { WorkType } from "../works/types";
-import { PeopleType } from "../people/types";
+import { WorkType } from '../works/types';
+import { PeopleType } from '../people/types';
 
 // People type
 const PeopleWorksType = new GraphQLObjectType({
-  name: "peopleWorks",
-  description: "PeopleWorks Type",
+  name: 'peopleWorks',
+  description: 'PeopleWorks Type',
 
   fields: () => ({
     id: { type: GraphQLInt },

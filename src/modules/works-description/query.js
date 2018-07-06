@@ -1,9 +1,9 @@
 // Imports
-import { GraphQLInt, GraphQLString, GraphQLList } from "graphql";
+import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql';
 
 // App Imports
-import { WorksDescriptionType } from "./types";
-import { getAll, getById, getByWork } from "./resolvers";
+import { WorksDescriptionType } from './types';
+import { getAll, getById, getByWork } from './resolvers';
 
 // WorksDescription By Work
 export const worksDescriptionsByWork = {

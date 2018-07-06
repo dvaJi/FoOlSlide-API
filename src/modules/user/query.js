@@ -1,9 +1,9 @@
 // Imports
-import { GraphQLInt, GraphQLString, GraphQLList } from "graphql";
+import { GraphQLInt, GraphQLString, GraphQLList } from 'graphql';
 
 // App Imports
-import { UserType, UserLoginType, UserGenderType } from "./types";
-import { getAll, getById, login, getGenders } from "./resolvers";
+import { UserType, UserLoginType, UserGenderType } from './types';
+import { getAll, getById, login, getGenders } from './resolvers';
 
 // All
 export const users = {
@@ -25,17 +25,17 @@ export const userLogin = {
   type: UserLoginType,
   args: {
     email: {
-      name: "email",
+      name: 'email',
       type: GraphQLString
     },
 
     password: {
-      name: "password",
+      name: 'password',
       type: GraphQLString
     },
 
     role: {
-      name: "role",
+      name: 'role',
       type: GraphQLString
     }
   },

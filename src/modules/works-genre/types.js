@@ -1,19 +1,18 @@
 // Imports
-import { GraphQLObjectType, GraphQLString, GraphQLInt } from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 
 // App Imports
-import { WorkType } from "../works/types";
+import { WorkType } from '../works/types';
 
 // WorksGenre type
 const WorksGenreType = new GraphQLObjectType({
-  name: "worksGenre",
-  description: "WorksGenre Type",
+  name: 'worksGenre',
+  description: 'WorksGenre Type',
 
   fields: () => ({
     id: { type: GraphQLInt },
     work: { type: WorkType },
-    language: { type: GraphQLString },
-    description: { type: GraphQLString },
+    genreId: { type: GraphQLInt },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString }
   })
@@ -21,8 +20,8 @@ const WorksGenreType = new GraphQLObjectType({
 
 // Genres type
 const GenresType = new GraphQLObjectType({
-  name: "genresType",
-  description: "Genres Type",
+  name: 'genresType',
+  description: 'Genres Type',
 
   fields: () => ({
     id: { type: GraphQLInt },
@@ -32,8 +31,8 @@ const GenresType = new GraphQLObjectType({
 
 // Demographic type
 const DemographicType = new GraphQLObjectType({
-  name: "demographicType",
-  description: "Demographic Type",
+  name: 'demographicType',
+  description: 'Demographic Type',
 
   fields: () => ({
     id: { type: GraphQLInt },

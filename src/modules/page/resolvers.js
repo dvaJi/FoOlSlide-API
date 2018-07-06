@@ -1,6 +1,6 @@
 // App Imports
-import params from "../../config/params";
-import models from "../../setup/models";
+import params from '../../config/params';
+import models from '../../setup/models';
 
 // Get pages by chapter
 export async function getByChapter(parentValue, { chapterId }) {
@@ -8,7 +8,7 @@ export async function getByChapter(parentValue, { chapterId }) {
     where: {
       chapterId: chapterId
     },
-    include: [{ model: models.Chapter, as: "chapter" }]
+    include: [{ model: models.Chapter, as: 'chapter' }]
   });
 }
 
@@ -29,7 +29,7 @@ export async function create(
       mime
     });
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -53,7 +53,7 @@ export async function update(
       { where: { id } }
     );
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -64,12 +64,12 @@ export async function remove(parentValue, { id }, { auth }) {
 
     if (!page) {
       // Page does not exists
-      throw new Error("The page does not exists.");
+      throw new Error('The page does not exists.');
     } else {
       return await models.Page.destroy({ where: { id } });
     }
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // PeopleWorks
 module.exports = function(sequelize, DataTypes) {
-  let PeopleWorks = sequelize.define("people_works", {
+  let PeopleWorks = sequelize.define('people_works', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,

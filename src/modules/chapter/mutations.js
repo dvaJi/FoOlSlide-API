@@ -1,66 +1,66 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLBoolean } from "graphql";
+import { GraphQLString, GraphQLInt, GraphQLBoolean } from 'graphql';
 
 // App Imports
-import { ChapterType } from "./types";
-import { create, update, remove } from "./resolvers";
+import { ChapterType } from './types';
+import { create, update, remove } from './resolvers';
 
 // Chapter create
 export const chapterCreate = {
   type: ChapterType,
   args: {
     workId: {
-      name: "workId",
+      name: 'workId',
       type: GraphQLInt
     },
-    
+
     chapter: {
-      name: "chapter",
+      name: 'chapter',
       type: GraphQLInt
     },
 
     subchapter: {
-      name: "subchapter",
+      name: 'subchapter',
       type: GraphQLInt
     },
 
     volume: {
-      name: "volume",
+      name: 'volume',
       type: GraphQLInt
     },
 
     language: {
-      name: "language",
+      name: 'language',
       type: GraphQLString
     },
 
     name: {
-      name: "name",
+      name: 'name',
       type: GraphQLString
     },
 
     stub: {
-      name: "stub",
+      name: 'stub',
       type: GraphQLString
     },
 
     uniqid: {
-      name: "uniqid",
+      name: 'uniqid',
       type: GraphQLString
     },
 
     hidden: {
-      name: "hidden",
+      name: 'hidden',
       type: GraphQLBoolean
     },
 
     description: {
-      name: "description",
+      name: 'description',
       type: GraphQLString
     },
 
     thumbnail: {
-      name: "thumbnail",
+      name: 'thumbnail',
       type: GraphQLString
     }
   },
@@ -72,62 +72,62 @@ export const chapterUpdate = {
   type: ChapterType,
   args: {
     id: {
-      name: "id",
+      name: 'id',
       type: GraphQLInt
     },
 
     workId: {
-      name: "workId",
+      name: 'workId',
       type: GraphQLInt
     },
 
     chapter: {
-      name: "chapter",
+      name: 'chapter',
       type: GraphQLInt
     },
 
     subchapter: {
-      name: "subchapter",
+      name: 'subchapter',
       type: GraphQLInt
     },
 
     volume: {
-      name: "volume",
+      name: 'volume',
       type: GraphQLInt
     },
 
     language: {
-      name: "language",
+      name: 'language',
       type: GraphQLString
     },
 
     name: {
-      name: "name",
+      name: 'name',
       type: GraphQLString
     },
 
     stub: {
-      name: "stub",
+      name: 'stub',
       type: GraphQLString
     },
 
     uniqid: {
-      name: "uniqid",
+      name: 'uniqid',
       type: GraphQLString
     },
 
     hidden: {
-      name: "hidden",
+      name: 'hidden',
       type: GraphQLBoolean
     },
 
     description: {
-      name: "description",
+      name: 'description',
       type: GraphQLString
     },
 
     thumbnail: {
-      name: "thumbnail",
+      name: 'thumbnail',
       type: GraphQLString
     }
   },
@@ -139,7 +139,7 @@ export const chapterRemove = {
   type: ChapterType,
   args: {
     id: {
-      name: "id",
+      name: 'id',
       type: GraphQLInt
     }
   },

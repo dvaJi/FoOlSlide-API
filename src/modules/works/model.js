@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 // Works
 module.exports = function(sequelize, DataTypes) {
-  let Works = sequelize.define("works", {
+  let Works = sequelize.define('works', {
     name: {
       type: DataTypes.STRING
     },
@@ -27,9 +27,6 @@ module.exports = function(sequelize, DataTypes) {
     statusReason: {
       type: DataTypes.TEXT
     },
-    thumbnail: {
-      type: DataTypes.TEXT
-    },
     adult: {
       type: DataTypes.BOOLEAN
     },
@@ -42,6 +39,8 @@ module.exports = function(sequelize, DataTypes) {
     Works.hasMany(models.Chapter);
     Works.hasMany(models.WorksDescription);
     Works.hasMany(models.PeopleWorks);
+    Works.hasMany(models.WorksCovers);
+    Works.hasMany(models.WorksGenres);
   };
 
   return Works;

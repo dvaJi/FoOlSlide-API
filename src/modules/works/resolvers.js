@@ -1,27 +1,36 @@
 // App Imports
-import params from "../../config/params";
-import models from "../../setup/models";
+import params from '../../config/params';
+import models from '../../setup/models';
 
 // Get all works
-export async function getAll(parentValue, { language, orderBy, first, offset }) {
+export async function getAll(
+  parentValue,
+  { language, orderBy, first, offset }
+) {
   return await models.Works.findAll({
-    order: [["id", orderBy]],
+    order: [['id', orderBy]],
     offset: offset,
     limit: first,
     include: [
       {
         model: models.Chapter,
-        as: "chapters",
-        include: [{ model: models.Page, as: "pages" }]
+        as: 'chapters',
+        include: [{ model: models.Page, as: 'pages' }]
       },
       {
         model: models.WorksDescription,
-        as: "works_descriptions",
+        as: 'works_descriptions',
         where: { language }
       },
       {
+        model: models.WorksCovers
+      },
+      {
+        model: models.WorksGenres
+      },
+      {
         model: models.PeopleWorks,
-        as: "people_works",
+        as: 'people_works',
         include: [{ model: models.People }]
       }
     ]
@@ -35,17 +44,23 @@ export async function getByStub(parentValue, { stub, language }) {
     include: [
       {
         model: models.Chapter,
-        as: "chapters",
-        include: [{ model: models.Page, as: "pages" }]
+        as: 'chapters',
+        include: [{ model: models.Page, as: 'pages' }]
       },
       {
         model: models.WorksDescription,
-        as: "works_descriptions",
+        as: 'works_descriptions',
         where: { language }
       },
       {
+        model: models.WorksCovers
+      },
+      {
+        model: models.WorksGenres
+      },
+      {
         model: models.PeopleWorks,
-        as: "people_works",
+        as: 'people_works',
         include: [{ model: models.People }]
       }
     ]
@@ -53,7 +68,7 @@ export async function getByStub(parentValue, { stub, language }) {
 
   if (!works) {
     // Works does not exists
-    throw new Error("The works you are looking for does not exists.");
+    throw new Error('The works you are looking for does not exists.');
   } else {
     return works;
   }
@@ -66,17 +81,23 @@ export async function getById(parentValue, { workId, language }) {
     include: [
       {
         model: models.WorksDescription,
-        as: "works_descriptions",
+        as: 'works_descriptions',
         where: { language }
       },
       {
         model: models.Chapter,
-        as: "chapters",
-        include: [{ model: models.Page, as: "pages" }]
+        as: 'chapters',
+        include: [{ model: models.Page, as: 'pages' }]
+      },
+      {
+        model: models.WorksCovers
+      },
+      {
+        model: models.WorksGenres
       },
       {
         model: models.PeopleWorks,
-        as: "people_works",
+        as: 'people_works',
         include: [{ model: models.People }]
       }
     ]
@@ -84,34 +105,37 @@ export async function getById(parentValue, { workId, language }) {
 
   if (!works) {
     // Works does not exists
-    throw new Error("The works you are looking for does not exists.");
+    throw new Error('The works you are looking for does not exists.');
   } else {
     return works;
   }
 }
 
-// Get related works
-export async function getRelated(parentValue, { workId, language }) {
-  return await models.Works.findAll({
-    where: {
-      id: { [models.Sequelize.Op.not]: workId }
-    },
-    limit: 3,
-    order: [[models.Sequelize.fn("RAND")]],
+// Get random work
+export async function getRandom(parentValue, { language }) {
+  return await models.Works.findOne({
+    limit: 1,
+    order: [[models.Sequelize.fn('RAND')]],
     include: [
       {
         model: models.WorksDescription,
-        as: "works_descriptions",
+        as: 'works_descriptions',
         where: { language }
       },
       {
         model: models.Chapter,
-        as: "chapters",
-        include: [{ model: models.Page, as: "pages" }]
+        as: 'chapters',
+        include: [{ model: models.Page, as: 'pages' }]
+      },
+      {
+        model: models.WorksCovers
+      },
+      {
+        model: models.WorksGenres
       },
       {
         model: models.PeopleWorks,
-        as: "people_works",
+        as: 'people_works',
         include: [{ model: models.People }]
       }
     ]
@@ -127,10 +151,10 @@ export async function create(
     uniqid,
     type,
     hidden,
+    demographicId,
     status,
     statusReason,
     description,
-    thumbnail,
     adult,
     visits
   },
@@ -143,15 +167,15 @@ export async function create(
       uniqid,
       type,
       hidden,
+      demographicId,
       status,
       statusReason,
       description,
-      thumbnail,
       adult,
       visits
     });
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -165,10 +189,10 @@ export async function update(
     uniqid,
     type,
     hidden,
+    demographicId,
     status,
     statusReason,
     description,
-    thumbnail,
     adult,
     visits
   },
@@ -182,17 +206,17 @@ export async function update(
         uniqid,
         type,
         hidden,
+        demographicId,
         status,
         statusReason,
         description,
-        thumbnail,
         adult,
         visits
       },
       { where: { id } }
     );
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
@@ -203,12 +227,12 @@ export async function remove(parentValue, { id }, { auth }) {
 
     if (!works) {
       // Works does not exists
-      throw new Error("The works does not exists.");
+      throw new Error('The works does not exists.');
     } else {
       return await models.Works.destroy({ where: { id } });
     }
   } else {
-    throw new Error("Operation denied.");
+    throw new Error('Operation denied.');
   }
 }
 
