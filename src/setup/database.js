@@ -6,7 +6,7 @@ import { NODE_ENV } from '../config/env';
 import databaseConfig from '../config/database.json';
 
 // Load database config
-const databaseConfigEnv = databaseConfig['development'];
+const databaseConfigEnv = databaseConfig[NODE_ENV];
 
 // Create new database connection
 const connection = new Sequelize(
@@ -16,7 +16,7 @@ const connection = new Sequelize(
   {
     host: databaseConfigEnv.host,
     dialect: databaseConfigEnv.dialect,
-    logging: true,
+    logging: NODE_ENV.trim() === 'development',
     operatorsAliases: Sequelize.Op
   }
 );

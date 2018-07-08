@@ -22,7 +22,7 @@ export async function getAll(
 }
 
 // Get chapter by work
-export async function getByWork(parentValue, { workId }) {
+export async function getByWork(parentValue, { workId, language }) {
   return await models.Chapter.findAll({
     where: {
       workId: Number(workId),

@@ -3,7 +3,7 @@
 const params = require('../config/params');
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: queryInterface => {
     return queryInterface.bulkInsert(
       'people_works',
       [
@@ -26,7 +26,7 @@ module.exports = {
     );
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.bulkDelete('people_works', null, {});
   }
 };

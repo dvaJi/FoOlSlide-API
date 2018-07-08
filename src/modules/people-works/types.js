@@ -1,10 +1,5 @@
 // Imports
-import {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLBoolean
-} from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
 
 // App Imports
 import { WorkType } from '../works/types';

@@ -1,5 +1,5 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLBoolean } from 'graphql';
+import { GraphQLString, GraphQLInt } from 'graphql';
 
 // App Imports
 import { PeopleType } from './types';

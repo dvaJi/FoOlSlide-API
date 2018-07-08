@@ -5,7 +5,7 @@ const config = require('../config/server.json');
 const params = require('../config/params.json');
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: queryInterface => {
     return queryInterface.bulkInsert('users', [
       {
         name: 'The Admin',
@@ -26,7 +26,7 @@ module.exports = {
     ]);
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.bulkDelete('users', null, {});
   }
 };

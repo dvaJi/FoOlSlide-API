@@ -3,8 +3,7 @@ import {
   GraphQLList,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLInt,
-  GraphQLBoolean
+  GraphQLInt
 } from 'graphql';
 
 // App Imports

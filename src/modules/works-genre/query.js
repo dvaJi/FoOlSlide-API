@@ -1,5 +1,5 @@
 // Imports
-import { GraphQLString, GraphQLInt, GraphQLList } from 'graphql';
+import { GraphQLList } from 'graphql';
 
 // App Imports
 import { GenresType, DemographicType } from './types';
